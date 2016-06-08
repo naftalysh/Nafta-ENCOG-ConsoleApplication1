@@ -29,7 +29,7 @@ namespace LotoPrediction
 
             DateTime Execution_End = System.DateTime.Now;
 
-            String line = String.Format("H:{0} M:{1} S:{2} MS:{3}",
+            String line = String.Format("H:M:S.MS = {0:D1}:{1:D2}:{2:D2}.{3:D3}",
                             (Execution_End - Execution_Start).Hours,
                             (Execution_End - Execution_Start).Minutes,
                             (Execution_End - Execution_Start).Seconds,

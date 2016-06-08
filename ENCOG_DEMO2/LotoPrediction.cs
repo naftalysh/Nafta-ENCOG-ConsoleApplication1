@@ -80,7 +80,9 @@ namespace LotoPrediction
             ////Evaluate Network
             EvaluateNetwork();
 
-            ////Predict next value
+            ////Predict next value three times
+            PredictNetwork();
+            PredictNetwork();
             PredictNetwork();
 
 
@@ -321,7 +323,7 @@ namespace LotoPrediction
                 OutputNeurons = FutureWindowSize
             };
 
-            pattern.AddHiddenLayer(45);
+            pattern.AddHiddenLayer(5);
             network = (BasicNetwork)pattern.Generate();
 
             ITrain train = new ResilientPropagation(network, trainingSet);
