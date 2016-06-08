@@ -80,6 +80,9 @@ namespace LotoPrediction
             ////Evaluate Network
             EvaluateNetwork();
 
+            ////Predict next value
+            PredictNetwork();
+
 
         }
 
@@ -324,8 +327,7 @@ namespace LotoPrediction
             ITrain train = new ResilientPropagation(network, trainingSet);
             EncogUtility.TrainToError(train, MaxError);
 
-            Console.WriteLine("Press any key to continue..");
-            Console.ReadLine();
+            Console.WriteLine("-- End of CreateAndTrainNetwork step --");
         }
 
 
@@ -410,12 +412,63 @@ namespace LotoPrediction
 
 
 
-                    string line = string.Format("DrawNumber: {0}; Actual: {1}; Predicted: {2}", DrawNumber, Actual1, predicted1);
+                    string line = string.Format("DrawNumber: {0}; Actual: {1}; Predicted: {2}", DrawNumber, actual1_2, predicted1);
                     file.WriteLine(line);
                     Console.WriteLine(line);
                 }
             }
         }
 
+
+        private void PredictNetwork()
+        {
+
+            int evaluateStop = data.Select(t => t.Id).Max();
+            
+
+
+            using (var file = new System.IO.StreamWriter(Config.PredictResult.ToString()))
+            {
+
+                //Start new
+                int currentId = evaluateStop + 1;
+
+                //Calculate based on actual data
+                var input = new BasicMLData(PastWindowSize * 7);
+                for (int i = 0; i < PastWindowSize; i++)
+                {
+                    input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                     .Select(t => t.NormalizeDayOfWeek).First();
+
+                    input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                        .Select(t => t.NormalizedActual1).First();
+
+                    input[i * 7 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                        .Select(t => t.NormalizedActual2).First();
+
+                    input[i * 7 + 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                        .Select(t => t.NormalizedActual3).First();
+
+                    input[i * 7 + 4] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                        .Select(t => t.NormalizedActual4).First();
+
+                    input[i * 7 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                        .Select(t => t.NormalizedActual5).First();
+
+                    input[i * 7 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                        .Select(t => t.NormalizedActual6).First();
+                }
+                //Start new - end
+
+                var output = network.Compute(input);
+                double normalizedPredicted = output[0];
+                double predicted = Math.Round(norm1.Stats.DeNormalize(normalizedPredicted), 0);
+                int DrawNumber = data.Where(t => t.Id == currentId).Select(t => t.DrawNumber).First();
+
+                string line = string.Format("DrawNumber: {0}; Predicted: {1}", DrawNumber, predicted);
+                file.WriteLine(line);
+                Console.WriteLine(line);
+            }
+        }
     }
 }

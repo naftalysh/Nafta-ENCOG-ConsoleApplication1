@@ -19,6 +19,7 @@ namespace LotoPrediction
         #region Evaluation
 
         public static FileInfo EvaluationResult = FileUtil.CombinePath(BasePath, "LotoData_Evaluate.csv");
+        public static FileInfo PredictResult = FileUtil.CombinePath(BasePath, "LotoData_Predict.csv");
 
         #endregion
     }
