@@ -50,11 +50,12 @@ namespace LotoPrediction
 
     public class LotoPrediction
     {
-        public const int PastWindowSize = 4;
+        public int PastWindowSize = 15;
         public const int FutureWindowSize = 1;
         public const double NormalizeHigh = 1.0;
         public const double NormalizeLow = -1.0;
-        public const double MaxError = 0.03;
+        public double MaxError = 0.01;
+        public int LotoNumber;
 
         private List<LotoData> data = new List<LotoData>();
         private TemporalMLDataSet trainingSet;
@@ -82,10 +83,6 @@ namespace LotoPrediction
 
             ////Predict next value three times
             PredictNetwork();
-            PredictNetwork();
-            PredictNetwork();
-
-
         }
 
         private void ReadData()
@@ -236,6 +233,7 @@ namespace LotoPrediction
 
         private void GenerateTemporalData()
         {
+            TemporalDataDescription desc1 = null, desc2 = null, desc3 = null, desc4 = null, desc5 = null, desc6 = null;
             //Temporal dataset
             trainingSet = new TemporalMLDataSet(PastWindowSize, FutureWindowSize);
 
@@ -244,35 +242,101 @@ namespace LotoPrediction
             desc0.Index = 0;
             trainingSet.AddDescription(desc0);
 
+            switch (LotoNumber)
+            {
+                case 1:
+                    desc1 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                    desc1.Index = 1;
+                    trainingSet.AddDescription(desc1);
+
+                    break;
+
+                case 2:
+                    desc2 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                    desc2.Index = 2;
+                    trainingSet.AddDescription(desc2);
+
+                    break;
+
+                case 3:
+                    desc3 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                    desc3.Index = 3;
+                    trainingSet.AddDescription(desc3);
+
+                    break;
+
+                case 4:
+                    desc4 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                    desc4.Index = 4;
+                    trainingSet.AddDescription(desc4);
+
+                    break;
+
+                case 5:
+                    desc5 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                    desc5.Index = 5;
+                    trainingSet.AddDescription(desc5);
+
+                    break;
+
+                case 6:
+                    desc6 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                    desc6.Index = 6;
+                    trainingSet.AddDescription(desc6);
+
+                    break;
+
+                default:
+                    break;
+            }
+
             //Description #1
-            var desc1 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
-            desc1.Index = 1;
-            trainingSet.AddDescription(desc1);
+            if (desc1 != null)
+            {
+                desc1 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
+                desc1.Index = 1;
+                trainingSet.AddDescription(desc1);
+            }
 
             //Description #2
-            var desc2 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-            desc2.Index = 2;
-            trainingSet.AddDescription(desc2);
+            if (desc2 != null)
+            {
+                desc2 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
+                desc2.Index = 2;
+                trainingSet.AddDescription(desc2);
+            }
 
-            //Description #3
-            var desc3 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-            desc3.Index = 3;
-            trainingSet.AddDescription(desc3);
+            if (desc3 != null)
+            {
+                desc3 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
+                desc3.Index = 3;
+                trainingSet.AddDescription(desc3);
+            }
 
-            //Description #4
-            var desc4 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-            desc4.Index = 4;
-            trainingSet.AddDescription(desc4);
+            if (desc4 != null)
+            {
+                desc4 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
+                desc4.Index = 4;
+                trainingSet.AddDescription(desc4);
+            }
 
-            //Description #5
-            var desc5 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-            desc5.Index = 5;
-            trainingSet.AddDescription(desc5);
 
-            //Description #6
-            var desc6 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-            desc6.Index = 6;
-            trainingSet.AddDescription(desc6);
+            if (desc5 != null)
+            {
+                desc5 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
+                desc5.Index = 5;
+                trainingSet.AddDescription(desc5);
+            }
+
+
+            if (desc6 != null)
+            {
+                desc6 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
+                desc6.Index = 6;
+                trainingSet.AddDescription(desc6);
+            }
+
+
 
             ////Description #7
             //var desc7 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
@@ -323,7 +387,7 @@ namespace LotoPrediction
                 OutputNeurons = FutureWindowSize
             };
 
-            pattern.AddHiddenLayer(5);
+            pattern.AddHiddenLayer(16);
             network = (BasicNetwork)pattern.Generate();
 
             ITrain train = new ResilientPropagation(network, trainingSet);
@@ -370,11 +434,18 @@ namespace LotoPrediction
             //    + ", actual=" + output[0] + ",ideal=" + pair.Ideal[0]);
             //}
 
+            int countPredicted, countUnPredicted;
+            Boolean blnPredicted;
+            
+            float predictionPercent;
+
             int evaluateStart = data.Select(t => t.Id).Min() + PastWindowSize;
             int evaluateStop = data.Select(t => t.Id).Max();
 
             using (var file = new System.IO.StreamWriter(Config.EvaluationResult.ToString()))
             {
+                countPredicted = 0;
+                countUnPredicted = 0;
 
                 for (int currentId = evaluateStart; currentId <= evaluateStop; currentId++)
                 {
@@ -405,19 +476,64 @@ namespace LotoPrediction
                     }
 
                     var output = network.Compute(input);
-                    double normalizedPredicted1 = output[0];
-                    double predicted1 = Math.Round(norm1.Stats.DeNormalize(normalizedPredicted1), 0);
-                    double Actual1 = data.Where(t => t.Id == currentId).Select(t => t.Actual1).First();
-                    double actual1_2 = Math.Round(norm1.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual1).First()), 0);
+                    double normalizedPredicted = output[0];
+                    double predicted = Math.Round(norm1.Stats.DeNormalize(normalizedPredicted), 0);
+                    //double Actual1 = data.Where(t => t.Id == currentId).Select(t => t.Actual1).First();
+                    double actual = 0.0;
+
+                    switch (LotoNumber)
+                    {
+                        case 1:
+                            actual = Math.Round(norm1.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual1).First()), 0);
+                            break;
+
+                        case 2:
+                            actual = Math.Round(norm2.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual2).First()), 0);
+                            break;
+
+                        case 3:
+                            actual = Math.Round(norm3.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual3).First()), 0);
+                            break;
+
+                        case 4:
+                            actual = Math.Round(norm4.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual4).First()), 0);
+                            break;
+
+                        case 5:
+                            actual = Math.Round(norm5.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual5).First()), 0);
+                            break;
+
+                        case 6:
+                            actual = Math.Round(norm6.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual6).First()), 0);
+                            break;
+
+                        default:
+                            break;
+                    }
+
+
                     int DrawNumber = data.Where(t => t.Id == currentId).Select(t => t.DrawNumber).First();
+                    blnPredicted = (actual == predicted) ? true: false;
+
+                    if (blnPredicted)
+                        countPredicted++;
+                    else
+                        countUnPredicted++;
 
 
-
-
-                    string line = string.Format("DrawNumber: {0}; Actual: {1}; Predicted: {2}", DrawNumber, actual1_2, predicted1);
-                    file.WriteLine(line);
-                    Console.WriteLine(line);
+                    string line1 = string.Format("DrawNumber: {0}; Actual: {1}; Predicted: {2}", DrawNumber, actual, predicted);
+                    file.WriteLine(line1);
+                    Console.WriteLine(line1);
                 }
+
+                
+                predictionPercent = ((float)countPredicted / ((float)countPredicted + (float)countUnPredicted)) * 100;
+                string line2 = string.Format("TotalPredictions = {0}, Predicted = {1}, UnPredicted = {2}, Prediction percent = {3:0.00}%",
+                                                (countPredicted + countUnPredicted), countPredicted, countUnPredicted, predictionPercent);
+                file.WriteLine(line2);
+                Console.WriteLine(line2);
+
+
             }
         }
 
@@ -429,7 +545,7 @@ namespace LotoPrediction
             
 
 
-            using (var file = new System.IO.StreamWriter(Config.PredictResult.ToString()))
+            using (var file = new System.IO.StreamWriter(Config.PredictResult.ToString(), true))
             {
 
                 //Start new
@@ -467,7 +583,7 @@ namespace LotoPrediction
                 double predicted = Math.Round(norm1.Stats.DeNormalize(normalizedPredicted), 0);
                 int DrawNumber = data.Where(t => t.Id == (currentId-1)).Select(t => t.DrawNumber).First() +  1;
 
-                string line = string.Format("DrawNumber: {0}; Predicted: {1}", DrawNumber, predicted);
+                string line = string.Format("DrawNumber: {0}; LotoNumber: {1}; Predicted: {2}", DrawNumber, LotoNumber, predicted);
                 file.WriteLine(line);
                 Console.WriteLine(line);
             }
