@@ -463,7 +463,7 @@ namespace LotoPrediction
                 var output = network.Compute(input);
                 double normalizedPredicted = output[0];
                 double predicted = Math.Round(norm1.Stats.DeNormalize(normalizedPredicted), 0);
-                int DrawNumber = data.Where(t => t.Id == currentId).Select(t => t.DrawNumber).First();
+                int DrawNumber = data.Where(t => t.Id == (currentId-1)).Select(t => t.DrawNumber).First() +  1;
 
                 string line = string.Format("DrawNumber: {0}; Predicted: {1}", DrawNumber, predicted);
                 file.WriteLine(line);
