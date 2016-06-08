@@ -22,12 +22,22 @@ namespace LotoPrediction
     {
         static void Main(string[] args)
         {
+            DateTime Execution_Start = System.DateTime.Now;
+
             var lotoPrediction = new LotoPrediction();
             lotoPrediction.Predict();
 
-            Console.WriteLine("Press any key to exit..");
-            Console.ReadLine();
+            DateTime Execution_End = System.DateTime.Now;
 
+            String line = String.Format("H:{0} M:{1} S:{2} MS:{3}",
+                            (Execution_End - Execution_Start).Hours,
+                            (Execution_End - Execution_Start).Minutes,
+                            (Execution_End - Execution_Start).Seconds,
+                            (Execution_End - Execution_Start).Milliseconds);
+
+
+            Console.WriteLine("-- End Of execution -- \n" + line);
+            Console.ReadLine();
 
         }
                 
