@@ -46,7 +46,7 @@ namespace XOR_Demo
                 Console.WriteLine("Iteration no :{0}, Error: {1}", epoch, train.Error);
 
 
-            } while (train.Error > 0.0001);
+            } while (train.Error > 0.00001);
 
 
             foreach (var item in traningSet)

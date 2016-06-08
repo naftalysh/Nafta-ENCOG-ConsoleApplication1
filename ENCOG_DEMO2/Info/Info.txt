@@ -1,0 +1,7 @@
+﻿===========================================
+6 out of 1-37 + 1 out of 1-7 from 17/5/2011
+===========================================
+
+Data directory:		"C:\projects\ENCOG\Loto-Archieve"
+Input file:			"Lotto-07-05-16.csv"
+Evaluation file:	"LotoData_Evaluate.csv"
