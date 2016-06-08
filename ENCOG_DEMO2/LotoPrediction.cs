@@ -54,7 +54,7 @@ namespace LotoPrediction
         public const int FutureWindowSize = 1;
         public const double NormalizeHigh = 1.0;
         public const double NormalizeLow = -1.0;
-        public const double MaxError = 0.04;
+        public const double MaxError = 0.03;
 
         private List<LotoData> data = new List<LotoData>();
         private TemporalMLDataSet trainingSet;
