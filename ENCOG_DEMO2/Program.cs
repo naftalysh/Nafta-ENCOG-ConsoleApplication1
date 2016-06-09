@@ -23,12 +23,7 @@ namespace LotoPrediction
         static void Main(string[] args)
         {
             var programName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-
-            if (args.Length == 0)
-            {
-                System.Console.WriteLine("Format: " + programName + " LotoNumber, PastWindowSize, MaxError ");
-                return;
-            }
+            System.Console.WriteLine("Format: " + programName + " LotoNumber, PastWindowSize, MaxError ");
 
            
             DateTime Execution_Start = System.DateTime.Now;
@@ -49,6 +44,7 @@ namespace LotoPrediction
             {
                 lotoPrediction.LotoNumber = Convert.ToInt32(args[0]);
             }
+
 
             lotoPrediction.Predict();
 

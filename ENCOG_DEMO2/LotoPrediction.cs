@@ -55,7 +55,7 @@ namespace LotoPrediction
         public const double NormalizeHigh = 1.0;
         public const double NormalizeLow = -1.0;
         public double MaxError = 0.01;
-        public int LotoNumber;
+        public int LotoNumber = 1;
 
         private List<LotoData> data = new List<LotoData>();
         private TemporalMLDataSet trainingSet;
@@ -387,7 +387,7 @@ namespace LotoPrediction
                 OutputNeurons = FutureWindowSize
             };
 
-            pattern.AddHiddenLayer(PastWindowSize + FutureWindowSize+2);
+            pattern.AddHiddenLayer((PastWindowSize + FutureWindowSize)*2);
             network = (BasicNetwork)pattern.Generate();
 
             ITrain train = new ResilientPropagation(network, trainingSet);
