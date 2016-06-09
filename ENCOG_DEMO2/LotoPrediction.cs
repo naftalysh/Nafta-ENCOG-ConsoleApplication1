@@ -50,7 +50,7 @@ namespace LotoPrediction
 
     public class LotoPrediction
     {
-        public int PastWindowSize = 15;
+        public int PastWindowSize = 14;
         public const int FutureWindowSize = 1;
         public const double NormalizeHigh = 1.0;
         public const double NormalizeLow = -1.0;
@@ -387,7 +387,7 @@ namespace LotoPrediction
                 OutputNeurons = FutureWindowSize
             };
 
-            pattern.AddHiddenLayer(16);
+            pattern.AddHiddenLayer(18);
             network = (BasicNetwork)pattern.Generate();
 
             ITrain train = new ResilientPropagation(network, trainingSet);

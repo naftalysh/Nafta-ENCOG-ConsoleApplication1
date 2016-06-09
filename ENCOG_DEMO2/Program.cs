@@ -26,7 +26,7 @@ namespace LotoPrediction
 
             if (args.Length == 0)
             {
-                System.Console.WriteLine("Format: " + programName + "LotoNumber, PastWindowSize, MaxError ");
+                System.Console.WriteLine("Format: " + programName + " LotoNumber, PastWindowSize, MaxError ");
                 return;
             }
 
