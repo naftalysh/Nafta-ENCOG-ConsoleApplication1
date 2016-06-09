@@ -247,42 +247,36 @@ namespace LotoPrediction
                 case 1:
                     desc1 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
                     desc1.Index = 1;
-                    trainingSet.AddDescription(desc1);
 
                     break;
 
                 case 2:
                     desc2 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
                     desc2.Index = 2;
-                    trainingSet.AddDescription(desc2);
 
                     break;
 
                 case 3:
                     desc3 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
                     desc3.Index = 3;
-                    trainingSet.AddDescription(desc3);
 
                     break;
 
                 case 4:
                     desc4 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
                     desc4.Index = 4;
-                    trainingSet.AddDescription(desc4);
 
                     break;
 
                 case 5:
                     desc5 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
                     desc5.Index = 5;
-                    trainingSet.AddDescription(desc5);
 
                     break;
 
                 case 6:
                     desc6 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
                     desc6.Index = 6;
-                    trainingSet.AddDescription(desc6);
 
                     break;
 
@@ -291,51 +285,52 @@ namespace LotoPrediction
             }
 
             //Description #1
-            if (desc1 != null)
+            if (desc1 == null)
             {
                 desc1 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                 desc1.Index = 1;
-                trainingSet.AddDescription(desc1);
             }
 
             //Description #2
-            if (desc2 != null)
+            if (desc2 == null)
             {
                 desc2 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                 desc2.Index = 2;
-                trainingSet.AddDescription(desc2);
             }
 
-            if (desc3 != null)
+            if (desc3 == null)
             {
                 desc3 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                 desc3.Index = 3;
-                trainingSet.AddDescription(desc3);
             }
 
-            if (desc4 != null)
+            if (desc4 == null)
             {
                 desc4 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                 desc4.Index = 4;
-                trainingSet.AddDescription(desc4);
             }
 
 
-            if (desc5 != null)
+            if (desc5 == null)
             {
                 desc5 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                 desc5.Index = 5;
-                trainingSet.AddDescription(desc5);
             }
 
 
-            if (desc6 != null)
+            if (desc6 == null)
             {
                 desc6 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                 desc6.Index = 6;
-                trainingSet.AddDescription(desc6);
             }
 
+
+            trainingSet.AddDescription(desc1);
+            trainingSet.AddDescription(desc2);
+            trainingSet.AddDescription(desc3);
+            trainingSet.AddDescription(desc4);
+            trainingSet.AddDescription(desc5);
+            trainingSet.AddDescription(desc6);
 
 
             ////Description #7
