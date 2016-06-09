@@ -382,7 +382,7 @@ namespace LotoPrediction
                 OutputNeurons = FutureWindowSize
             };
 
-            pattern.AddHiddenLayer((PastWindowSize + FutureWindowSize)*2);
+            pattern.AddHiddenLayer((PastWindowSize + FutureWindowSize) * 2);
             network = (BasicNetwork)pattern.Generate();
 
             ITrain train = new ResilientPropagation(network, trainingSet);
@@ -472,7 +472,39 @@ namespace LotoPrediction
 
                     var output = network.Compute(input);
                     double normalizedPredicted = output[0];
-                    double predicted = Math.Round(norm1.Stats.DeNormalize(normalizedPredicted), 0);
+                    double predicted = 0.0;
+
+                    switch (LotoNumber)
+                    {
+                        case 1:
+                            predicted = Math.Round(norm1.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 2:
+                            predicted = Math.Round(norm2.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 3:
+                            predicted = Math.Round(norm3.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 4:
+                            predicted = Math.Round(norm4.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 5:
+                            predicted = Math.Round(norm5.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 6:
+                            predicted = Math.Round(norm6.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        default:
+                            break;
+                    }
+
+
                     //double Actual1 = data.Where(t => t.Id == currentId).Select(t => t.Actual1).First();
                     double actual = 0.0;
 
