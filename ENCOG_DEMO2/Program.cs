@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace LotoPrediction 
 {
-    class Program
+    class Program 
     {
         static void Main(string[] args)
         {
