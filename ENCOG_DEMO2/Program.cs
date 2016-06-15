@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 
 
-namespace LotoPrediction
+namespace LotoPrediction 
 {
     class Program
     {
