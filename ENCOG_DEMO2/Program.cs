@@ -23,28 +23,34 @@ namespace LotoPrediction
         static void Main(string[] args)
         {
             var programName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-            System.Console.WriteLine("Format: " + programName + " LotoNumber, PastWindowSize, MaxError ");
+            System.Console.WriteLine("Format: " + programName + " LotoNumber, PastWindowSize, MaxError, blnShowConsole ");
 
            
             DateTime Execution_Start = System.DateTime.Now;
 
             var lotoPrediction = new LotoPrediction();
-            if (args.Length == 3)
+            if (args.Length == 4)
             {
                 lotoPrediction.LotoNumber = Convert.ToInt32(args[0]);
                 lotoPrediction.PastWindowSize = Convert.ToInt32(args[1]);
                 lotoPrediction.MaxError = Convert.ToDouble(args[2]);
+                lotoPrediction.blnShowConsole = Convert.ToBoolean(args[3]);
+            }
+            else if (args.Length == 3)
+            {
+                lotoPrediction.LotoNumber = Convert.ToInt32(args[0]);
+                lotoPrediction.PastWindowSize = Convert.ToInt32(args[1]);
+                lotoPrediction.blnShowConsole = Convert.ToBoolean(args[2]);
             }
             else if (args.Length == 2)
             {
                 lotoPrediction.LotoNumber = Convert.ToInt32(args[0]);
-                lotoPrediction.PastWindowSize = Convert.ToInt32(args[1]);
+                lotoPrediction.blnShowConsole = Convert.ToBoolean(args[1]);
             }
             else if (args.Length == 1)
             {
-                lotoPrediction.LotoNumber = Convert.ToInt32(args[0]);
+                lotoPrediction.blnShowConsole = Convert.ToBoolean(args[0]);
             }
-
 
             lotoPrediction.Predict();
 
@@ -58,7 +64,7 @@ namespace LotoPrediction
 
 
             Console.WriteLine("-- End Of execution -- \n" + line);
-            Console.ReadLine();
+            //Console.ReadLine();
 
         }
                 

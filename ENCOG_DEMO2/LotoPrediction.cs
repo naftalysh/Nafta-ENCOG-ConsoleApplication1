@@ -56,6 +56,8 @@ namespace LotoPrediction
         public const double NormalizeLow = -1.0;
         public double MaxError = 0.01;
         public int LotoNumber = 1;
+        public Boolean blnShowConsole = true;
+        float predictionPercent;
 
         private List<LotoData> data = new List<LotoData>();
         private TemporalMLDataSet trainingSet;
@@ -76,10 +78,10 @@ namespace LotoPrediction
             ////Create & Train Network
             CreateAndTrainNetwork();
 
-            errorDiagnostic(network, trainingSet);
+            errorDiagnostic(network, trainingSet, blnShowConsole);
 
             ////Evaluate Network
-            EvaluateNetwork();
+            EvaluateNetwork(blnShowConsole);
 
             ////Predict next value three times
             PredictNetwork();
@@ -393,10 +395,13 @@ namespace LotoPrediction
 
 
 
-        public static void errorDiagnostic(BasicNetwork network, TemporalMLDataSet dataSet)
+        public static void errorDiagnostic(BasicNetwork network, TemporalMLDataSet dataSet, Boolean blnShowConsole)
         {
             int count = 0;
             double totalError = 0;
+
+            if (! blnShowConsole)
+                return;
 
             Console.WriteLine("Network error: " + network.CalculateError(dataSet));
 
@@ -418,7 +423,7 @@ namespace LotoPrediction
             }
         }
 
-        private void EvaluateNetwork()
+        private void EvaluateNetwork(Boolean blnShowConsole)
         {
 
             //Console.WriteLine("Neural Network Results:");
@@ -432,7 +437,7 @@ namespace LotoPrediction
             int countPredicted, countUnPredicted;
             Boolean blnPredicted;
             
-            float predictionPercent;
+            //float predictionPercent;
 
             int evaluateStart = data.Select(t => t.Id).Min() + PastWindowSize;
             int evaluateStop = data.Select(t => t.Id).Max();
@@ -550,7 +555,9 @@ namespace LotoPrediction
 
                     string line1 = string.Format("DrawNumber: {0}; Actual: {1}; Predicted: {2}", DrawNumber, actual, predicted);
                     file.WriteLine(line1);
-                    Console.WriteLine(line1);
+
+                    if (blnShowConsole) 
+                        Console.WriteLine(line1);
                 }
 
                 
@@ -642,9 +649,14 @@ namespace LotoPrediction
 
                 int DrawNumber = data.Where(t => t.Id == (currentId-1)).Select(t => t.DrawNumber).First() +  1;
 
-                string line = string.Format("DrawNumber: {0}; LotoNumber: {1}; Predicted: {2}", DrawNumber, LotoNumber, predicted);
+                string consoleLine = string.Format("DrawNumber: {0}; LotoNumber: {1}; PastWindowSize = {2}; MaxError: {3}; Predicted: {4}; Prediction percent: {5:0.00}%", 
+                                            DrawNumber, LotoNumber, PastWindowSize, MaxError, predicted, predictionPercent);
+
+                string line = string.Format("{0}; {1}; {2}; {3}; {4}; {5:0.00}%",
+                                            DrawNumber, LotoNumber, PastWindowSize, MaxError, predicted, predictionPercent);
+
                 file.WriteLine(line);
-                Console.WriteLine(line);
+                Console.WriteLine(consoleLine);
             }
         }
     }
