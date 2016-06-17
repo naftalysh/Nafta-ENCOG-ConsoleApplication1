@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Encog.Util.File;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Encog.ML.Data;
-using Encog.Util.File;
-
-
 
 namespace LotoPrediction
 {
@@ -21,6 +13,6 @@ namespace LotoPrediction
         public static FileInfo EvaluationResult = FileUtil.CombinePath(BasePath, "LotoData_Evaluate.csv");
         public static FileInfo PredictResult = FileUtil.CombinePath(BasePath, "LotoData_Predict.csv");
 
-        #endregion
+        #endregion Evaluation
     }
 }

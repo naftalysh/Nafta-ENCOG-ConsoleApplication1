@@ -4,18 +4,13 @@ using Encog.Neural.Networks;
 using Encog.Neural.Networks.Layers;
 using Encog.Neural.Networks.Training.Propagation.Resilient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace XOR_Demo
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             double[][] XOR_Input =
             {
                 new[] {0.0,0.0 },
@@ -32,7 +27,6 @@ namespace XOR_Demo
                 new[] {0.0}
             };
 
-
             var traningSet = new BasicMLDataSet(XOR_Input, XOR_Ideal);
             BasicNetwork network = CreateNetwork();
 
@@ -44,10 +38,7 @@ namespace XOR_Demo
                 train.Iteration();
                 epoch++;
                 Console.WriteLine("Iteration no :{0}, Error: {1}", epoch, train.Error);
-
-
             } while (train.Error > 0.00001);
-
 
             foreach (var item in traningSet)
             {
@@ -57,9 +48,6 @@ namespace XOR_Demo
 
             Console.WriteLine("Press any key to exit..");
             Console.ReadLine();
-
-             
-
         }
 
         private static BasicNetwork CreateNetwork()

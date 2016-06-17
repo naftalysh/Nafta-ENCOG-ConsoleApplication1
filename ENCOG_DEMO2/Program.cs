@@ -1,31 +1,14 @@
-﻿using Encog.Engine.Network.Activation;
-using Encog.ML.Data.Basic;
-using Encog.Neural.Networks;
-using Encog.Neural.Networks.Layers;
-using Encog.Neural.Networks.Training.Propagation.Resilient;
-using Encog.App.Analyst;
-using Encog.App.Analyst.CSV.Normalize;
-using Encog.App.Analyst.Wizard;
-using Encog.ML.Data;
-using Encog.Util.CSV;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
-
-
-namespace LotoPrediction 
+namespace LotoPrediction
 {
-    class Program 
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var programName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
             System.Console.WriteLine("Format: " + programName + " LotoNumber, PastWindowSize, MaxError, blnShowConsole ");
 
-           
             DateTime Execution_Start = System.DateTime.Now;
 
             var lotoPrediction = new LotoPrediction();
@@ -62,11 +45,8 @@ namespace LotoPrediction
                             (Execution_End - Execution_Start).Seconds,
                             (Execution_End - Execution_Start).Milliseconds);
 
-
             Console.WriteLine("-- End Of execution -- \n" + line);
             //Console.ReadLine();
-
         }
-                
     }
 }

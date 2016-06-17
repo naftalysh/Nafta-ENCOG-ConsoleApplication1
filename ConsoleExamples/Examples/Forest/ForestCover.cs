@@ -137,10 +137,10 @@ namespace Encog.Examples.Forest
             SerializeObject.Save(config.NormalizeFile.ToString(), norm);
 
             // create and save the neural network
-            BasicNetwork network = EncogUtility.SimpleFeedForward(norm
-                                                                      .GetNetworkInputLayerSize(), config.HiddenCount, 0,
-                                                                  norm
-                                                                      .GetNetworkOutputLayerSize(), true);
+            BasicNetwork network =
+                EncogUtility.SimpleFeedForward(norm.GetNetworkInputLayerSize(),
+                                               config.HiddenCount, 0, norm.GetNetworkOutputLayerSize(), true);
+
             EncogDirectoryPersistence.SaveObject(config.TrainedNetworkFile, network);
         }
 

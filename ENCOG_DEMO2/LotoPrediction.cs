@@ -1,31 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Encog.Util.Simple;
-using Encog.Engine.Network.Activation;
+﻿using Encog.Engine.Network.Activation;
+using Encog.ML.Data;
 using Encog.ML.Data.Basic;
-using Encog.ML.Train;
 using Encog.ML.Data.Temporal;
 using Encog.Neural.Networks;
+using Encog.Neural.Networks.Training;
+using Encog.Neural.Networks.Training.Propagation.Resilient;
+using Encog.Neural.Pattern;
 using Encog.Util.Arrayutil;
 using Encog.Util.CSV;
-using Encog.Neural.Networks.Layers;
-using Encog.Neural.Networks.Training.Propagation.Resilient;
-using Encog.ML;
-using Encog.ML.Data;
-using Encog.ML.Train.Strategy;
-using Encog.Neural.Networks.Training;
-using Encog.Neural.Networks.Training.Anneal;
-using Encog.Neural.Networks.Training.Lma;
-using Encog.Neural.Networks.Training.Propagation.Back;
-using Encog.Neural.Pattern;
-using Encog.Neural.NeuralData;
+using Encog.Util.Simple;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LotoPrediction
 {
-    
     public class LotoData
     {
         public int Id { get; set; }
@@ -57,7 +46,7 @@ namespace LotoPrediction
         public double MaxError = 0.01;
         public int LotoNumber = 1;
         public Boolean blnShowConsole = true;
-        float predictionPercent;
+        private float predictionPercent;
 
         private List<LotoData> data = new List<LotoData>();
         private TemporalMLDataSet trainingSet;
@@ -101,7 +90,7 @@ namespace LotoPrediction
                     Id = count,
                     DrawNumber = csvreader.GetInt("DrawNumber"),
                     //DrawDate = csvreader.Get("DrawDate"),
-                    DayOfWeek = (int)(DateTime.ParseExact(csvreader.Get("DrawDate"), "dd/MM/yy", System.Globalization.CultureInfo.InvariantCulture)).DayOfWeek ,
+                    DayOfWeek = (int)(DateTime.ParseExact(csvreader.Get("DrawDate"), "dd/MM/yy", System.Globalization.CultureInfo.InvariantCulture)).DayOfWeek,
                     Actual1 = csvreader.GetInt("N1"),
                     Actual2 = csvreader.GetInt("N2"),
                     Actual3 = csvreader.GetInt("N3"),
@@ -111,7 +100,6 @@ namespace LotoPrediction
                     Actual7 = csvreader.GetInt("N7")
                 });
             }
-
         }
 
         private void NormalizeData()
@@ -180,14 +168,12 @@ namespace LotoPrediction
             //    data[i].NormalizedActual6 = normalizedArray6[i];
             //}
 
-
             //NormalizeDayOfWeek
             var normalizedArray = norm0.Process((data.Select(t => (double)t.DayOfWeek).ToArray()));
             for (int i = 0; i < normalizedArray.Count(); i++)
             {
                 data[i].NormalizeDayOfWeek = normalizedArray[i];
             }
-
 
             normalizedArray = norm1.Process(data.Select(t => t.Actual1).ToArray());
             for (int i = 0; i < normalizedArray.Count(); i++)
@@ -231,7 +217,6 @@ namespace LotoPrediction
             //    data[i].NormalizedActual7 = normalizedArray[i];
             //}
         }
-
 
         private void GenerateTemporalData()
         {
@@ -312,20 +297,17 @@ namespace LotoPrediction
                 desc4.Index = 4;
             }
 
-
             if (desc5 == null)
             {
                 desc5 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                 desc5.Index = 5;
             }
 
-
             if (desc6 == null)
             {
                 desc6 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                 desc6.Index = 6;
             }
-
 
             trainingSet.AddDescription(desc1);
             trainingSet.AddDescription(desc2);
@@ -334,17 +316,14 @@ namespace LotoPrediction
             trainingSet.AddDescription(desc5);
             trainingSet.AddDescription(desc6);
 
-
             ////Description #7
             //var desc7 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
             //desc7.Index = 7;
             //trainingSet.AddDescription(desc7);
 
-
             //Temporal point
             foreach (var item in data)
             {
-                
                 var point = new TemporalPoint(7); //1 values
                 point.Sequence = item.Id;
                 point.Data[0] = item.NormalizeDayOfWeek;
@@ -367,8 +346,6 @@ namespace LotoPrediction
 
             trainingSet.Generate();
         }
-
-
 
         private void CreateAndTrainNetwork()
         {
@@ -393,18 +370,15 @@ namespace LotoPrediction
             Console.WriteLine("-- End of CreateAndTrainNetwork step --");
         }
 
-
-
         public static void errorDiagnostic(BasicNetwork network, TemporalMLDataSet dataSet, Boolean blnShowConsole)
         {
             int count = 0;
             double totalError = 0;
 
-            if (! blnShowConsole)
+            if (!blnShowConsole)
                 return;
 
             Console.WriteLine("Network error: " + network.CalculateError(dataSet));
-
 
             foreach (IMLDataPair pair in dataSet)
             {
@@ -418,14 +392,12 @@ namespace LotoPrediction
                     count++;
                     double currentError = totalError / count;
                     Console.WriteLine("\tIdeal: " + pair.Ideal[i] + ", Actual: " + actual[i] + ", Delta: " + delta + ", Current Error: " + currentError);
-
                 }
             }
         }
 
         private void EvaluateNetwork(Boolean blnShowConsole)
         {
-
             //Console.WriteLine("Neural Network Results:");
             //foreach (IMLDataPair pair in trainingSet)
             //{
@@ -436,7 +408,7 @@ namespace LotoPrediction
 
             int countPredicted, countUnPredicted;
             Boolean blnPredicted;
-            
+
             //float predictionPercent;
 
             int evaluateStart = data.Select(t => t.Id).Min() + PastWindowSize;
@@ -450,10 +422,10 @@ namespace LotoPrediction
                 for (int currentId = evaluateStart; currentId <= evaluateStop; currentId++)
                 {
                     //Calculate based on actual data
-                    var input = new BasicMLData(PastWindowSize*7);
+                    var input = new BasicMLData(PastWindowSize * 7);
                     for (int i = 0; i < PastWindowSize; i++)
                     {
-                        input[i*7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                        input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                          .Select(t => t.NormalizeDayOfWeek).First();
 
                         input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
@@ -509,7 +481,6 @@ namespace LotoPrediction
                             break;
                     }
 
-
                     //double Actual1 = data.Where(t => t.Id == currentId).Select(t => t.Actual1).First();
                     double actual = 0.0;
 
@@ -543,45 +514,35 @@ namespace LotoPrediction
                             break;
                     }
 
-
                     int DrawNumber = data.Where(t => t.Id == currentId).Select(t => t.DrawNumber).First();
-                    blnPredicted = (actual == predicted) ? true: false;
+                    blnPredicted = (actual == predicted) ? true : false;
 
                     if (blnPredicted)
                         countPredicted++;
                     else
                         countUnPredicted++;
 
-
                     string line1 = string.Format("DrawNumber: {0}; Actual: {1}; Predicted: {2}", DrawNumber, actual, predicted);
                     file.WriteLine(line1);
 
-                    if (blnShowConsole) 
+                    if (blnShowConsole)
                         Console.WriteLine(line1);
                 }
 
-                
                 predictionPercent = ((float)countPredicted / ((float)countPredicted + (float)countUnPredicted)) * 100;
                 string line2 = string.Format("TotalPredictions = {0}, Predicted = {1}, UnPredicted = {2}, Prediction percent = {3:0.00}%",
                                                 (countPredicted + countUnPredicted), countPredicted, countUnPredicted, predictionPercent);
                 file.WriteLine(line2);
                 Console.WriteLine(line2);
-
-
             }
         }
 
-
         private void PredictNetwork()
         {
-
             int evaluateStop = data.Select(t => t.Id).Max();
-            
-
 
             using (var file = new System.IO.StreamWriter(Config.PredictResult.ToString(), true))
             {
-
                 //Start new
                 int currentId = evaluateStop + 1;
 
@@ -647,9 +608,9 @@ namespace LotoPrediction
                         break;
                 }
 
-                int DrawNumber = data.Where(t => t.Id == (currentId-1)).Select(t => t.DrawNumber).First() +  1;
+                int DrawNumber = data.Where(t => t.Id == (currentId - 1)).Select(t => t.DrawNumber).First() + 1;
 
-                string consoleLine = string.Format("DrawNumber: {0}; LotoNumber: {1}; PastWindowSize = {2}; MaxError: {3}; Predicted: {4}; Prediction percent: {5:0.00}%", 
+                string consoleLine = string.Format("DrawNumber: {0}; LotoNumber: {1}; PastWindowSize = {2}; MaxError: {3}; Predicted: {4}; Prediction percent: {5:0.00}%",
                                             DrawNumber, LotoNumber, PastWindowSize, MaxError, predicted, predictionPercent);
 
                 string line = string.Format("{0}; {1}; {2}; {3}; {4}; {5:0.00}%",
