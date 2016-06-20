@@ -39,7 +39,7 @@ namespace LotoPrediction
 
     public class LotoPrediction
     {
-        public int PastWindowSize = 14;
+        public int PastWindowSize = 17;
         public const int FutureWindowSize = 1;
         public const double NormalizeHigh = 1.0;
         public const double NormalizeLow = -1.0;
@@ -413,6 +413,10 @@ namespace LotoPrediction
 
             int evaluateStart = data.Select(t => t.Id).Min() + PastWindowSize;
             int evaluateStop = data.Select(t => t.Id).Max();
+            int TotalNumOfIterations = evaluateStop- evaluateStart;
+
+            evaluateStart = evaluateStart + TotalNumOfIterations * (2 / 3); //Test last 1/3rd 
+
 
             using (var file = new System.IO.StreamWriter(Config.EvaluationResult.ToString()))
             {
