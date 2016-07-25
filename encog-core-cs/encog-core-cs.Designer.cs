@@ -20,10 +20,10 @@
 // and trademarks visit:
 // http://www.heatonresearch.com/copyright
 //
-namespace Encog {
-    using System;
-    
-    
+namespace Encog
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
