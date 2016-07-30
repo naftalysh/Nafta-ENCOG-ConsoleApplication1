@@ -51,7 +51,7 @@ namespace LotoPrediction
         private List<LotoData> data = new List<LotoData>();
         private TemporalMLDataSet trainingSet;
         private BasicNetwork network;
-        private NormalizeArray norm0, norm1, norm2, norm3, norm4, norm5, norm6;
+        private NormalizeArray norm0, norm1, norm2, norm3, norm4, norm5, norm6, norm7;
 
         public void Predict()
         {
@@ -111,6 +111,7 @@ namespace LotoPrediction
             norm4 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
             norm5 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
             norm6 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
+            norm7 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
 
             //var Array1 = data.Select(t => t.Actual1).ToArray();
             //var Array2 = data.Select(t => t.Actual2).ToArray();
@@ -211,6 +212,12 @@ namespace LotoPrediction
                 data[i].NormalizedActual6 = normalizedArray[i];
             }
 
+            normalizedArray = norm7.Process(data.Select(t => t.Actual7).ToArray());
+            for (int i = 0; i < normalizedArray.Count(); i++)
+            {
+                data[i].NormalizedActual7 = normalizedArray[i];
+            }
+
             //normalizedArray = norm.Process(data.Select(t => t.Actual7).ToArray());
             //for (int i = 0; i < normalizedArray.Count(); i++)
             //{
@@ -220,7 +227,7 @@ namespace LotoPrediction
 
         private void GenerateTemporalData()
         {
-            TemporalDataDescription desc1 = null, desc2 = null, desc3 = null, desc4 = null, desc5 = null, desc6 = null;
+            TemporalDataDescription desc1 = null, desc2 = null, desc3 = null, desc4 = null, desc5 = null, desc6 = null, desc7 = null;
             //Temporal dataset
             trainingSet = new TemporalMLDataSet(PastWindowSize, FutureWindowSize);
 
@@ -229,92 +236,114 @@ namespace LotoPrediction
             desc0.Index = 0;
             trainingSet.AddDescription(desc0);
 
-            switch (LotoNumber)
+            if (LotoNumber != 7)
             {
-                case 1:
-                    desc1 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                switch (LotoNumber)
+                {
+                    case 1:
+                        desc1 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                        desc1.Index = 1;
+
+                        break;
+
+                    case 2:
+                        desc2 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                        desc2.Index = 2;
+
+                        break;
+
+                    case 3:
+                        desc3 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                        desc3.Index = 3;
+
+                        break;
+
+                    case 4:
+                        desc4 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                        desc4.Index = 4;
+
+                        break;
+
+                    case 5:
+                        desc5 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                        desc5.Index = 5;
+
+                        break;
+
+                    case 6:
+                        desc6 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                        desc6.Index = 6;
+
+                        break;
+
+                    //case 7:
+                    //    desc7 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                    //    desc7.Index = 7;
+
+                    //    break;
+
+                    default:
+                        break;
+                }
+
+                //Description #1
+                if (desc1 == null)
+                {
+                    desc1 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                     desc1.Index = 1;
+                }
 
-                    break;
-
-                case 2:
-                    desc2 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                //Description #2
+                if (desc2 == null)
+                {
+                    desc2 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                     desc2.Index = 2;
+                }
 
-                    break;
-
-                case 3:
-                    desc3 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                if (desc3 == null)
+                {
+                    desc3 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                     desc3.Index = 3;
+                }
 
-                    break;
-
-                case 4:
-                    desc4 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                if (desc4 == null)
+                {
+                    desc4 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                     desc4.Index = 4;
+                }
 
-                    break;
-
-                case 5:
-                    desc5 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                if (desc5 == null)
+                {
+                    desc5 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                     desc5.Index = 5;
+                }
 
-                    break;
-
-                case 6:
-                    desc6 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                if (desc6 == null)
+                {
+                    desc6 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
                     desc6.Index = 6;
+                }
 
-                    break;
+                //if (desc7 == null)
+                //{
+                //    desc7 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
+                //    desc7.Index = 7;
+                //}
 
-                default:
-                    break;
+                trainingSet.AddDescription(desc1);
+                trainingSet.AddDescription(desc2);
+                trainingSet.AddDescription(desc3);
+                trainingSet.AddDescription(desc4);
+                trainingSet.AddDescription(desc5);
+                trainingSet.AddDescription(desc6);
+                //trainingSet.AddDescription(desc7);
             }
-
-            //Description #1
-            if (desc1 == null)
+            else
             {
-                desc1 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-                desc1.Index = 1;
+                desc7 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
+                desc7.Index = 7;
+                trainingSet.AddDescription(desc7);
             }
-
-            //Description #2
-            if (desc2 == null)
-            {
-                desc2 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-                desc2.Index = 2;
-            }
-
-            if (desc3 == null)
-            {
-                desc3 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-                desc3.Index = 3;
-            }
-
-            if (desc4 == null)
-            {
-                desc4 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-                desc4.Index = 4;
-            }
-
-            if (desc5 == null)
-            {
-                desc5 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-                desc5.Index = 5;
-            }
-
-            if (desc6 == null)
-            {
-                desc6 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-                desc6.Index = 6;
-            }
-
-            trainingSet.AddDescription(desc1);
-            trainingSet.AddDescription(desc2);
-            trainingSet.AddDescription(desc3);
-            trainingSet.AddDescription(desc4);
-            trainingSet.AddDescription(desc5);
-            trainingSet.AddDescription(desc6);
 
             ////Description #7
             //var desc7 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
@@ -322,18 +351,20 @@ namespace LotoPrediction
             //trainingSet.AddDescription(desc7);
 
             //Temporal point
-            foreach (var item in data)
+            if (LotoNumber != 7)
             {
-                var point = new TemporalPoint(7); //1 values
-                point.Sequence = item.Id;
-                point.Data[0] = item.NormalizeDayOfWeek;
-                point.Data[1] = item.NormalizedActual1;
-                point.Data[2] = item.NormalizedActual2;
-                point.Data[3] = item.NormalizedActual3;
-                point.Data[4] = item.NormalizedActual4;
-                point.Data[5] = item.NormalizedActual5;
-                point.Data[6] = item.NormalizedActual6;
-                trainingSet.Points.Add(point);
+                foreach (var item in data)
+                {
+                    var point = new TemporalPoint(7); //1 values
+                    point.Sequence = item.Id;
+                    point.Data[0] = item.NormalizeDayOfWeek;
+                    point.Data[1] = item.NormalizedActual1;
+                    point.Data[2] = item.NormalizedActual2;
+                    point.Data[3] = item.NormalizedActual3;
+                    point.Data[4] = item.NormalizedActual4;
+                    point.Data[5] = item.NormalizedActual5;
+                    point.Data[6] = item.NormalizedActual6;
+                    trainingSet.Points.Add(point);
 
                 //point.Data[0] = item.NormalizedActual1;
                 //point.Data[1] = item.NormalizedActual2;
@@ -342,6 +373,25 @@ namespace LotoPrediction
                 //point.Data[4] = item.NormalizedActual5;
                 //point.Data[5] = item.NormalizedActual6;
                 //trainingSet.Points.Add(point);
+                }
+            }
+            else {
+                foreach (var item in data)
+                {
+                    var point = new TemporalPoint(2); //1 values
+                    point.Sequence = item.Id;
+                    point.Data[0] = item.NormalizeDayOfWeek;
+                    point.Data[1] = item.NormalizedActual7;
+                    trainingSet.Points.Add(point);
+
+                    //point.Data[0] = item.NormalizedActual1;
+                    //point.Data[1] = item.NormalizedActual2;
+                    //point.Data[2] = item.NormalizedActual3;
+                    //point.Data[3] = item.NormalizedActual4;
+                    //point.Data[4] = item.NormalizedActual5;
+                    //point.Data[5] = item.NormalizedActual6;
+                    //trainingSet.Points.Add(point);
+                }
             }
 
             trainingSet.Generate();
@@ -414,6 +464,7 @@ namespace LotoPrediction
             int evaluateStart = data.Select(t => t.Id).Min() + PastWindowSize;
             int evaluateStop = data.Select(t => t.Id).Max();
             int TotalNumOfIterations = evaluateStop- evaluateStart;
+            IMLData output;
 
             evaluateStart = evaluateStart + TotalNumOfIterations * (2 / 3); //Test last 1/3rd 
 
@@ -422,39 +473,59 @@ namespace LotoPrediction
             {
                 countPredicted = 0;
                 countUnPredicted = 0;
+                
 
                 for (int currentId = evaluateStart; currentId <= evaluateStop; currentId++)
                 {
-                    //Calculate based on actual data
-                    var input = new BasicMLData(PastWindowSize * 7);
-                    for (int i = 0; i < PastWindowSize; i++)
+
+                    if (LotoNumber != 7)
                     {
-                        input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                         .Select(t => t.NormalizeDayOfWeek).First();
+                        //Calculate based on actual data
+                        var input = new BasicMLData(PastWindowSize * 7);
+                        for (int i = 0; i < PastWindowSize; i++)
+                        {
+                            input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                             .Select(t => t.NormalizeDayOfWeek).First();
 
-                        input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                            .Select(t => t.NormalizedActual1).First();
+                            input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual1).First();
 
-                        input[i * 7 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                            .Select(t => t.NormalizedActual2).First();
+                            input[i * 7 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual2).First();
 
-                        input[i * 7 + 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                            .Select(t => t.NormalizedActual3).First();
+                            input[i * 7 + 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual3).First();
 
-                        input[i * 7 + 4] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                            .Select(t => t.NormalizedActual4).First();
+                            input[i * 7 + 4] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual4).First();
 
-                        input[i * 7 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                            .Select(t => t.NormalizedActual5).First();
+                            input[i * 7 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual5).First();
 
-                        input[i * 7 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                            .Select(t => t.NormalizedActual6).First();
+                            input[i * 7 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual6).First();
+                        }
+
+                        output = network.Compute(input);
+                    }
+                    else
+                    {
+                        //Calculate based on actual data
+                        var input = new BasicMLData(PastWindowSize * 2);
+                        for (int i = 0; i < PastWindowSize; i++)
+                        {
+                            input[i * 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                             .Select(t => t.NormalizeDayOfWeek).First();
+
+                            input[i * 2 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual7).First();
+                        }
+
+                        output = network.Compute(input);
                     }
 
-                    var output = network.Compute(input);
                     double normalizedPredicted = output[0];
                     double predicted = 0.0;
-
                     switch (LotoNumber)
                     {
                         case 1:
@@ -479,6 +550,10 @@ namespace LotoPrediction
 
                         case 6:
                             predicted = Math.Round(norm6.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 7:
+                            predicted = Math.Round(norm7.Stats.DeNormalize(normalizedPredicted), 0);
                             break;
 
                         default:
@@ -514,6 +589,10 @@ namespace LotoPrediction
                             actual = Math.Round(norm6.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual6).First()), 0);
                             break;
 
+                        case 7:
+                            actual = Math.Round(norm7.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual7).First()), 0);
+                            break;
+
                         default:
                             break;
                     }
@@ -543,6 +622,7 @@ namespace LotoPrediction
 
         private void PredictNetwork()
         {
+            IMLData output;
             int evaluateStop = data.Select(t => t.Id).Max();
 
             using (var file = new System.IO.StreamWriter(Config.PredictResult.ToString(), true))
@@ -550,38 +630,56 @@ namespace LotoPrediction
                 //Start new
                 int currentId = evaluateStop + 1;
 
-                //Calculate based on actual data
-                var input = new BasicMLData(PastWindowSize * 7);
-                for (int i = 0; i < PastWindowSize; i++)
+                if (LotoNumber != 7)
                 {
-                    input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                     .Select(t => t.NormalizeDayOfWeek).First();
+                    //Calculate based on actual data
+                    var input = new BasicMLData(PastWindowSize * 7);
+                    for (int i = 0; i < PastWindowSize; i++)
+                    {
+                        input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                         .Select(t => t.NormalizeDayOfWeek).First();
 
-                    input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                        .Select(t => t.NormalizedActual1).First();
+                        input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            .Select(t => t.NormalizedActual1).First();
 
-                    input[i * 7 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                        .Select(t => t.NormalizedActual2).First();
+                        input[i * 7 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            .Select(t => t.NormalizedActual2).First();
 
-                    input[i * 7 + 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                        .Select(t => t.NormalizedActual3).First();
+                        input[i * 7 + 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            .Select(t => t.NormalizedActual3).First();
 
-                    input[i * 7 + 4] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                        .Select(t => t.NormalizedActual4).First();
+                        input[i * 7 + 4] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            .Select(t => t.NormalizedActual4).First();
 
-                    input[i * 7 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                        .Select(t => t.NormalizedActual5).First();
+                        input[i * 7 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            .Select(t => t.NormalizedActual5).First();
 
-                    input[i * 7 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                        .Select(t => t.NormalizedActual6).First();
+                        input[i * 7 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            .Select(t => t.NormalizedActual6).First();
+                    }
+
+                    output = network.Compute(input);
+                }
+                else
+                {
+                    //Calculate based on actual data
+                    var input = new BasicMLData(PastWindowSize * 2);
+                    for (int i = 0; i < PastWindowSize; i++)
+                    {
+                        input[i * 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                         .Select(t => t.NormalizeDayOfWeek).First();
+
+                        input[i * 2 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            .Select(t => t.NormalizedActual7).First();
+                    }
+
+                    output = network.Compute(input);
                 }
                 //Start new - end
 
-                var output = network.Compute(input);
+                
                 double normalizedPredicted = output[0];
-
                 double predicted = 0.0;
-
                 switch (LotoNumber)
                 {
                     case 1:
@@ -606,6 +704,10 @@ namespace LotoPrediction
 
                     case 6:
                         predicted = Math.Round(norm6.Stats.DeNormalize(normalizedPredicted), 0);
+                        break;
+
+                    case 7:
+                        predicted = Math.Round(norm7.Stats.DeNormalize(normalizedPredicted), 0);
                         break;
 
                     default:

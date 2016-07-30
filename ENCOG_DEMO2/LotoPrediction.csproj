@@ -76,10 +76,16 @@
     <ManifestKeyFile>LotoPrediction_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -102,6 +108,7 @@
   <ItemGroup>
     <None Include="Properties\App.config" />
     <None Include="LotoPrediction_TemporaryKey.pfx" />
+    <None Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Info\Info.txt" />
