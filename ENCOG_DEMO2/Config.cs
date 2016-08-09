@@ -5,7 +5,7 @@ namespace LotoPrediction
 {
     public static class Config
     {
-        public static FileInfo BasePath = new FileInfo(@"C:\Projects\ENCOG\L-Archieve\");
+        public static FileInfo BasePath = new FileInfo(@"..\Archieve\");
         public static FileInfo BaseFile = FileUtil.CombinePath(BasePath, "L-Archieve.csv");
 
         #region Evaluation
