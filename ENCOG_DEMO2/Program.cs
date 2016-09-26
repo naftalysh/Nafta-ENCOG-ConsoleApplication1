@@ -19,7 +19,7 @@ namespace LotoPrediction
                 lotoPrediction.MaxError = Convert.ToDouble(args[2]);
                 lotoPrediction.blnShowConsole = Convert.ToBoolean(args[3]);
             }
-            else if (args.Length == 3)
+            else if (args.Length == 3)  
             {
                 lotoPrediction.LotoNumber = Convert.ToInt32(args[0]);
                 lotoPrediction.PastWindowSize = Convert.ToInt32(args[1]);
