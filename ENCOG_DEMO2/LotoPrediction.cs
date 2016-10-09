@@ -23,18 +23,25 @@ namespace LotoPrediction
         public double NormalizeDayOfWeek { get; set; }
         public double Actual1 { get; set; }
         public double NormalizedActual1 { get; set; }
+        public double _closedLoopNormalizedActual1 { get; set; }
         public double Actual2 { get; set; }
         public double NormalizedActual2 { get; set; }
+        public double _closedLoopNormalizedActual2 { get; set; }
         public double Actual3 { get; set; }
         public double NormalizedActual3 { get; set; }
+        public double _closedLoopNormalizedActual3 { get; set; }
         public double Actual4 { get; set; }
         public double NormalizedActual4 { get; set; }
+        public double _closedLoopNormalizedActual4 { get; set; }
         public double Actual5 { get; set; }
         public double NormalizedActual5 { get; set; }
+        public double _closedLoopNormalizedActual5 { get; set; }
         public double Actual6 { get; set; }
         public double NormalizedActual6 { get; set; }
+        public double _closedLoopNormalizedActual6 { get; set; }
         public double Actual7 { get; set; }
         public double NormalizedActual7 { get; set; }
+        public double _closedLoopNormalizedActual7 { get; set; }
     }
 
     public class LotoPrediction
@@ -176,10 +183,17 @@ namespace LotoPrediction
                 data[i].NormalizeDayOfWeek = normalizedArray[i];
             }
 
+            
             normalizedArray = norm1.Process(data.Select(t => t.Actual1).ToArray());
             for (int i = 0; i < normalizedArray.Count(); i++)
             {
                 data[i].NormalizedActual1 = normalizedArray[i];
+            }
+
+            var _closedLoopNormalizedArray = Encog.Util.EngineArray.ArrayCopy(normalizedArray);
+            for (int i = 0; i < _closedLoopNormalizedArray.Count(); i++)
+            {
+                data[i]._closedLoopNormalizedActual1 = _closedLoopNormalizedArray[i];
             }
 
             normalizedArray = norm2.Process(data.Select(t => t.Actual2).ToArray());
@@ -188,11 +202,24 @@ namespace LotoPrediction
                 data[i].NormalizedActual2 = normalizedArray[i];
             }
 
+            _closedLoopNormalizedArray = Encog.Util.EngineArray.ArrayCopy(normalizedArray);
+            for (int i = 0; i < _closedLoopNormalizedArray.Count(); i++)
+            {
+                data[i]._closedLoopNormalizedActual2 = _closedLoopNormalizedArray[i];
+            }
+
             normalizedArray = norm3.Process(data.Select(t => t.Actual3).ToArray());
             for (int i = 0; i < normalizedArray.Count(); i++)
             {
                 data[i].NormalizedActual3 = normalizedArray[i];
             }
+
+            _closedLoopNormalizedArray = Encog.Util.EngineArray.ArrayCopy(normalizedArray);
+            for (int i = 0; i < _closedLoopNormalizedArray.Count(); i++)
+            {
+                data[i]._closedLoopNormalizedActual3 = _closedLoopNormalizedArray[i];
+            }
+
 
             normalizedArray = norm4.Process(data.Select(t => t.Actual4).ToArray());
             for (int i = 0; i < normalizedArray.Count(); i++)
@@ -200,11 +227,25 @@ namespace LotoPrediction
                 data[i].NormalizedActual4 = normalizedArray[i];
             }
 
+            _closedLoopNormalizedArray = Encog.Util.EngineArray.ArrayCopy(normalizedArray);
+            for (int i = 0; i < _closedLoopNormalizedArray.Count(); i++)
+            {
+                data[i]._closedLoopNormalizedActual4 = _closedLoopNormalizedArray[i];
+            }
+
+
             normalizedArray = norm5.Process(data.Select(t => t.Actual5).ToArray());
             for (int i = 0; i < normalizedArray.Count(); i++)
             {
                 data[i].NormalizedActual5 = normalizedArray[i];
             }
+
+            _closedLoopNormalizedArray = Encog.Util.EngineArray.ArrayCopy(normalizedArray);
+            for (int i = 0; i < _closedLoopNormalizedArray.Count(); i++)
+            {
+                data[i]._closedLoopNormalizedActual5 = _closedLoopNormalizedArray[i];
+            }
+
 
             normalizedArray = norm6.Process(data.Select(t => t.Actual6).ToArray());
             for (int i = 0; i < normalizedArray.Count(); i++)
@@ -212,11 +253,25 @@ namespace LotoPrediction
                 data[i].NormalizedActual6 = normalizedArray[i];
             }
 
+            _closedLoopNormalizedArray = Encog.Util.EngineArray.ArrayCopy(normalizedArray);
+            for (int i = 0; i < _closedLoopNormalizedArray.Count(); i++)
+            {
+                data[i]._closedLoopNormalizedActual6 = _closedLoopNormalizedArray[i];
+            }
+
+
             normalizedArray = norm7.Process(data.Select(t => t.Actual7).ToArray());
             for (int i = 0; i < normalizedArray.Count(); i++)
             {
                 data[i].NormalizedActual7 = normalizedArray[i];
             }
+
+            _closedLoopNormalizedArray = Encog.Util.EngineArray.ArrayCopy(normalizedArray);
+            for (int i = 0; i < _closedLoopNormalizedArray.Count(); i++)
+            {
+                data[i]._closedLoopNormalizedActual7 = _closedLoopNormalizedArray[i];
+            }
+
 
             //normalizedArray = norm.Process(data.Select(t => t.Actual7).ToArray());
             //for (int i = 0; i < normalizedArray.Count(); i++)
@@ -466,8 +521,8 @@ namespace LotoPrediction
             int TotalNumOfIterations = evaluateStop- evaluateStart;
             IMLData output;
 
-            evaluateStart = evaluateStart + TotalNumOfIterations * (2 / 3); //Test last 1/3rd 
-
+            //evaluateStart = evaluateStart + TotalNumOfIterations * (2 / 3); //Test last 1/3rd 
+            
 
             using (var file = new System.IO.StreamWriter(Config.EvaluationResult.ToString()))
             {
