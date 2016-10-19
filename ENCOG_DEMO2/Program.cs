@@ -46,7 +46,7 @@ namespace LotoPrediction
                             (Execution_End - Execution_Start).Milliseconds);
 
             Console.WriteLine("-- End Of execution -- \n" + line);
-            //Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }

@@ -6,10 +6,12 @@ using Encog.Neural.Networks;
 using Encog.Neural.Networks.Training;
 using Encog.Neural.Networks.Training.Propagation.Resilient;
 using Encog.Neural.Pattern;
+using Encog.Persist;
 using Encog.Util.Arrayutil;
 using Encog.Util.CSV;
 using Encog.Util.Simple;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,10 +57,25 @@ namespace LotoPrediction
         public Boolean blnShowConsole = true;
         private float predictionPercent;
 
+        public int TrainStart;
+        public int TrainEnd;
+        public int EvaluateStart;
+        public int EvaluateEnd;
+        int TotalNumOfIterations;
+
         private List<LotoData> data = new List<LotoData>();
         private TemporalMLDataSet trainingSet;
         private BasicNetwork network;
         private NormalizeArray norm0, norm1, norm2, norm3, norm4, norm5, norm6, norm7;
+
+
+        public void SaveLoadNetwork(Boolean blnSave, string savedFilename)
+        {
+            if (blnSave) 
+                EncogDirectoryPersistence.SaveObject(new FileInfo(savedFilename), network);
+            else
+                network = (BasicNetwork)EncogDirectoryPersistence.LoadObject(new FileInfo(savedFilename));
+        }
 
         public void Predict()
         {
@@ -107,6 +124,13 @@ namespace LotoPrediction
                     Actual7 = csvreader.GetInt("N7")
                 });
             }
+
+            TotalNumOfIterations = data.Select(t => t.Id).Max() - (data.Select(t => t.Id).Min() + PastWindowSize);
+            TrainStart = data.Select(t => t.Id).Min() + PastWindowSize;
+            TrainEnd = TrainStart + TotalNumOfIterations * 3 / 4; 
+            EvaluateStart = TrainEnd + 1;
+            EvaluateEnd = TotalNumOfIterations;
+
         }
 
         private void NormalizeData()
@@ -408,46 +432,61 @@ namespace LotoPrediction
             //Temporal point
             if (LotoNumber != 7)
             {
-                foreach (var item in data)
+                for (int i = 0; i < TrainEnd; i++)
                 {
                     var point = new TemporalPoint(7); //1 values
-                    point.Sequence = item.Id;
-                    point.Data[0] = item.NormalizeDayOfWeek;
-                    point.Data[1] = item.NormalizedActual1;
-                    point.Data[2] = item.NormalizedActual2;
-                    point.Data[3] = item.NormalizedActual3;
-                    point.Data[4] = item.NormalizedActual4;
-                    point.Data[5] = item.NormalizedActual5;
-                    point.Data[6] = item.NormalizedActual6;
+                    point.Sequence = data[i].Id;
+                    point.Data[0] = data[i].NormalizeDayOfWeek;
+                    point.Data[1] = data[i].NormalizedActual1;
+                    point.Data[2] = data[i].NormalizedActual2;
+                    point.Data[3] = data[i].NormalizedActual3;
+                    point.Data[4] = data[i].NormalizedActual4;
+                    point.Data[5] = data[i].NormalizedActual5;
+                    point.Data[6] = data[i].NormalizedActual6;
                     trainingSet.Points.Add(point);
-
-                //point.Data[0] = item.NormalizedActual1;
-                //point.Data[1] = item.NormalizedActual2;
-                //point.Data[2] = item.NormalizedActual3;
-                //point.Data[3] = item.NormalizedActual4;
-                //point.Data[4] = item.NormalizedActual5;
-                //point.Data[5] = item.NormalizedActual6;
-                //trainingSet.Points.Add(point);
                 }
             }
-            else {
-                foreach (var item in data)
+            else
+            {
+                for (int i = 0; i < TrainEnd; i++)
                 {
                     var point = new TemporalPoint(2); //1 values
-                    point.Sequence = item.Id;
-                    point.Data[0] = item.NormalizeDayOfWeek;
-                    point.Data[1] = item.NormalizedActual7;
+                    point.Sequence = data[i].Id;
+                    point.Data[0] = data[i].NormalizeDayOfWeek;
+                    point.Data[1] = data[i].NormalizedActual7;
                     trainingSet.Points.Add(point);
-
-                    //point.Data[0] = item.NormalizedActual1;
-                    //point.Data[1] = item.NormalizedActual2;
-                    //point.Data[2] = item.NormalizedActual3;
-                    //point.Data[3] = item.NormalizedActual4;
-                    //point.Data[4] = item.NormalizedActual5;
-                    //point.Data[5] = item.NormalizedActual6;
-                    //trainingSet.Points.Add(point);
                 }
             }
+
+
+
+
+            //if (LotoNumber != 7)
+            //{
+            //    foreach (var item in data)
+            //    {
+            //        var point = new TemporalPoint(7); //1 values
+            //        point.Sequence = item.Id;
+            //        point.Data[0] = item.NormalizeDayOfWeek;
+            //        point.Data[1] = item.NormalizedActual1;
+            //        point.Data[2] = item.NormalizedActual2;
+            //        point.Data[3] = item.NormalizedActual3;
+            //        point.Data[4] = item.NormalizedActual4;
+            //        point.Data[5] = item.NormalizedActual5;
+            //        point.Data[6] = item.NormalizedActual6;
+            //        trainingSet.Points.Add(point);
+            //    }
+            //}
+            //else {
+            //    foreach (var item in data)
+            //    {
+            //        var point = new TemporalPoint(2); //1 values
+            //        point.Sequence = item.Id;
+            //        point.Data[0] = item.NormalizeDayOfWeek;
+            //        point.Data[1] = item.NormalizedActual7;
+            //        trainingSet.Points.Add(point);
+            //    }
+            //}
 
             trainingSet.Generate();
         }
@@ -516,21 +555,20 @@ namespace LotoPrediction
 
             //float predictionPercent;
 
-            int evaluateStart = data.Select(t => t.Id).Min() + PastWindowSize;
-            int evaluateStop = data.Select(t => t.Id).Max();
-            int TotalNumOfIterations = evaluateStop- evaluateStart;
+            //int evaluateStart = data.Select(t => t.Id).Min() + PastWindowSize;
+            //int evaluateStop = data.Select(t => t.Id).Max();
+            //int TotalNumOfIterations = evaluateStop - evaluateStart;
+
             IMLData output;
 
-            //evaluateStart = evaluateStart + TotalNumOfIterations * (2 / 3); //Test last 1/3rd 
-            
 
             using (var file = new System.IO.StreamWriter(Config.EvaluationResult.ToString()))
             {
                 countPredicted = 0;
                 countUnPredicted = 0;
-                
 
-                for (int currentId = evaluateStart; currentId <= evaluateStop; currentId++)
+
+                for (int currentId = EvaluateStart; currentId <= EvaluateEnd; currentId++)
                 {
 
                     if (LotoNumber != 7)
@@ -580,6 +618,10 @@ namespace LotoPrediction
                     }
 
                     double normalizedPredicted = output[0];
+                    // _closedLoopSunspots[currentId] = normalizedPredicted;
+                    // _closedLoopNormalizedActual1
+
+
                     double predicted = 0.0;
                     switch (LotoNumber)
                     {
