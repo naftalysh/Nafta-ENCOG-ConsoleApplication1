@@ -571,6 +571,8 @@ namespace LotoPrediction
                 for (int currentId = EvaluateStart; currentId <= EvaluateEnd; currentId++)
                 {
 
+                    //TODO assign data[i]._closedLoopNormalizedActual1 .. data[i]._closedLoopNormalizedActual7 values according to on-going predictions
+
                     if (LotoNumber != 7)
                     {
                         //Calculate based on actual data
