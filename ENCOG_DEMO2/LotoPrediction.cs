@@ -56,6 +56,7 @@ namespace LotoPrediction
         public int LotoNumber = 1;
         public Boolean blnShowConsole = true;
         private float predictionPercent;
+        private float CL_predictionPercent;
 
         public int TrainStart;
         public int TrainEnd;
@@ -550,8 +551,8 @@ namespace LotoPrediction
             //    + ", actual=" + output[0] + ",ideal=" + pair.Ideal[0]);
             //}
 
-            int countPredicted, countUnPredicted;
-            Boolean blnPredicted;
+            int countPredicted, countUnPredicted, CL_countPredicted, CL_countUnPredicted;
+            Boolean blnPredicted, bln_closedLoop_Predicted;
 
             //float predictionPercent;
 
@@ -560,27 +561,28 @@ namespace LotoPrediction
             //int TotalNumOfIterations = evaluateStop - evaluateStart;
 
             IMLData output;
+            IMLData _closedLoop_output;
 
 
             using (var file = new System.IO.StreamWriter(Config.EvaluationResult.ToString()))
             {
-                countPredicted = 0;
-                countUnPredicted = 0;
+                countPredicted = countUnPredicted = 0;
+                CL_countPredicted = CL_countUnPredicted = 0;
 
 
                 for (int currentId = EvaluateStart; currentId <= EvaluateEnd; currentId++)
                 {
 
-                    //TODO assign data[i]._closedLoopNormalizedActual1 .. data[i]._closedLoopNormalizedActual7 values according to on-going predictions
-
                     if (LotoNumber != 7)
                     {
                         //Calculate based on actual data
                         var input = new BasicMLData(PastWindowSize * 7);
+                        var _closedLoop_input = new BasicMLData(PastWindowSize * 7);
+
                         for (int i = 0; i < PastWindowSize; i++)
                         {
                             input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
-                             .Select(t => t.NormalizeDayOfWeek).First();
+                                 .Select(t => t.NormalizeDayOfWeek).First();
 
                             input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t.NormalizedActual1).First();
@@ -599,14 +601,39 @@ namespace LotoPrediction
 
                             input[i * 7 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t.NormalizedActual6).First();
+
+
+                            _closedLoop_input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                             .Select(t => t.NormalizeDayOfWeek).First();
+
+                            _closedLoop_input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t._closedLoopNormalizedActual1).First();
+
+                            _closedLoop_input[i * 7 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t._closedLoopNormalizedActual2).First();
+
+                            _closedLoop_input[i * 7 + 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t._closedLoopNormalizedActual3).First();
+
+                            _closedLoop_input[i * 7 + 4] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t._closedLoopNormalizedActual4).First();
+
+                            _closedLoop_input[i * 7 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t._closedLoopNormalizedActual5).First();
+
+                            _closedLoop_input[i * 7 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t._closedLoopNormalizedActual6).First();
                         }
 
                         output = network.Compute(input);
+                        _closedLoop_output = network.Compute(_closedLoop_input);
                     }
                     else
                     {
                         //Calculate based on actual data
                         var input = new BasicMLData(PastWindowSize * 2);
+                        var _closedLoop_input = new BasicMLData(PastWindowSize * 2);
+
                         for (int i = 0; i < PastWindowSize; i++)
                         {
                             input[i * 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
@@ -614,45 +641,68 @@ namespace LotoPrediction
 
                             input[i * 2 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t.NormalizedActual7).First();
+
+                            _closedLoop_input[i * 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizeDayOfWeek).First();
+
+                            _closedLoop_input[i * 2 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t._closedLoopNormalizedActual7).First();
+
+
                         }
 
                         output = network.Compute(input);
+                        _closedLoop_output = network.Compute(_closedLoop_input);
                     }
 
                     double normalizedPredicted = output[0];
-                    // _closedLoopSunspots[currentId] = normalizedPredicted;
-                    // _closedLoopNormalizedActual1
-
+                    double _closedLoop_normalizedPredicted = _closedLoop_output[0];
 
                     double predicted = 0.0;
+                    double _closedLoop_predicted = 0.0;
+
                     switch (LotoNumber)
                     {
                         case 1:
+                            data[currentId]._closedLoopNormalizedActual1 = _closedLoop_normalizedPredicted;
                             predicted = Math.Round(norm1.Stats.DeNormalize(normalizedPredicted), 0);
+                            _closedLoop_predicted = Math.Round(norm1.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
                             break;
 
                         case 2:
+                            data[currentId]._closedLoopNormalizedActual2 = _closedLoop_normalizedPredicted;
                             predicted = Math.Round(norm2.Stats.DeNormalize(normalizedPredicted), 0);
+                            _closedLoop_predicted = Math.Round(norm2.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
                             break;
 
                         case 3:
+                            data[currentId]._closedLoopNormalizedActual3 = _closedLoop_normalizedPredicted;
                             predicted = Math.Round(norm3.Stats.DeNormalize(normalizedPredicted), 0);
+                            _closedLoop_predicted = Math.Round(norm3.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
                             break;
 
                         case 4:
+                            data[currentId]._closedLoopNormalizedActual4 = _closedLoop_normalizedPredicted;
                             predicted = Math.Round(norm4.Stats.DeNormalize(normalizedPredicted), 0);
+                            _closedLoop_predicted = Math.Round(norm4.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
                             break;
 
                         case 5:
+                            data[currentId]._closedLoopNormalizedActual5 = _closedLoop_normalizedPredicted;
                             predicted = Math.Round(norm5.Stats.DeNormalize(normalizedPredicted), 0);
+                            _closedLoop_predicted = Math.Round(norm5.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
                             break;
 
                         case 6:
+                            data[currentId]._closedLoopNormalizedActual6 = _closedLoop_normalizedPredicted;
                             predicted = Math.Round(norm6.Stats.DeNormalize(normalizedPredicted), 0);
+                            _closedLoop_predicted = Math.Round(norm6.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
                             break;
 
                         case 7:
+                            data[currentId]._closedLoopNormalizedActual7 = _closedLoop_normalizedPredicted;
                             predicted = Math.Round(norm7.Stats.DeNormalize(normalizedPredicted), 0);
+                            _closedLoop_predicted = Math.Round(norm7.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
                             break;
 
                         default:
@@ -698,13 +748,20 @@ namespace LotoPrediction
 
                     int DrawNumber = data.Where(t => t.Id == currentId).Select(t => t.DrawNumber).First();
                     blnPredicted = (actual == predicted) ? true : false;
+                    bln_closedLoop_Predicted = (actual == _closedLoop_predicted) ? true : false;
 
                     if (blnPredicted)
                         countPredicted++;
                     else
                         countUnPredicted++;
 
-                    string line1 = string.Format("DrawNumber: {0}; Actual: {1}; Predicted: {2}", DrawNumber, actual, predicted);
+                    if (bln_closedLoop_Predicted)
+                        CL_countPredicted++;
+                    else
+                        CL_countUnPredicted++;
+
+
+                    string line1 = string.Format("DrawNumber: {0}; Actual: {1}; Predicted: {2}; closedLoop_Predicted: {3}", DrawNumber, actual, predicted, _closedLoop_predicted);
                     file.WriteLine(line1);
 
                     if (blnShowConsole)
@@ -712,8 +769,12 @@ namespace LotoPrediction
                 }
 
                 predictionPercent = ((float)countPredicted / ((float)countPredicted + (float)countUnPredicted)) * 100;
-                string line2 = string.Format("TotalPredictions = {0}, Predicted = {1}, UnPredicted = {2}, Prediction percent = {3:0.00}%",
-                                                (countPredicted + countUnPredicted), countPredicted, countUnPredicted, predictionPercent);
+                CL_predictionPercent = ((float)CL_countPredicted / ((float)CL_countPredicted + (float)CL_countUnPredicted)) * 100;
+
+                string line2 = string.Format(@"TotalPredictions = {0}, Predicted = {1}, UnPredicted = {2}, Prediction percent = {3:0.00}% \n 
+                                               _closedLoop_TotalPredictions = {4}, _closedLoop_Predicted = {5}, _closedLoop_UnPredicted = {6}, _closedLoop_Prediction percent = {7:0.00}%",
+                                                (countPredicted + countUnPredicted), countPredicted, countUnPredicted, predictionPercent,
+                                                (CL_countPredicted + CL_countUnPredicted), CL_countPredicted, CL_countUnPredicted, CL_predictionPercent);
                 file.WriteLine(line2);
                 Console.WriteLine(line2);
             }
