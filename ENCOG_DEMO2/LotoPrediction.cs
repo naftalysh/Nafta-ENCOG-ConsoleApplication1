@@ -710,45 +710,48 @@ namespace LotoPrediction
                     }
 
                     //double Actual1 = data.Where(t => t.Id == currentId).Select(t => t.Actual1).First();
-                    double actual = 0.0;
+                    double actual1 = 0.0;
+                    double actual2 = 0.0;
+                    double actual3 = 0.0;
+                    double actual4 = 0.0;
+                    double actual5 = 0.0;
+                    double actual6 = 0.0;
+                    double actual7 = 0.0;
 
-                    switch (LotoNumber)
+                    if (LotoNumber != 7)
                     {
-                        case 1:
-                            actual = Math.Round(norm1.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual1).First()), 0);
-                            break;
-
-                        case 2:
-                            actual = Math.Round(norm2.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual2).First()), 0);
-                            break;
-
-                        case 3:
-                            actual = Math.Round(norm3.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual3).First()), 0);
-                            break;
-
-                        case 4:
-                            actual = Math.Round(norm4.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual4).First()), 0);
-                            break;
-
-                        case 5:
-                            actual = Math.Round(norm5.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual5).First()), 0);
-                            break;
-
-                        case 6:
-                            actual = Math.Round(norm6.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual6).First()), 0);
-                            break;
-
-                        case 7:
-                            actual = Math.Round(norm7.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual7).First()), 0);
-                            break;
-
-                        default:
-                            break;
+                        actual1 = Math.Round(norm1.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual1).First()), 0);
+                        actual2 = Math.Round(norm2.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual2).First()), 0);
+                        actual3 = Math.Round(norm3.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual3).First()), 0);
+                        actual4 = Math.Round(norm4.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual4).First()), 0);
+                        actual5 = Math.Round(norm5.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual5).First()), 0);
+                        actual6 = Math.Round(norm6.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual6).First()), 0);
                     }
+                    else
+                        actual7 = Math.Round(norm7.Stats.DeNormalize(data.Where(t => t.Id == currentId).Select(t => t.NormalizedActual7).First()), 0);
 
                     int DrawNumber = data.Where(t => t.Id == currentId).Select(t => t.DrawNumber).First();
-                    blnPredicted = (actual == predicted) ? true : false;
-                    bln_closedLoop_Predicted = (actual == _closedLoop_predicted) ? true : false;
+                    if (LotoNumber != 7) {
+                        blnPredicted = (actual1 == predicted || 
+                                        actual2 == predicted || 
+                                        actual3 == predicted || 
+                                        actual4 == predicted || 
+                                        actual5 == predicted || 
+                                        actual6 == predicted) ? true : false;
+
+                        bln_closedLoop_Predicted = (actual1 == _closedLoop_predicted ||
+                                                    actual2 == _closedLoop_predicted ||
+                                                    actual3 == _closedLoop_predicted ||
+                                                    actual4 == _closedLoop_predicted ||
+                                                    actual5 == _closedLoop_predicted ||
+                                                    actual6 == _closedLoop_predicted) ? true : false;
+                    }
+                    else
+                    {
+                        blnPredicted = (actual7 == predicted) ? true : false;
+                        bln_closedLoop_Predicted = (actual7 == _closedLoop_predicted) ? true : false;
+                    }
+                    
 
                     if (blnPredicted)
                         countPredicted++;
@@ -761,11 +764,20 @@ namespace LotoPrediction
                         CL_countUnPredicted++;
 
 
-                    string line1 = string.Format("DrawNumber: {0}; Actual: {1}; Predicted: {2}; closedLoop_Predicted: {3}", DrawNumber, actual, predicted, _closedLoop_predicted);
-                    file.WriteLine(line1);
+                    string line1 = "";
+                    if (LotoNumber != 7)
+                    {
+                        line1 = string.Format("DrawNumber: {0}; Actual: ({1},{2},{3},{4},{5},{6}); Predicted: {7}; closedLoop_Predicted: {8}", DrawNumber, actual1, actual2, actual3, actual4, actual5, actual6, predicted, _closedLoop_predicted);
+                    }
+                    else
+                    {
+                        line1 = string.Format("DrawNumber: {0}; Actual: {1}; Predicted: {2}; closedLoop_Predicted: {3}", DrawNumber, actual7, predicted, _closedLoop_predicted);
+                    }
 
+                    file.WriteLine(line1);
                     if (blnShowConsole)
                         Console.WriteLine(line1);
+
                 }
 
                 predictionPercent = ((float)countPredicted / ((float)countPredicted + (float)countUnPredicted)) * 100;
