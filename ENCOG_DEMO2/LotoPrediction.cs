@@ -98,7 +98,9 @@ namespace LotoPrediction
             EvaluateNetwork(blnShowConsole);
 
             ////Predict next value three times
-            PredictNetwork();
+            //PredictNetwork();
+
+            PredictNetworkNew();
         }
 
         private void ReadData()
@@ -128,7 +130,7 @@ namespace LotoPrediction
 
             TotalNumOfIterations = data.Select(t => t.Id).Max() - (data.Select(t => t.Id).Min() + PastWindowSize);
             TrainStart = data.Select(t => t.Id).Min() + PastWindowSize;
-            TrainEnd = TrainStart + TotalNumOfIterations * 3 / 4; 
+            TrainEnd = TrainStart + TotalNumOfIterations * 75 / 100; 
             EvaluateStart = TrainEnd + 1;
             EvaluateEnd = TotalNumOfIterations;
 
@@ -781,6 +783,115 @@ namespace LotoPrediction
                                                 (CL_countPredicted + CL_countUnPredicted), CL_countPredicted, CL_countUnPredicted, CL_predictionPercent);
                 file.WriteLine(line2);
                 Console.WriteLine(line2);
+            }
+        }
+
+
+        private void PredictNetworkNew()
+        {
+            IMLData output;
+            int evaluateStop = data.Select(t => t.Id).Max();
+
+            using (var file = new System.IO.StreamWriter(Config.PredictResult.ToString(), true))
+            {
+                //Start new
+                int currentId = evaluateStop + 1;
+
+                    if (LotoNumber != 7)
+                    {
+                        //Calculate based on actual data
+                        var input = new BasicMLData(PastWindowSize * 7);
+
+                        for (int i = 0; i < PastWindowSize; i++)
+                        {
+                            input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                 .Select(t => t.NormalizeDayOfWeek).First();
+
+                            input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual1).First();
+
+                            input[i * 7 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual2).First();
+
+                            input[i * 7 + 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual3).First();
+
+                            input[i * 7 + 4] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual4).First();
+
+                            input[i * 7 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual5).First();
+
+                            input[i * 7 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual6).First();
+                        }
+
+                        output = network.Compute(input);
+                    }
+                    else
+                    {
+                        //Calculate based on actual data
+                        var input = new BasicMLData(PastWindowSize * 2);
+
+                        for (int i = 0; i < PastWindowSize; i++)
+                        {
+                            input[i * 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                             .Select(t => t.NormalizeDayOfWeek).First();
+
+                            input[i * 2 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedActual7).First();
+                        }
+
+                        output = network.Compute(input);
+                    }
+
+                    double normalizedPredicted = output[0];
+                    double predicted = 0.0;
+
+                    switch (LotoNumber)
+                    {
+                        case 1:
+                            predicted = Math.Round(norm1.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 2:
+                            predicted = Math.Round(norm2.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 3:
+                            predicted = Math.Round(norm3.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 4:
+                            predicted = Math.Round(norm4.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 5:
+                            predicted = Math.Round(norm5.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 6:
+                            predicted = Math.Round(norm6.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        case 7:
+                            predicted = Math.Round(norm7.Stats.DeNormalize(normalizedPredicted), 0);
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                int DrawNumber = data.Where(t => t.Id == (currentId - 1)).Select(t => t.DrawNumber).First() + 1;
+
+                string consoleLine = string.Format(@"DrawNumber:{0}; LotoNumber:{1}; PastWindowSize ={2}; MaxError:{3}; Predicted:{4}; Prediction percent:{5:0.00}%; _closedLoop_Prediction percent ={6:0.00}%",
+                                       DrawNumber, LotoNumber, PastWindowSize, MaxError, predicted, predictionPercent, CL_predictionPercent);
+
+                string Line = string.Format(@"{0}; {1}; {2}; {3}; {4}; {5:0.00}%; {6:0.00}%",
+                               DrawNumber, LotoNumber, PastWindowSize, MaxError, predicted, predictionPercent, CL_predictionPercent);
+
+                file.WriteLine(Line);
+                Console.WriteLine(consoleLine);
             }
         }
 
