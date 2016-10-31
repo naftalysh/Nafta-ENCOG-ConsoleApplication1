@@ -543,14 +543,6 @@ namespace LotoPrediction
 
         private void EvaluateNetwork(Boolean blnShowConsole)
         {
-            //Console.WriteLine("Neural Network Results:");
-            //foreach (IMLDataPair pair in trainingSet)
-            //{
-            //    INeuralData output = network.Compute(pair.Input);
-            //    Console.WriteLine(pair.Input[0] + "," + pair.Input[1]
-            //    + ", actual=" + output[0] + ",ideal=" + pair.Ideal[0]);
-            //}
-
             int countPredicted, countUnPredicted, CL_countPredicted, CL_countUnPredicted;
             Boolean blnPredicted, bln_closedLoop_Predicted;
 
