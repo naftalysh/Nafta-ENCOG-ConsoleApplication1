@@ -11,6 +11,7 @@ using Encog.Util.Arrayutil;
 using Encog.Util.CSV;
 using Encog.Util.Simple;
 using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,8 @@ namespace LotoPrediction
         public Boolean blnShowConsole = true;
         private float predictionPercent;
         private float CL_predictionPercent;
+        private float predictionPercent_Abs1;       // Abs(Actual-Predicted) <= 1
+        private float CL_predictionPercent_Abs1;
 
         public int TrainStart;
         public int TrainEnd;
@@ -548,6 +551,9 @@ namespace LotoPrediction
             int countPredicted, countUnPredicted, CL_countPredicted, CL_countUnPredicted;
             Boolean blnPredicted, bln_closedLoop_Predicted;
 
+            int countPredicted_Abs1, countUnPredicted_Abs1, CL_countPredicted_Abs1, CL_countUnPredicted_Abs1;
+            Boolean blnPredicted_Abs1, bln_closedLoop_Predicted_Abs1;
+
             //float predictionPercent;
 
             //int evaluateStart = data.Select(t => t.Id).Min() + PastWindowSize;
@@ -562,7 +568,8 @@ namespace LotoPrediction
             {
                 countPredicted = countUnPredicted = 0;
                 CL_countPredicted = CL_countUnPredicted = 0;
-
+                countPredicted_Abs1 = countUnPredicted_Abs1 = 0;
+                CL_countPredicted_Abs1 = CL_countUnPredicted_Abs1 = 0;
 
                 for (int currentId = EvaluateStart; currentId <= EvaluateEnd; currentId++)
                 {
@@ -739,13 +746,30 @@ namespace LotoPrediction
                                                     actual4 == _closedLoop_predicted ||
                                                     actual5 == _closedLoop_predicted ||
                                                     actual6 == _closedLoop_predicted) ? true : false;
+
+                        blnPredicted_Abs1 = (Math.Abs(actual1-predicted) <= 1 ||
+                                             Math.Abs(actual2-predicted) <= 1 ||
+                                             Math.Abs(actual3-predicted) <= 1 ||
+                                             Math.Abs(actual4-predicted) <= 1 ||
+                                             Math.Abs(actual5-predicted) <= 1 ||
+                                             Math.Abs(actual6-predicted) <= 1) ? true : false;
+
+                        bln_closedLoop_Predicted_Abs1 = (Math.Abs(actual1 - _closedLoop_predicted) <= 1 ||
+                                                         Math.Abs(actual2 - _closedLoop_predicted) <= 1 ||
+                                                         Math.Abs(actual3 - _closedLoop_predicted) <= 1 ||
+                                                         Math.Abs(actual4 - _closedLoop_predicted) <= 1 ||
+                                                         Math.Abs(actual5 - _closedLoop_predicted) <= 1 ||
+                                                         Math.Abs(actual6 - _closedLoop_predicted) <= 1) ? true : false;
                     }
                     else
                     {
                         blnPredicted = (actual7 == predicted) ? true : false;
                         bln_closedLoop_Predicted = (actual7 == _closedLoop_predicted) ? true : false;
+
+                        blnPredicted_Abs1 = (Math.Abs(actual7-predicted) <= 1) ? true : false;
+                        bln_closedLoop_Predicted_Abs1 = (Math.Abs(actual7 - _closedLoop_predicted) <= 1) ? true : false;
                     }
-                    
+
 
                     if (blnPredicted)
                         countPredicted++;
@@ -756,6 +780,17 @@ namespace LotoPrediction
                         CL_countPredicted++;
                     else
                         CL_countUnPredicted++;
+
+
+                    if (blnPredicted_Abs1)
+                        countPredicted_Abs1++;
+                    else
+                        countUnPredicted_Abs1++;
+
+                    if (bln_closedLoop_Predicted_Abs1)
+                        CL_countPredicted_Abs1++;
+                    else
+                        CL_countUnPredicted_Abs1++;
 
 
                     string line1 = "";
@@ -777,12 +812,24 @@ namespace LotoPrediction
                 predictionPercent = ((float)countPredicted / ((float)countPredicted + (float)countUnPredicted)) * 100;
                 CL_predictionPercent = ((float)CL_countPredicted / ((float)CL_countPredicted + (float)CL_countUnPredicted)) * 100;
 
+                predictionPercent_Abs1 = ((float)countPredicted_Abs1 / ((float)countPredicted_Abs1 + (float)countUnPredicted_Abs1)) * 100; 
+                CL_predictionPercent_Abs1 = ((float)CL_countPredicted_Abs1 / ((float)CL_countPredicted_Abs1 + (float)CL_countUnPredicted_Abs1)) * 100;
+
+
                 string line2 = string.Format(@"TotalPredictions = {0}, Predicted = {1}, UnPredicted = {2}, Prediction percent = {3:0.00}% \n 
                                                _closedLoop_TotalPredictions = {4}, _closedLoop_Predicted = {5}, _closedLoop_UnPredicted = {6}, _closedLoop_Prediction percent = {7:0.00}%",
                                                 (countPredicted + countUnPredicted), countPredicted, countUnPredicted, predictionPercent,
                                                 (CL_countPredicted + CL_countUnPredicted), CL_countPredicted, CL_countUnPredicted, CL_predictionPercent);
+
+                string line3 = string.Format(@"TotalPredictions = {0}, Predicted_Abs1 = {1}, UnPredicted_Abs1 = {2}, Prediction_Abs1 percent = {3:0.00}% \n 
+                                               _closedLoop_Abs1_TotalPredictions = {4}, _closedLoop_Abs1_Predicted = {5}, _closedLoop_Abs1_UnPredicted = {6}, _closedLoop_Prediction_Abs1 percent = {7:0.00}%",
+                                                        (countPredicted_Abs1 + countUnPredicted_Abs1), countPredicted_Abs1, countUnPredicted_Abs1, predictionPercent_Abs1,
+                                                        (CL_countPredicted_Abs1 + CL_countUnPredicted_Abs1), CL_countPredicted_Abs1, CL_countUnPredicted_Abs1, CL_predictionPercent_Abs1);
+
                 file.WriteLine(line2);
+                file.WriteLine(line3);
                 Console.WriteLine(line2);
+                Console.WriteLine(line3);
             }
         }
 
