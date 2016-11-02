@@ -11,7 +11,6 @@ using Encog.Util.Arrayutil;
 using Encog.Util.CSV;
 using Encog.Util.Simple;
 using System;
-using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,6 +70,7 @@ namespace LotoPrediction
         private TemporalMLDataSet trainingSet;
         private BasicNetwork network;
         private NormalizeArray norm0, norm1, norm2, norm3, norm4, norm5, norm6, norm7;
+        private NumbersAnalysis NA = new NumbersAnalysis();
 
 
         public void SaveLoadNetwork(Boolean blnSave, string savedFilename)
@@ -137,6 +137,13 @@ namespace LotoPrediction
             EvaluateStart = TrainEnd + 1;
             EvaluateEnd = TotalNumOfIterations;
 
+            foreach (int numberA in data.Select(t => t.Actual1).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            foreach (int numberA in data.Select(t => t.Actual2).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            foreach (int numberA in data.Select(t => t.Actual3).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            foreach (int numberA in data.Select(t => t.Actual4).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            foreach (int numberA in data.Select(t => t.Actual5).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            foreach (int numberA in data.Select(t => t.Actual6).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            foreach (int numberA in data.Select(t => t.Actual7).ToArray()) NA.NumbersDic7_Total[numberA]++;
         }
 
         private void NormalizeData()
