@@ -26,24 +26,39 @@ namespace LotoPrediction
         public double Actual1 { get; set; }
         public double NormalizedActual1 { get; set; }
         public double _closedLoopNormalizedActual1 { get; set; }
+        public double NA_Actual1 { get; set; }
+        public double NormalizedNA_Actual1 { get; set; }
         public double Actual2 { get; set; }
         public double NormalizedActual2 { get; set; }
         public double _closedLoopNormalizedActual2 { get; set; }
+        public double NA_Actual2 { get; set; }
+        public double NormalizedNA_Actual2 { get; set; }
         public double Actual3 { get; set; }
         public double NormalizedActual3 { get; set; }
         public double _closedLoopNormalizedActual3 { get; set; }
+        public double NA_Actual3 { get; set; }
+        public double NormalizedNA_Actual3 { get; set; }
         public double Actual4 { get; set; }
         public double NormalizedActual4 { get; set; }
         public double _closedLoopNormalizedActual4 { get; set; }
+        public double NA_Actual4 { get; set; }
+        public double NormalizedNA_Actual4 { get; set; }
         public double Actual5 { get; set; }
         public double NormalizedActual5 { get; set; }
         public double _closedLoopNormalizedActual5 { get; set; }
+        public double NA_Actual5 { get; set; }
+        public double NormalizedNA_Actual5 { get; set; }
         public double Actual6 { get; set; }
         public double NormalizedActual6 { get; set; }
         public double _closedLoopNormalizedActual6 { get; set; }
+        public double NA_Actual6 { get; set; }
+        public double NormalizedNA_Actual6 { get; set; }
         public double Actual7 { get; set; }
         public double NormalizedActual7 { get; set; }
         public double _closedLoopNormalizedActual7 { get; set; }
+        public double NA_Actual7 { get; set; }
+        public double NormalizedNA_Actual7 { get; set; }
+
     }
 
     public class LotoPrediction
@@ -135,15 +150,68 @@ namespace LotoPrediction
             TrainStart = data.Select(t => t.Id).Min() + PastWindowSize;
             TrainEnd = TrainStart + TotalNumOfIterations * 75 / 100; 
             EvaluateStart = TrainEnd + 1;
-            EvaluateEnd = TotalNumOfIterations;
+            EvaluateEnd = data.Count;
 
-            foreach (int numberA in data.Select(t => t.Actual1).ToArray()) NA.NumbersDic37_Total[numberA]++;
-            foreach (int numberA in data.Select(t => t.Actual2).ToArray()) NA.NumbersDic37_Total[numberA]++;
-            foreach (int numberA in data.Select(t => t.Actual3).ToArray()) NA.NumbersDic37_Total[numberA]++;
-            foreach (int numberA in data.Select(t => t.Actual4).ToArray()) NA.NumbersDic37_Total[numberA]++;
-            foreach (int numberA in data.Select(t => t.Actual5).ToArray()) NA.NumbersDic37_Total[numberA]++;
-            foreach (int numberA in data.Select(t => t.Actual6).ToArray()) NA.NumbersDic37_Total[numberA]++;
-            foreach (int numberA in data.Select(t => t.Actual7).ToArray()) NA.NumbersDic7_Total[numberA]++;
+
+            //var queryActual1 =
+            //        from LotoData in data
+            //        where LotoData.Id >= 0 && LotoData.Id < (TrainEnd - TrainStart + 1)
+            //        orderby LotoData.Id ascending
+            //        select LotoData.Actual1;
+
+            //foreach (int numberA in data.Select(t => t.Actual1).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            //foreach (int numberA in data.Select(t => t.Actual2).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            //foreach (int numberA in data.Select(t => t.Actual3).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            //foreach (int numberA in data.Select(t => t.Actual4).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            //foreach (int numberA in data.Select(t => t.Actual5).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            //foreach (int numberA in data.Select(t => t.Actual6).ToArray()) NA.NumbersDic37_Total[numberA]++;
+            //foreach (int numberA in data.Select(t => t.Actual7).ToArray()) NA.NumbersDic7_Total[numberA]++;
+
+            for (int i = 0; i < TrainEnd; i++)
+            {
+                NA.NumbersDic37_Total[(int)data[i].Actual1]++;
+                NA.NumbersDic37_Total[(int)data[i].Actual2]++;
+                NA.NumbersDic37_Total[(int)data[i].Actual3]++;
+                NA.NumbersDic37_Total[(int)data[i].Actual4]++;
+                NA.NumbersDic37_Total[(int)data[i].Actual5]++;
+                NA.NumbersDic37_Total[(int)data[i].Actual6]++;
+                NA.NumbersDic7_Total[(int)data[i].Actual7]++;
+            }
+
+            //Assign NA_Actual values for training set
+            for (int i = 0; i < TrainEnd; i++)
+            {
+                data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
+                data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
+                data[i].NA_Actual3 = NA.NumbersDic37_Total[(int)data[i].Actual3];
+                data[i].NA_Actual4 = NA.NumbersDic37_Total[(int)data[i].Actual4];
+                data[i].NA_Actual5 = NA.NumbersDic37_Total[(int)data[i].Actual5];
+                data[i].NA_Actual6 = NA.NumbersDic37_Total[(int)data[i].Actual6];
+                data[i].NA_Actual7 = NA.NumbersDic7_Total[(int)data[i].Actual7];
+            }
+
+            //Assign NA_Actual values for evaluation set
+            for (int i = EvaluateStart-1; i < EvaluateEnd; i++)
+            {
+
+                NA.NumbersDic37_Total[(int)data[i].Actual1] += (int)data[i].NA_Actual1;
+                NA.NumbersDic37_Total[(int)data[i].Actual2] += (int)data[i].NA_Actual2;
+                NA.NumbersDic37_Total[(int)data[i].Actual3] += (int)data[i].NA_Actual3;
+                NA.NumbersDic37_Total[(int)data[i].Actual4] += (int)data[i].NA_Actual4;
+                NA.NumbersDic37_Total[(int)data[i].Actual5] += (int)data[i].NA_Actual5;
+                NA.NumbersDic37_Total[(int)data[i].Actual6] += (int)data[i].NA_Actual6;
+                NA.NumbersDic7_Total[(int)data[i].Actual7] += (int)data[i].NA_Actual7;
+
+                data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
+                data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
+                data[i].NA_Actual3 = NA.NumbersDic37_Total[(int)data[i].Actual3];
+                data[i].NA_Actual4 = NA.NumbersDic37_Total[(int)data[i].Actual4];
+                data[i].NA_Actual5 = NA.NumbersDic37_Total[(int)data[i].Actual5];
+                data[i].NA_Actual6 = NA.NumbersDic37_Total[(int)data[i].Actual6];
+                data[i].NA_Actual7 = NA.NumbersDic7_Total[(int)data[i].Actual7];
+            }
+
+
         }
 
         private void NormalizeData()
@@ -578,7 +646,7 @@ namespace LotoPrediction
                 countPredicted_Abs1 = countUnPredicted_Abs1 = 0;
                 CL_countPredicted_Abs1 = CL_countUnPredicted_Abs1 = 0;
 
-                for (int currentId = EvaluateStart; currentId <= EvaluateEnd; currentId++)
+                for (int currentId = EvaluateStart; currentId < EvaluateEnd; currentId++)
                 {
 
                     if (LotoNumber != 7)

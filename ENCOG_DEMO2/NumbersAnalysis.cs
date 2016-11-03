@@ -15,10 +15,10 @@ namespace LotoPrediction
         private Dictionary<Int32, Int32> _NumbersDic7_PastWindow = new Dictionary<Int32, Int32>();
 
 
-        public IDictionary<Int32, Int32> NumbersDic37_Total { get; set; }
-        public IDictionary<Int32, Int32> NumbersDic7_Total { get; set; }
-        public IDictionary<Int32, Int32> NumbersDic37_PastWindow { get; set; }
-        public IDictionary<Int32, Int32> NumbersDic7_PastWindow { get; set; }
+        public IDictionary<Int32, Int32> NumbersDic37_Total { get { return _NumbersDic37_Total; } }
+        public IDictionary<Int32, Int32> NumbersDic7_Total { get { return _NumbersDic7_Total; } }
+        public IDictionary<Int32, Int32> NumbersDic37_PastWindow { get { return _NumbersDic37_PastWindow; } }
+        public IDictionary<Int32, Int32> NumbersDic7_PastWindow { get { return _NumbersDic7_PastWindow; } }
 
 
         public NumbersAnalysis() {
@@ -26,6 +26,8 @@ namespace LotoPrediction
 
             for (i = 1; i <= 37; i++) _NumbersDic37_Total[i] = 0;
             for (i = 1; i <= 7; i++) _NumbersDic7_Total[i] = 0;
+            for (i = 1; i <= 37; i++) _NumbersDic37_PastWindow[i] = 0;
+            for (i = 1; i <= 7; i++) _NumbersDic7_PastWindow[i] = 0;
         }
     }
 
