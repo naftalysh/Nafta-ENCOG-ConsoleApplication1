@@ -194,13 +194,13 @@ namespace LotoPrediction
             for (int i = EvaluateStart-1; i < EvaluateEnd; i++)
             {
 
-                NA.NumbersDic37_Total[(int)data[i].Actual1] += (int)data[i].NA_Actual1;
-                NA.NumbersDic37_Total[(int)data[i].Actual2] += (int)data[i].NA_Actual2;
-                NA.NumbersDic37_Total[(int)data[i].Actual3] += (int)data[i].NA_Actual3;
-                NA.NumbersDic37_Total[(int)data[i].Actual4] += (int)data[i].NA_Actual4;
-                NA.NumbersDic37_Total[(int)data[i].Actual5] += (int)data[i].NA_Actual5;
-                NA.NumbersDic37_Total[(int)data[i].Actual6] += (int)data[i].NA_Actual6;
-                NA.NumbersDic7_Total[(int)data[i].Actual7] += (int)data[i].NA_Actual7;
+                NA.NumbersDic37_Total[(int)data[i].Actual1] += (int)data[i].Actual1;
+                NA.NumbersDic37_Total[(int)data[i].Actual2] += (int)data[i].Actual2;
+                NA.NumbersDic37_Total[(int)data[i].Actual3] += (int)data[i].Actual3;
+                NA.NumbersDic37_Total[(int)data[i].Actual4] += (int)data[i].Actual4;
+                NA.NumbersDic37_Total[(int)data[i].Actual5] += (int)data[i].Actual5;
+                NA.NumbersDic37_Total[(int)data[i].Actual6] += (int)data[i].Actual6;
+                NA.NumbersDic7_Total[(int)data[i].Actual7] += (int)data[i].Actual7;
 
                 data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
                 data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
