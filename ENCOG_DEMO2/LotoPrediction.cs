@@ -396,7 +396,7 @@ namespace LotoPrediction
             desc0.Index = 0;
             trainingSet.AddDescription(desc0);
 
-            if (LotoNumber != 7)
+            if (LotoNumber != 7) 
             {
                 switch (LotoNumber)
                 {
