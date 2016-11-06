@@ -146,7 +146,7 @@ namespace LotoPrediction
                 });
             }
 
-            TotalNumOfIterations = data.Select(t => t.Id).Max() - (data.Select(t => t.Id).Min() + PastWindowSize);
+            TotalNumOfIterations = data.Select(t => t.Id).Max() - (data.Select(t => t.Id).Min() + PastWindowSize) + 1;
             TrainStart = data.Select(t => t.Id).Min() + PastWindowSize;
             TrainEnd = TrainStart + TotalNumOfIterations * 75 / 100; 
             EvaluateStart = TrainEnd + 1;
