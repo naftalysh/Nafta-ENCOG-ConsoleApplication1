@@ -578,7 +578,7 @@ namespace LotoPrediction
             //trainingSet.AddDescription(desc7);
 
             //Temporal point
-            if (LotoNumber != 7)
+            if (LotoNumber != 7)  
             {
                 for (int i = 0; i < TrainEnd; i++)
                 {
