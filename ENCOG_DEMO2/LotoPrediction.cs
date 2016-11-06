@@ -84,7 +84,7 @@ namespace LotoPrediction
         private List<LotoData> data = new List<LotoData>();
         private TemporalMLDataSet trainingSet;
         private BasicNetwork network;
-        private NormalizeArray norm0, norm1, norm2, norm3, norm4, norm5, norm6, norm7;
+        private NormalizeArray norm0, norm1, norm2, norm3, norm4, norm5, norm6, norm7, norm8, norm9, norm10, norm11, norm12, norm13, norm14;
         private NumbersAnalysis NA = new NumbersAnalysis();
 
 
@@ -224,6 +224,14 @@ namespace LotoPrediction
             norm5 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
             norm6 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
             norm7 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
+            norm8 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
+            norm9 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
+            norm10 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
+            norm11 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
+            norm12 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
+            norm13 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
+            norm14 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
+
 
             //var Array1 = data.Select(t => t.Actual1).ToArray();
             //var Array2 = data.Select(t => t.Actual2).ToArray();
@@ -378,6 +386,60 @@ namespace LotoPrediction
             }
 
 
+            /*
+            data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
+            data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
+            data[i].NA_Actual3 = NA.NumbersDic37_Total[(int)data[i].Actual3];
+            data[i].NA_Actual4 = NA.NumbersDic37_Total[(int)data[i].Actual4];
+            data[i].NA_Actual5 = NA.NumbersDic37_Total[(int)data[i].Actual5];
+            data[i].NA_Actual6 = NA.NumbersDic37_Total[(int)data[i].Actual6];
+            data[i].NA_Actual7 = NA.NumbersDic7_Total[(int)data[i].Actual7];
+            */
+
+            normalizedArray = norm8.Process(data.Select(t => t.NA_Actual1).ToArray());
+            for (int i = 0; i < normalizedArray.Count(); i++)
+            {
+                data[i].NormalizedNA_Actual1 = normalizedArray[i];
+            }
+
+
+            normalizedArray = norm9.Process(data.Select(t => t.NA_Actual2).ToArray());
+            for (int i = 0; i < normalizedArray.Count(); i++)
+            {
+                data[i].NormalizedNA_Actual2 = normalizedArray[i];
+            }
+
+            normalizedArray = norm10.Process(data.Select(t => t.NA_Actual3).ToArray());
+            for (int i = 0; i < normalizedArray.Count(); i++)
+            {
+                data[i].NormalizedNA_Actual3 = normalizedArray[i];
+            }
+
+            normalizedArray = norm11.Process(data.Select(t => t.NA_Actual4).ToArray());
+            for (int i = 0; i < normalizedArray.Count(); i++)
+            {
+                data[i].NormalizedNA_Actual4 = normalizedArray[i];
+            }
+
+            normalizedArray = norm12.Process(data.Select(t => t.NA_Actual5).ToArray());
+            for (int i = 0; i < normalizedArray.Count(); i++)
+            {
+                data[i].NormalizedNA_Actual5 = normalizedArray[i];
+            }
+
+            normalizedArray = norm13.Process(data.Select(t => t.NA_Actual6).ToArray());
+            for (int i = 0; i < normalizedArray.Count(); i++)
+            {
+                data[i].NormalizedNA_Actual6 = normalizedArray[i];
+            }
+
+            normalizedArray = norm14.Process(data.Select(t => t.NA_Actual7).ToArray());
+            for (int i = 0; i < normalizedArray.Count(); i++)
+            {
+                data[i].NormalizedNA_Actual7 = normalizedArray[i];
+            }
+
+
             //normalizedArray = norm.Process(data.Select(t => t.Actual7).ToArray());
             //for (int i = 0; i < normalizedArray.Count(); i++)
             //{
@@ -388,6 +450,7 @@ namespace LotoPrediction
         private void GenerateTemporalData()
         {
             TemporalDataDescription desc1 = null, desc2 = null, desc3 = null, desc4 = null, desc5 = null, desc6 = null, desc7 = null;
+            
             //Temporal dataset
             trainingSet = new TemporalMLDataSet(PastWindowSize, FutureWindowSize);
 
@@ -395,6 +458,9 @@ namespace LotoPrediction
             var desc0 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
             desc0.Index = 0;
             trainingSet.AddDescription(desc0);
+
+            var desc8 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
+            desc8.Index = 8;
 
             if (LotoNumber != 7) 
             {
@@ -496,13 +562,14 @@ namespace LotoPrediction
                 trainingSet.AddDescription(desc4);
                 trainingSet.AddDescription(desc5);
                 trainingSet.AddDescription(desc6);
-                //trainingSet.AddDescription(desc7);
+                trainingSet.AddDescription(desc8);
             }
             else
             {
                 desc7 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
                 desc7.Index = 7;
                 trainingSet.AddDescription(desc7);
+                trainingSet.AddDescription(desc8);
             }
 
             ////Description #7
@@ -515,7 +582,7 @@ namespace LotoPrediction
             {
                 for (int i = 0; i < TrainEnd; i++)
                 {
-                    var point = new TemporalPoint(7); //1 values
+                    var point = new TemporalPoint(8); //1 values
                     point.Sequence = data[i].Id;
                     point.Data[0] = data[i].NormalizeDayOfWeek;
                     point.Data[1] = data[i].NormalizedActual1;
@@ -524,6 +591,10 @@ namespace LotoPrediction
                     point.Data[4] = data[i].NormalizedActual4;
                     point.Data[5] = data[i].NormalizedActual5;
                     point.Data[6] = data[i].NormalizedActual6;
+
+                    point.Data[7] = (LotoNumber == 1) ? data[i].NormalizedNA_Actual1 : (LotoNumber == 2) ? data[i].NormalizedNA_Actual2 : (LotoNumber == 3) ? data[i].NormalizedNA_Actual3 :
+                                    (LotoNumber == 4) ? data[i].NormalizedNA_Actual4 : (LotoNumber == 5) ? data[i].NormalizedNA_Actual5 : data[i].NormalizedNA_Actual6;
+                    
                     trainingSet.Points.Add(point);
                 }
             }
@@ -531,10 +602,11 @@ namespace LotoPrediction
             {
                 for (int i = 0; i < TrainEnd; i++)
                 {
-                    var point = new TemporalPoint(2); //1 values
+                    var point = new TemporalPoint(3); //1 values
                     point.Sequence = data[i].Id;
                     point.Data[0] = data[i].NormalizeDayOfWeek;
                     point.Data[1] = data[i].NormalizedActual7;
+                    point.Data[2] = data[i].NormalizedNA_Actual7;
                     trainingSet.Points.Add(point);
                 }
             }
