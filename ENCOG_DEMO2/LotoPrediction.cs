@@ -192,7 +192,7 @@ namespace LotoPrediction
             for (int i = EvaluateStart-1; i < EvaluateEnd; i++)
             {
 
-                NA.NumbersDic37_Total[(int)data[i].Actual1] += 1;
+                NA.NumbersDic37_Total[(int)data[i].Actual1] += 1;    
                 NA.NumbersDic37_Total[(int)data[i].Actual2] += 1;
                 NA.NumbersDic37_Total[(int)data[i].Actual3] += 1;
                 NA.NumbersDic37_Total[(int)data[i].Actual4] += 1;
