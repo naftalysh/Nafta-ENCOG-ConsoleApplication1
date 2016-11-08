@@ -218,7 +218,7 @@ namespace LotoPrediction
             {
 
                 NA.ResetPastWindowAnalysis();
-                for (int j = 1; j <= PastWindowSize; j++)
+                for (int j = PastWindowSize; j >= 1; j--)
                 {
                     NA.NumbersDic37_PastWindow[(int)data[i-j].Actual1] += 1;
                     NA.NumbersDic37_PastWindow[(int)data[i-j].Actual2] += 1;
@@ -466,13 +466,6 @@ namespace LotoPrediction
             {
                 data[i].NormalizedNA_Actual7 = normalizedArray[i];
             }
-
-
-            //normalizedArray = norm.Process(data.Select(t => t.Actual7).ToArray());
-            //for (int i = 0; i < normalizedArray.Count(); i++)
-            //{
-            //    data[i].NormalizedActual7 = normalizedArray[i];
-            //}
         }
 
         private void GenerateTemporalData()
@@ -487,11 +480,12 @@ namespace LotoPrediction
             desc0.Index = 0;
             trainingSet.AddDescription(desc0);
 
-            var desc8 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
-            desc8.Index = 8;
-
             if (LotoNumber != 7) 
             {
+
+                var desc8 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
+                desc8.Index = 7;
+
                 switch (LotoNumber)
                 {
                     case 1:
@@ -594,8 +588,12 @@ namespace LotoPrediction
             }
             else
             {
+
+                var desc8 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, false);
+                desc8.Index = 2;
+
                 desc7 = new TemporalDataDescription(TemporalDataDescription.Type.Raw, true, true);
-                desc7.Index = 7;
+                desc7.Index = 1;
                 trainingSet.AddDescription(desc7);
                 trainingSet.AddDescription(desc8);
             }
