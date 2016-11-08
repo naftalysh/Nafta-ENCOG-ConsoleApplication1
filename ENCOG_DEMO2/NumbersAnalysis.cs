@@ -29,6 +29,14 @@ namespace LotoPrediction
             for (i = 1; i <= 37; i++) _NumbersDic37_PastWindow[i] = 0;
             for (i = 1; i <= 7; i++) _NumbersDic7_PastWindow[i] = 0;
         }
+
+        public void ResetPastWindowAnalysis()
+        {
+            Int32 i;
+
+            for (i = 1; i <= 37; i++) _NumbersDic37_PastWindow[i] = 0;
+            for (i = 1; i <= 7; i++) _NumbersDic7_PastWindow[i] = 0;
+        }
     }
 
 }

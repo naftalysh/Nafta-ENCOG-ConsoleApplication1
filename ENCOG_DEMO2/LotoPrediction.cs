@@ -167,6 +167,7 @@ namespace LotoPrediction
             //foreach (int numberA in data.Select(t => t.Actual6).ToArray()) NA.NumbersDic37_Total[numberA]++;
             //foreach (int numberA in data.Select(t => t.Actual7).ToArray()) NA.NumbersDic7_Total[numberA]++;
 
+            //Assign NA_Actual values for training set
             for (int i = 0; i < TrainEnd; i++)
             {
                 NA.NumbersDic37_Total[(int)data[i].Actual1]++;
@@ -176,11 +177,7 @@ namespace LotoPrediction
                 NA.NumbersDic37_Total[(int)data[i].Actual5]++;
                 NA.NumbersDic37_Total[(int)data[i].Actual6]++;
                 NA.NumbersDic7_Total[(int)data[i].Actual7]++;
-            }
 
-            //Assign NA_Actual values for training set
-            for (int i = 0; i < TrainEnd; i++)
-            {
                 data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
                 data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
                 data[i].NA_Actual3 = NA.NumbersDic37_Total[(int)data[i].Actual3];
@@ -189,18 +186,19 @@ namespace LotoPrediction
                 data[i].NA_Actual6 = NA.NumbersDic37_Total[(int)data[i].Actual6];
                 data[i].NA_Actual7 = NA.NumbersDic7_Total[(int)data[i].Actual7];
             }
+
 
             //Assign NA_Actual values for evaluation set
             for (int i = EvaluateStart-1; i < EvaluateEnd; i++)
             {
 
-                NA.NumbersDic37_Total[(int)data[i].Actual1] += (int)data[i].Actual1;
-                NA.NumbersDic37_Total[(int)data[i].Actual2] += (int)data[i].Actual2;
-                NA.NumbersDic37_Total[(int)data[i].Actual3] += (int)data[i].Actual3;
-                NA.NumbersDic37_Total[(int)data[i].Actual4] += (int)data[i].Actual4;
-                NA.NumbersDic37_Total[(int)data[i].Actual5] += (int)data[i].Actual5;
-                NA.NumbersDic37_Total[(int)data[i].Actual6] += (int)data[i].Actual6;
-                NA.NumbersDic7_Total[(int)data[i].Actual7] += (int)data[i].Actual7;
+                NA.NumbersDic37_Total[(int)data[i].Actual1] += 1;
+                NA.NumbersDic37_Total[(int)data[i].Actual2] += 1;
+                NA.NumbersDic37_Total[(int)data[i].Actual3] += 1;
+                NA.NumbersDic37_Total[(int)data[i].Actual4] += 1;
+                NA.NumbersDic37_Total[(int)data[i].Actual5] += 1;
+                NA.NumbersDic37_Total[(int)data[i].Actual6] += 1;
+                NA.NumbersDic7_Total[(int)data[i].Actual7] += 1;
 
                 data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
                 data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
@@ -210,6 +208,36 @@ namespace LotoPrediction
                 data[i].NA_Actual6 = NA.NumbersDic37_Total[(int)data[i].Actual6];
                 data[i].NA_Actual7 = NA.NumbersDic7_Total[(int)data[i].Actual7];
             }
+
+
+            //Assign NA_Actual values for all set per PastWindowSize
+            //_NumbersDic37_PastWindow
+            //_NumbersDic7_PastWindow
+
+            for (int i = PastWindowSize; i < EvaluateEnd; i++)
+            {
+
+                NA.ResetPastWindowAnalysis();
+                for (int j = 1; j <= PastWindowSize; j++)
+                {
+                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual1] += 1;
+                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual2] += 1;
+                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual3] += 1;
+                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual4] += 1;
+                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual5] += 1;
+                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual6] += 1;
+                    NA.NumbersDic7_PastWindow[(int)data[i-j].Actual7] += 1;
+                }
+
+                data[i].NA_Actual1 = NA.NumbersDic37_PastWindow[(int)data[i].Actual1];
+                data[i].NA_Actual2 = NA.NumbersDic37_PastWindow[(int)data[i].Actual2];
+                data[i].NA_Actual3 = NA.NumbersDic37_PastWindow[(int)data[i].Actual3];
+                data[i].NA_Actual4 = NA.NumbersDic37_PastWindow[(int)data[i].Actual4];
+                data[i].NA_Actual5 = NA.NumbersDic37_PastWindow[(int)data[i].Actual5];
+                data[i].NA_Actual6 = NA.NumbersDic37_PastWindow[(int)data[i].Actual6];
+                data[i].NA_Actual7 = NA.NumbersDic7_PastWindow[(int)data[i].Actual7];
+            }
+
 
 
         }
