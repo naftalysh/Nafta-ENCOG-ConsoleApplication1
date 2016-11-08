@@ -750,53 +750,63 @@ namespace LotoPrediction
                     if (LotoNumber != 7)
                     {
                         //Calculate based on actual data
-                        var input = new BasicMLData(PastWindowSize * 7);
-                        var _closedLoop_input = new BasicMLData(PastWindowSize * 7);
+                        var input = new BasicMLData(PastWindowSize * 8);
+                        var _closedLoop_input = new BasicMLData(PastWindowSize * 8);
 
                         for (int i = 0; i < PastWindowSize; i++)
                         {
-                            input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            input[i * 8] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                  .Select(t => t.NormalizeDayOfWeek).First();
 
-                            input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            input[i * 8 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t.NormalizedActual1).First();
 
-                            input[i * 7 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            input[i * 8 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t.NormalizedActual2).First();
 
-                            input[i * 7 + 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            input[i * 8 + 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t.NormalizedActual3).First();
 
-                            input[i * 7 + 4] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            input[i * 8 + 4] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t.NormalizedActual4).First();
 
-                            input[i * 7 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            input[i * 8 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t.NormalizedActual5).First();
 
-                            input[i * 7 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            input[i * 8 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t.NormalizedActual6).First();
 
 
-                            _closedLoop_input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            input[i * 8 + 7] = (LotoNumber == 1) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual1).First() :
+                                               (LotoNumber == 2) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual2).First() :
+                                               (LotoNumber == 3) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual3).First() :
+                                               (LotoNumber == 4) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual4).First() :
+                                               (LotoNumber == 5) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual5).First() :
+                                               data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual6).First();
+
+
+                            _closedLoop_input[i * 8] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                              .Select(t => t.NormalizeDayOfWeek).First();
 
-                            _closedLoop_input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            _closedLoop_input[i * 8 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t._closedLoopNormalizedActual1).First();
 
-                            _closedLoop_input[i * 7 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            _closedLoop_input[i * 8 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t._closedLoopNormalizedActual2).First();
 
-                            _closedLoop_input[i * 7 + 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            _closedLoop_input[i * 8 + 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t._closedLoopNormalizedActual3).First();
 
-                            _closedLoop_input[i * 7 + 4] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            _closedLoop_input[i * 8 + 4] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t._closedLoopNormalizedActual4).First();
 
-                            _closedLoop_input[i * 7 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            _closedLoop_input[i * 8 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t._closedLoopNormalizedActual5).First();
 
-                            _closedLoop_input[i * 7 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            _closedLoop_input[i * 8 + 6] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t._closedLoopNormalizedActual6).First();
+
+                            _closedLoop_input[i * 8 + 7] = input[i * 8 + 7];
                         }
 
                         output = network.Compute(input);
@@ -805,24 +815,27 @@ namespace LotoPrediction
                     else
                     {
                         //Calculate based on actual data
-                        var input = new BasicMLData(PastWindowSize * 2);
-                        var _closedLoop_input = new BasicMLData(PastWindowSize * 2);
+                        var input = new BasicMLData(PastWindowSize * 3);
+                        var _closedLoop_input = new BasicMLData(PastWindowSize * 3);
 
                         for (int i = 0; i < PastWindowSize; i++)
                         {
-                            input[i * 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            input[i * 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                              .Select(t => t.NormalizeDayOfWeek).First();
 
-                            input[i * 2 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            input[i * 3 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t.NormalizedActual7).First();
 
-                            _closedLoop_input[i * 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            input[i * 3 + 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                .Select(t => t.NormalizedNA_Actual7).First();
+
+                            _closedLoop_input[i * 3] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t.NormalizeDayOfWeek).First();
 
-                            _closedLoop_input[i * 2 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            _closedLoop_input[i * 3 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t._closedLoopNormalizedActual7).First();
 
-
+                            _closedLoop_input[i * 3 + 2] = input[i * 3 + 2];
                         }
 
                         output = network.Compute(input);
