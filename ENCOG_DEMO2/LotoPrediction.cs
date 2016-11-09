@@ -168,6 +168,7 @@ namespace LotoPrediction
             //foreach (int numberA in data.Select(t => t.Actual7).ToArray()) NA.NumbersDic7_Total[numberA]++;
 
             //Assign NA_Actual values for training set
+            
             for (int i = 0; i < TrainEnd; i++)
             {
                 NA.NumbersDic37_Total[(int)data[i].Actual1]++;
@@ -214,29 +215,29 @@ namespace LotoPrediction
             //_NumbersDic37_PastWindow
             //_NumbersDic7_PastWindow
 
-            for (int i = PastWindowSize; i < EvaluateEnd; i++)
-            {
+            
+            //for (int i = PastWindowSize; i < EvaluateEnd; i++)
+            //{
+            //    NA.ResetPastWindowAnalysis();
+            //    for (int j = PastWindowSize; j >= 1; j--)
+            //    {
+            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual1] += 1;
+            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual2] += 1;
+            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual3] += 1;
+            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual4] += 1;
+            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual5] += 1;
+            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual6] += 1;
+            //        NA.NumbersDic7_PastWindow[(int)data[i-j].Actual7] += 1;
+            //    }
 
-                NA.ResetPastWindowAnalysis();
-                for (int j = PastWindowSize; j >= 1; j--)
-                {
-                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual1] += 1;
-                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual2] += 1;
-                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual3] += 1;
-                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual4] += 1;
-                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual5] += 1;
-                    NA.NumbersDic37_PastWindow[(int)data[i-j].Actual6] += 1;
-                    NA.NumbersDic7_PastWindow[(int)data[i-j].Actual7] += 1;
-                }
-
-                data[i].NA_Actual1 = NA.NumbersDic37_PastWindow[(int)data[i].Actual1];
-                data[i].NA_Actual2 = NA.NumbersDic37_PastWindow[(int)data[i].Actual2];
-                data[i].NA_Actual3 = NA.NumbersDic37_PastWindow[(int)data[i].Actual3];
-                data[i].NA_Actual4 = NA.NumbersDic37_PastWindow[(int)data[i].Actual4];
-                data[i].NA_Actual5 = NA.NumbersDic37_PastWindow[(int)data[i].Actual5];
-                data[i].NA_Actual6 = NA.NumbersDic37_PastWindow[(int)data[i].Actual6];
-                data[i].NA_Actual7 = NA.NumbersDic7_PastWindow[(int)data[i].Actual7];
-            }
+            //    data[i].NA_Actual1 = NA.NumbersDic37_PastWindow[(int)data[i].Actual1];
+            //    data[i].NA_Actual2 = NA.NumbersDic37_PastWindow[(int)data[i].Actual2];
+            //    data[i].NA_Actual3 = NA.NumbersDic37_PastWindow[(int)data[i].Actual3];
+            //    data[i].NA_Actual4 = NA.NumbersDic37_PastWindow[(int)data[i].Actual4];
+            //    data[i].NA_Actual5 = NA.NumbersDic37_PastWindow[(int)data[i].Actual5];
+            //    data[i].NA_Actual6 = NA.NumbersDic37_PastWindow[(int)data[i].Actual6];
+            //    data[i].NA_Actual7 = NA.NumbersDic7_PastWindow[(int)data[i].Actual7];
+            //}
 
 
 
