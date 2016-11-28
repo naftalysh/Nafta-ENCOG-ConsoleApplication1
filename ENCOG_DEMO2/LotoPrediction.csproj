@@ -107,7 +107,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Archieve\L-Archieve.csv" />
     <None Include="Properties\App.config" />
     <None Include="LotoPrediction_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
