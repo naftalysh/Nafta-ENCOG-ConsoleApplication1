@@ -75,6 +75,12 @@ namespace LotoPrediction
         private float predictionPercent_Abs1;       // Abs(Actual-Predicted) <= 1
         private float CL_predictionPercent_Abs1;
 
+
+        private float MAX_predictionPercent;
+        private float MAX_CL_predictionPercent;
+        private float MAX_predictionPercent_Abs1;       
+        private float MAX_CL_predictionPercent_Abs1;
+
         public int TrainStart;
         public int TrainEnd;
         public int EvaluateStart;
