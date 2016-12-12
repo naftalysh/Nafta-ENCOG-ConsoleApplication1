@@ -8,6 +8,10 @@ namespace LotoPrediction
         //public static FileInfo BasePath = new FileInfo(@"..\..\Archieve\");
         public static FileInfo BasePath = new FileInfo(@"C:\Projects\ENCOG\L-Archieve\");
         public static FileInfo BaseFile = FileUtil.CombinePath(BasePath, "L-Archieve.csv");
+        public static FileInfo MAX_predictionPercentFile = FileUtil.CombinePath(BasePath, "MAX_predictionPercentFile.dat");
+        public static FileInfo MAX_CL_predictionPercentFile = FileUtil.CombinePath(BasePath, "MAX_CL_predictionPercentFile.dat");
+        public static FileInfo MAX_predictionPercent_Abs1File = FileUtil.CombinePath(BasePath, "MAX_predictionPercent_Abs1File.dat");
+        public static FileInfo MAX_CL_predictionPercent_Abs1File = FileUtil.CombinePath(BasePath, "MAX_CL_predictionPercent_Abs1File.dat");
 
         #region Evaluation
 
