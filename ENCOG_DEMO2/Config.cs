@@ -13,6 +13,11 @@ namespace LotoPrediction
         public static FileInfo MAX_predictionPercent_Abs1File = FileUtil.CombinePath(BasePath, "MAX_predictionPercent_Abs1File.dat");
         public static FileInfo MAX_CL_predictionPercent_Abs1File = FileUtil.CombinePath(BasePath, "MAX_CL_predictionPercent_Abs1File.dat");
 
+
+        //Config.MAX_predictionPercentFile.ToString()
+        //Config.MAX_CL_predictionPercentFile.ToString()
+        //Config.MAX_predictionPercent_Abs1File.ToString()
+        //Config.MAX_CL_predictionPercent_Abs1File.ToString()
         #region Evaluation
 
         public static FileInfo EvaluationResult = FileUtil.CombinePath(BasePath, "LotoData_Evaluate.csv");
