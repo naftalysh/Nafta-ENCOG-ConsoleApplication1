@@ -1617,7 +1617,7 @@ namespace LotoPrediction
             IMLData output;
             int evaluateStop = data.Select(t => t.Id).Max();
 
-            using (var file = new System.IO.StreamWriter(Config.PredictResult.ToString(), true))
+            using (System.IO.StreamWriter file = File.AppendText(Config.PredictResult.ToString()))
             {
                 //Start new
                 int currentId = evaluateStop + 1;
