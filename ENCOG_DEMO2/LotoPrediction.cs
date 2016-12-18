@@ -1442,12 +1442,12 @@ namespace LotoPrediction
                     if (LotoNumber != 7)
                     {
                         line1 = string.Format("DrawNumber: {0}; Actual: ({1},{2},{3},{4},{5},{6}); Predicted: {7}; closedLoop_Predicted: {8}", DrawNumber, actual1, actual2, actual3, actual4, actual5, actual6, predicted, _closedLoop_predicted);
-                        line0 = string.Format("{0};{1};({2},{3},{4},{5},{6},{7});{8};{9}", DrawNumber, LotoNumber, actual1, actual2, actual3, actual4, actual5, actual6, predicted, _closedLoop_predicted);
+                        line0 = string.Format("{0};{1}", DrawNumber, LotoNumber);
                     }
                     else
                     {
                         line1 = string.Format("DrawNumber: {0}; Actual: {1}; Predicted: {2}; closedLoop_Predicted: {3}", DrawNumber, actual7, predicted, _closedLoop_predicted);
-                        line0 = string.Format("{0};{1};({2});{3};{4}", DrawNumber, LotoNumber, actual7, predicted, _closedLoop_predicted);
+                        line0 = string.Format("{0};{1}", DrawNumber, LotoNumber);
                     }
 
                     //file.WriteLine(line1);
