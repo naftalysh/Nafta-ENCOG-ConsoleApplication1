@@ -14,6 +14,10 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Configuration;
+using System.Reflection;
+
+
 
 namespace LotoPrediction
 {
@@ -76,10 +80,10 @@ namespace LotoPrediction
         private float CL_predictionPercent_Abs1;
 
 
-        private float MAX_predictionPercent;
-        private float MAX_CL_predictionPercent;
-        private float MAX_predictionPercent_Abs1;       
-        private float MAX_CL_predictionPercent_Abs1;
+        private float MAX_predictionPercent = 0;
+        private float MAX_CL_predictionPercent = 0;
+        private float MAX_predictionPercent_Abs1 = 0;       
+        private float MAX_CL_predictionPercent_Abs1 = 0;
 
         public int TrainStart;
         public int TrainEnd;
@@ -94,6 +98,10 @@ namespace LotoPrediction
         private NumbersAnalysis NA = new NumbersAnalysis();
 
 
+        
+        /// </summary>
+        /// <param name="blnSave"></param>
+        /// <param name="savedFilename"></param>
         public void SaveLoadNetwork(Boolean blnSave, string savedFilename)
         {
             if (blnSave) 
@@ -101,6 +109,44 @@ namespace LotoPrediction
             else
                 network = (BasicNetwork)EncogDirectoryPersistence.LoadObject(new FileInfo(savedFilename));
         }
+
+
+
+        private static string GetSetting(string key)
+        {
+            string filePath = System.IO.Path.GetFullPath("settings.app.config");
+            var map = new ExeConfigurationFileMap { ExeConfigFilename = filePath };
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+
+            var entry = config.AppSettings.Settings[key];
+            if (entry == null)
+                return null;
+            else
+                return entry.Value;
+        }
+
+        
+        
+        public static void Set(string key, string value)
+        {
+            string filePath = System.IO.Path.GetFullPath("settings.app.config");
+            var map = new ExeConfigurationFileMap { ExeConfigFilename = filePath };
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+
+            var entry = config.AppSettings.Settings[key];
+            if (entry == null)
+                config.AppSettings.Settings.Add(key, value);
+            else
+                config.AppSettings.Settings[key].Value = value;
+
+            config.Save(ConfigurationSaveMode.Modified);
+            // Force a reload of a changed section.
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        // Determines if a key exists within the App.config
+
+
 
         public void Predict()
         {
@@ -121,11 +167,27 @@ namespace LotoPrediction
             ////Evaluate Network
             EvaluateNetwork(blnShowConsole);
 
-            ////Predict next value three times
+
+            ////Save the network to MAX_predictionPercentFile
+            //SaveLoadNetwork(true, Config.MAX_predictionPercentFile.ToString());
+
+            ////Predict next value
             //PredictNetwork();
 
             PredictNetworkNew();
+
+
+            ////Load the network from MAX_predictionPercentFile
+            //SaveLoadNetwork(false, Config.MAX_predictionPercentFile.ToString());
+
+            ////Predict next value
+            //PredictNetworkNew();
+
         }
+
+
+
+        
 
         private void ReadData()
         {
@@ -1190,6 +1252,8 @@ namespace LotoPrediction
         }
 
 
+
+       
         private void EvaluateNetwork(Boolean blnShowConsole)
         {
             int countPredicted, countUnPredicted, CL_countPredicted, CL_countUnPredicted;
@@ -1499,6 +1563,69 @@ namespace LotoPrediction
                 Console.WriteLine(line2);
                 Console.WriteLine(line3);
                 Console.WriteLine(lineStatus);
+
+
+                ////Save best performant network per each indicator
+                ////Save the network to MAX_predictionPercentFile
+                /*
+                   private float MAX_predictionPercent = 0;
+                   private float MAX_CL_predictionPercent = 0;
+                   private float MAX_predictionPercent_Abs1 = 0;
+                   private float MAX_CL_predictionPercent_Abs1 = 0;
+                */
+
+                //Set("MAX_predictionPercent", "0");
+                //Set("MAX_CL_predictionPercent", "0");
+                //Set("MAX_predictionPercent_Abs1", "0");
+                //Set("MAX_CL_predictionPercent_Abs1", "0");
+
+                //f.ToString("R");
+                //12345.678901.ToString("0.0000");
+
+
+                //string strMAX_predictionPercent = GetSetting("MAX_predictionPercent");
+                //string strMAX_CL_predictionPercent = GetSetting("MAX_CL_predictionPercent"); 
+                //string strMAX_predictionPercent_Abs1 = GetSetting("MAX_predictionPercent_Abs1");
+                //string strMAX_CL_predictionPercent_Abs1 = GetSetting("MAX_CL_predictionPercent_Abs1");
+
+                MAX_predictionPercent = float.Parse(GetSetting("MAX_predictionPercent"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent = float.Parse(GetSetting("MAX_CL_predictionPercent"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_predictionPercent_Abs1 = float.Parse(GetSetting("MAX_predictionPercent_Abs1"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_Abs1 = float.Parse(GetSetting("MAX_CL_predictionPercent_Abs1"), System.Globalization.CultureInfo.InvariantCulture);
+
+                //Set("MAX_predictionPercent", MAX_predictionPercent.ToString("R"));
+                //Set("MAX_CL_predictionPercent", MAX_CL_predictionPercent.ToString("R"));
+                //Set("MAX_predictionPercent_Abs1", MAX_predictionPercent_Abs1.ToString("R"));
+                //Set("MAX_CL_predictionPercent_Abs1", MAX_CL_predictionPercent_Abs1.ToString("R"));
+
+
+                if (predictionPercent > MAX_predictionPercent)
+                {
+                    MAX_predictionPercent = predictionPercent;
+                    SaveLoadNetwork(true, Config.MAX_predictionPercentFile.ToString());
+                    Set("MAX_predictionPercent", MAX_predictionPercent.ToString("R"));  //Persist the value
+                }
+
+                if (CL_predictionPercent > MAX_CL_predictionPercent)
+                {
+                    MAX_CL_predictionPercent = CL_predictionPercent;
+                    SaveLoadNetwork(true, Config.MAX_CL_predictionPercentFile.ToString());
+                    Set("MAX_CL_predictionPercent", MAX_CL_predictionPercent.ToString("R"));
+                }
+
+                if (predictionPercent_Abs1 > MAX_predictionPercent_Abs1)
+                {
+                    MAX_predictionPercent_Abs1 = predictionPercent_Abs1;
+                    SaveLoadNetwork(true, Config.MAX_predictionPercent_Abs1File.ToString());
+                    Set("MAX_predictionPercent_Abs1", MAX_predictionPercent_Abs1.ToString("R"));
+                }
+
+                if (CL_predictionPercent_Abs1 > MAX_CL_predictionPercent_Abs1)
+                {
+                    MAX_CL_predictionPercent_Abs1 = CL_predictionPercent_Abs1;
+                    SaveLoadNetwork(true, Config.MAX_CL_predictionPercent_Abs1File.ToString());
+                    Set("MAX_CL_predictionPercent_Abs1", MAX_CL_predictionPercent_Abs1.ToString("R"));
+                }
             }
         }
 
@@ -1510,7 +1637,7 @@ namespace LotoPrediction
             int evaluateStop = data.Select(t => t.Id).Max();
 
             using (var file = new System.IO.StreamWriter(Config.PredictResult.ToString(), true))
-            {
+            {   
                 //Start new
                 int currentId = evaluateStop + 1;
 

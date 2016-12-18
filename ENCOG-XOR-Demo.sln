@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "encog-core-cs", "encog-core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleExamples", "ConsoleExamples\ConsoleExamples.csproj", "{A65A5878-6336-4ACF-9C40-540F8FAF2CC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{FDADDD6E-B0B4-4380-AE37-6FBB22864FCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{A65A5878-6336-4ACF-9C40-540F8FAF2CC7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A65A5878-6336-4ACF-9C40-540F8FAF2CC7}.Release|x64.ActiveCfg = Release|Any CPU
 		{A65A5878-6336-4ACF-9C40-540F8FAF2CC7}.Release|x64.Build.0 = Release|Any CPU
+		{FDADDD6E-B0B4-4380-AE37-6FBB22864FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDADDD6E-B0B4-4380-AE37-6FBB22864FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDADDD6E-B0B4-4380-AE37-6FBB22864FCA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FDADDD6E-B0B4-4380-AE37-6FBB22864FCA}.Debug|x64.Build.0 = Debug|Any CPU
+		{FDADDD6E-B0B4-4380-AE37-6FBB22864FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDADDD6E-B0B4-4380-AE37-6FBB22864FCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDADDD6E-B0B4-4380-AE37-6FBB22864FCA}.Release|x64.ActiveCfg = Release|Any CPU
+		{FDADDD6E-B0B4-4380-AE37-6FBB22864FCA}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
