@@ -49,6 +49,7 @@ namespace LotoPrediction
             //Console.WriteLine("AppPath = " + Config.AppPath.ToString());
 
             //Console.ReadLine();
+
         }
     }
 }
