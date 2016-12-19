@@ -162,7 +162,7 @@ namespace LotoPrediction
             ////Create & Train Network
             CreateAndTrainNetwork();
 
-            errorDiagnostic(network, trainingSet, blnShowConsole);
+            //errorDiagnostic(network, trainingSet, blnShowConsole);
 
             ////Evaluate Network
             EvaluateNetwork(blnShowConsole);
@@ -191,7 +191,7 @@ namespace LotoPrediction
 
         private void ReadData()
         {
-            var csvreader = new Encog.Util.CSV.ReadCSV(Config.BaseFile.ToString(), true,
+            var csvreader = new Encog.Util.CSV.ReadCSV(Config.BaseArchieveFile.ToString(), true,
                                                         CSVFormat.English);
 
             int count = 0;
@@ -1566,13 +1566,7 @@ namespace LotoPrediction
 
 
                 ////Save best performant network per each indicator
-                ////Save the network to MAX_predictionPercentFile
-                /*
-                   private float MAX_predictionPercent = 0;
-                   private float MAX_CL_predictionPercent = 0;
-                   private float MAX_predictionPercent_Abs1 = 0;
-                   private float MAX_CL_predictionPercent_Abs1 = 0;
-                */
+
 
                 //Set("MAX_predictionPercent", "0");
                 //Set("MAX_CL_predictionPercent", "0");
@@ -1583,10 +1577,16 @@ namespace LotoPrediction
                 //12345.678901.ToString("0.0000");
 
 
-                //string strMAX_predictionPercent = GetSetting("MAX_predictionPercent");
-                //string strMAX_CL_predictionPercent = GetSetting("MAX_CL_predictionPercent"); 
-                //string strMAX_predictionPercent_Abs1 = GetSetting("MAX_predictionPercent_Abs1");
-                //string strMAX_CL_predictionPercent_Abs1 = GetSetting("MAX_CL_predictionPercent_Abs1");
+                string strMAX_predictionPercent = GetSetting("MAX_predictionPercent");
+                string strMAX_CL_predictionPercent = GetSetting("MAX_CL_predictionPercent");
+                string strMAX_predictionPercent_Abs1 = GetSetting("MAX_predictionPercent_Abs1");
+                string strMAX_CL_predictionPercent_Abs1 = GetSetting("MAX_CL_predictionPercent_Abs1");
+
+                if (strMAX_predictionPercent == null) Set("MAX_predictionPercent", "0");
+                if (strMAX_CL_predictionPercent == null) Set("MAX_CL_predictionPercent", "0");
+                if (strMAX_predictionPercent_Abs1 == null) Set("MAX_predictionPercent_Abs1", "0");
+                if (strMAX_CL_predictionPercent_Abs1 == null) Set("MAX_CL_predictionPercent_Abs1", "0");
+
 
                 MAX_predictionPercent = float.Parse(GetSetting("MAX_predictionPercent"), System.Globalization.CultureInfo.InvariantCulture);
                 MAX_CL_predictionPercent = float.Parse(GetSetting("MAX_CL_predictionPercent"), System.Globalization.CultureInfo.InvariantCulture);
@@ -1597,6 +1597,8 @@ namespace LotoPrediction
                 //Set("MAX_CL_predictionPercent", MAX_CL_predictionPercent.ToString("R"));
                 //Set("MAX_predictionPercent_Abs1", MAX_predictionPercent_Abs1.ToString("R"));
                 //Set("MAX_CL_predictionPercent_Abs1", MAX_CL_predictionPercent_Abs1.ToString("R"));
+
+              
 
 
                 if (predictionPercent > MAX_predictionPercent)
