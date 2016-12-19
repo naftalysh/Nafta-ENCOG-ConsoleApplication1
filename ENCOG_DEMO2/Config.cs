@@ -17,6 +17,41 @@ namespace LotoPrediction
         public static FileInfo MAX_predictionPercent_Abs1File = FileUtil.CombinePath(AppPath, "MAX_predictionPercent_Abs1File.dat");
         public static FileInfo MAX_CL_predictionPercent_Abs1File = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercent_Abs1File.dat");
 
+        public static FileInfo MAX_predictionPercentFile_N1 = FileUtil.CombinePath(AppPath, "MAX_predictionPercentFile_N1.dat");
+        public static FileInfo MAX_CL_predictionPercentFile_N1 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercentFile_N1.dat");
+        public static FileInfo MAX_predictionPercent_Abs1File_N1 = FileUtil.CombinePath(AppPath, "MAX_predictionPercent_Abs1File_N1.dat");
+        public static FileInfo MAX_CL_predictionPercent_Abs1File_N1 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercent_Abs1File_N1.dat");
+
+        public static FileInfo MAX_predictionPercentFile_N2 = FileUtil.CombinePath(AppPath, "MAX_predictionPercentFile_N2.dat");
+        public static FileInfo MAX_CL_predictionPercentFile_N2 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercentFile_N2.dat");
+        public static FileInfo MAX_predictionPercent_Abs1File_N2 = FileUtil.CombinePath(AppPath, "MAX_predictionPercent_Abs1File_N2.dat");
+        public static FileInfo MAX_CL_predictionPercent_Abs1File_N2 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercent_Abs1File_N2.dat");
+
+        public static FileInfo MAX_predictionPercentFile_N3 = FileUtil.CombinePath(AppPath, "MAX_predictionPercentFile_N3.dat");
+        public static FileInfo MAX_CL_predictionPercentFile_N3 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercentFile_N3.dat");
+        public static FileInfo MAX_predictionPercent_Abs1File_N3 = FileUtil.CombinePath(AppPath, "MAX_predictionPercent_Abs1File_N3.dat");
+        public static FileInfo MAX_CL_predictionPercent_Abs1File_N3 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercent_Abs1File_N3.dat");
+
+        public static FileInfo MAX_predictionPercentFile_N4 = FileUtil.CombinePath(AppPath, "MAX_predictionPercentFile_N4.dat");
+        public static FileInfo MAX_CL_predictionPercentFile_N4 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercentFile_N4.dat");
+        public static FileInfo MAX_predictionPercent_Abs1File_N4 = FileUtil.CombinePath(AppPath, "MAX_predictionPercent_Abs1File_N4.dat");
+        public static FileInfo MAX_CL_predictionPercent_Abs1File_N4 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercent_Abs1File_N4.dat");
+
+        public static FileInfo MAX_predictionPercentFile_N5 = FileUtil.CombinePath(AppPath, "MAX_predictionPercentFile_N5.dat");
+        public static FileInfo MAX_CL_predictionPercentFile_N5 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercentFile_N5.dat");
+        public static FileInfo MAX_predictionPercent_Abs1File_N5 = FileUtil.CombinePath(AppPath, "MAX_predictionPercent_Abs1File_N5.dat");
+        public static FileInfo MAX_CL_predictionPercent_Abs1File_N5 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercent_Abs1File_N5.dat");
+
+        public static FileInfo MAX_predictionPercentFile_N6 = FileUtil.CombinePath(AppPath, "MAX_predictionPercentFile_N6.dat");
+        public static FileInfo MAX_CL_predictionPercentFile_N6 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercentFile_N6.dat");
+        public static FileInfo MAX_predictionPercent_Abs1File_N6 = FileUtil.CombinePath(AppPath, "MAX_predictionPercent_Abs1File_N6.dat");
+        public static FileInfo MAX_CL_predictionPercent_Abs1File_N6 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercent_Abs1File_N6.dat");
+
+        public static FileInfo MAX_predictionPercentFile_N7 = FileUtil.CombinePath(AppPath, "MAX_predictionPercentFile_N7.dat");
+        public static FileInfo MAX_CL_predictionPercentFile_N7 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercentFile_N7.dat");
+        public static FileInfo MAX_predictionPercent_Abs1File_N7 = FileUtil.CombinePath(AppPath, "MAX_predictionPercent_Abs1File_N7.dat");
+        public static FileInfo MAX_CL_predictionPercent_Abs1File_N7 = FileUtil.CombinePath(AppPath, "MAX_CL_predictionPercent_Abs1File_N7.dat");
+
 
         //Config.MAX_predictionPercentFile.ToString()
         //Config.MAX_CL_predictionPercentFile.ToString()
@@ -24,7 +59,7 @@ namespace LotoPrediction
         //Config.MAX_CL_predictionPercent_Abs1File.ToString()
         #region Evaluation
 
-        
+
 
         #endregion Evaluation
     }

@@ -85,6 +85,43 @@ namespace LotoPrediction
         private float MAX_predictionPercent_Abs1 = 0;       
         private float MAX_CL_predictionPercent_Abs1 = 0;
 
+        private float MAX_predictionPercent_N1 = 0;
+        private float MAX_CL_predictionPercent_N1 = 0;
+        private float MAX_predictionPercent_Abs1_N1 = 0;
+        private float MAX_CL_predictionPercent_Abs1_N1 = 0;
+
+        private float MAX_predictionPercent_N2 = 0;
+        private float MAX_CL_predictionPercent_N2 = 0;
+        private float MAX_predictionPercent_Abs1_N2 = 0;
+        private float MAX_CL_predictionPercent_Abs1_N2 = 0;
+
+        private float MAX_predictionPercent_N3 = 0;
+        private float MAX_CL_predictionPercent_N3 = 0;
+        private float MAX_predictionPercent_Abs1_N3 = 0;
+        private float MAX_CL_predictionPercent_Abs1_N3 = 0;
+
+        private float MAX_predictionPercent_N4 = 0;
+        private float MAX_CL_predictionPercent_N4 = 0;
+        private float MAX_predictionPercent_Abs1_N4 = 0;
+        private float MAX_CL_predictionPercent_Abs1_N4 = 0;
+
+        private float MAX_predictionPercent_N5 = 0;
+        private float MAX_CL_predictionPercent_N5 = 0;
+        private float MAX_predictionPercent_Abs1_N5 = 0;
+        private float MAX_CL_predictionPercent_Abs1_N5 = 0;
+
+        private float MAX_predictionPercent_N6 = 0;
+        private float MAX_CL_predictionPercent_N6 = 0;
+        private float MAX_predictionPercent_Abs1_N6 = 0;
+        private float MAX_CL_predictionPercent_Abs1_N6 = 0;
+
+        private float MAX_predictionPercent_N7 = 0;
+        private float MAX_CL_predictionPercent_N7 = 0;
+        private float MAX_predictionPercent_Abs1_N7 = 0;
+        private float MAX_CL_predictionPercent_Abs1_N7 = 0;
+
+
+
         public int TrainStart;
         public int TrainEnd;
         public int EvaluateStart;
@@ -1582,10 +1619,81 @@ namespace LotoPrediction
                 string strMAX_predictionPercent_Abs1 = GetSetting("MAX_predictionPercent_Abs1");
                 string strMAX_CL_predictionPercent_Abs1 = GetSetting("MAX_CL_predictionPercent_Abs1");
 
+                string strMAX_predictionPercent_N1 = GetSetting("MAX_predictionPercent_N1");
+                string strMAX_CL_predictionPercent_N1 = GetSetting("MAX_CL_predictionPercent_N1");
+                string strMAX_predictionPercent_Abs1_N1 = GetSetting("MAX_predictionPercent_Abs1_N1");
+                string strMAX_CL_predictionPercent_Abs1_N1 = GetSetting("MAX_CL_predictionPercent_Abs1_N1");
+
+                string strMAX_predictionPercent_N2 = GetSetting("MAX_predictionPercent_N2");
+                string strMAX_CL_predictionPercent_N2 = GetSetting("MAX_CL_predictionPercent_N2");
+                string strMAX_predictionPercent_Abs1_N2 = GetSetting("MAX_predictionPercent_Abs1_N2");
+                string strMAX_CL_predictionPercent_Abs1_N2 = GetSetting("MAX_CL_predictionPercent_Abs1_N2");
+
+                string strMAX_predictionPercent_N3 = GetSetting("MAX_predictionPercent_N3");
+                string strMAX_CL_predictionPercent_N3 = GetSetting("MAX_CL_predictionPercent_N3");
+                string strMAX_predictionPercent_Abs1_N3 = GetSetting("MAX_predictionPercent_Abs1_N3");
+                string strMAX_CL_predictionPercent_Abs1_N3 = GetSetting("MAX_CL_predictionPercent_Abs1_N3");
+
+                string strMAX_predictionPercent_N4 = GetSetting("MAX_predictionPercent_N4");
+                string strMAX_CL_predictionPercent_N4 = GetSetting("MAX_CL_predictionPercent_N4");
+                string strMAX_predictionPercent_Abs1_N4 = GetSetting("MAX_predictionPercent_Abs1_N4");
+                string strMAX_CL_predictionPercent_Abs1_N4 = GetSetting("MAX_CL_predictionPercent_Abs1_N4");
+
+                string strMAX_predictionPercent_N5 = GetSetting("MAX_predictionPercent_N5");
+                string strMAX_CL_predictionPercent_N5 = GetSetting("MAX_CL_predictionPercent_N5");
+                string strMAX_predictionPercent_Abs1_N5 = GetSetting("MAX_predictionPercent_Abs1_N5");
+                string strMAX_CL_predictionPercent_Abs1_N5 = GetSetting("MAX_CL_predictionPercent_Abs1_N5");
+
+                string strMAX_predictionPercent_N6 = GetSetting("MAX_predictionPercent_N6");
+                string strMAX_CL_predictionPercent_N6 = GetSetting("MAX_CL_predictionPercent_N6");
+                string strMAX_predictionPercent_Abs1_N6 = GetSetting("MAX_predictionPercent_Abs1_N6");
+                string strMAX_CL_predictionPercent_Abs1_N6 = GetSetting("MAX_CL_predictionPercent_Abs1_N6");
+
+                string strMAX_predictionPercent_N7 = GetSetting("MAX_predictionPercent_N7");
+                string strMAX_CL_predictionPercent_N7 = GetSetting("MAX_CL_predictionPercent_N7");
+                string strMAX_predictionPercent_Abs1_N7 = GetSetting("MAX_predictionPercent_Abs1_N7");
+                string strMAX_CL_predictionPercent_Abs1_N7 = GetSetting("MAX_CL_predictionPercent_Abs1_N7");
+
                 if (strMAX_predictionPercent == null) Set("MAX_predictionPercent", "0");
                 if (strMAX_CL_predictionPercent == null) Set("MAX_CL_predictionPercent", "0");
                 if (strMAX_predictionPercent_Abs1 == null) Set("MAX_predictionPercent_Abs1", "0");
                 if (strMAX_CL_predictionPercent_Abs1 == null) Set("MAX_CL_predictionPercent_Abs1", "0");
+
+                if (strMAX_predictionPercent_N1 == null) Set("MAX_predictionPercent_N1", "0");
+                if (strMAX_CL_predictionPercent_N1 == null) Set("MAX_CL_predictionPercent_N1", "0");
+                if (strMAX_predictionPercent_Abs1_N1 == null) Set("MAX_predictionPercent_Abs1_N1", "0");
+                if (strMAX_CL_predictionPercent_Abs1_N1 == null) Set("MAX_CL_predictionPercent_Abs1_N1", "0");
+
+                if (strMAX_predictionPercent_N2 == null) Set("MAX_predictionPercent_N2", "0");
+                if (strMAX_CL_predictionPercent_N2 == null) Set("MAX_CL_predictionPercent_N2", "0");
+                if (strMAX_predictionPercent_Abs1_N2 == null) Set("MAX_predictionPercent_Abs1_N2", "0");
+                if (strMAX_CL_predictionPercent_Abs1_N2 == null) Set("MAX_CL_predictionPercent_Abs1_N2", "0");
+
+                if (strMAX_predictionPercent_N3 == null) Set("MAX_predictionPercent_N3", "0");
+                if (strMAX_CL_predictionPercent_N3 == null) Set("MAX_CL_predictionPercent_N3", "0");
+                if (strMAX_predictionPercent_Abs1_N3 == null) Set("MAX_predictionPercent_Abs1_N3", "0");
+                if (strMAX_CL_predictionPercent_Abs1_N3 == null) Set("MAX_CL_predictionPercent_Abs1_N3", "0");
+
+                if (strMAX_predictionPercent_N4 == null) Set("MAX_predictionPercent_N4", "0");
+                if (strMAX_CL_predictionPercent_N4 == null) Set("MAX_CL_predictionPercent_N4", "0");
+                if (strMAX_predictionPercent_Abs1_N4 == null) Set("MAX_predictionPercent_Abs1_N4", "0");
+                if (strMAX_CL_predictionPercent_Abs1_N4 == null) Set("MAX_CL_predictionPercent_Abs1_N4", "0");
+
+                if (strMAX_predictionPercent_N5 == null) Set("MAX_predictionPercent_N5", "0");
+                if (strMAX_CL_predictionPercent_N5 == null) Set("MAX_CL_predictionPercent_N5", "0");
+                if (strMAX_predictionPercent_Abs1_N5 == null) Set("MAX_predictionPercent_Abs1_N5", "0");
+                if (strMAX_CL_predictionPercent_Abs1_N5 == null) Set("MAX_CL_predictionPercent_Abs1_N5", "0");
+
+                if (strMAX_predictionPercent_N6 == null) Set("MAX_predictionPercent_N6", "0");
+                if (strMAX_CL_predictionPercent_N6 == null) Set("MAX_CL_predictionPercent_N6", "0");
+                if (strMAX_predictionPercent_Abs1_N6 == null) Set("MAX_predictionPercent_Abs1_N6", "0");
+                if (strMAX_CL_predictionPercent_Abs1_N6 == null) Set("MAX_CL_predictionPercent_Abs1_N6", "0");
+
+                if (strMAX_predictionPercent_N7 == null) Set("MAX_predictionPercent_N7", "0");
+                if (strMAX_CL_predictionPercent_N7 == null) Set("MAX_CL_predictionPercent_N7", "0");
+                if (strMAX_predictionPercent_Abs1_N7 == null) Set("MAX_predictionPercent_Abs1_N7", "0");
+                if (strMAX_CL_predictionPercent_Abs1_N7 == null) Set("MAX_CL_predictionPercent_Abs1_N7", "0");
+
 
 
                 MAX_predictionPercent = float.Parse(GetSetting("MAX_predictionPercent"), System.Globalization.CultureInfo.InvariantCulture);
@@ -1593,12 +1701,50 @@ namespace LotoPrediction
                 MAX_predictionPercent_Abs1 = float.Parse(GetSetting("MAX_predictionPercent_Abs1"), System.Globalization.CultureInfo.InvariantCulture);
                 MAX_CL_predictionPercent_Abs1 = float.Parse(GetSetting("MAX_CL_predictionPercent_Abs1"), System.Globalization.CultureInfo.InvariantCulture);
 
+                MAX_predictionPercent_N1 = float.Parse(GetSetting("MAX_predictionPercent_N1"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_N1 = float.Parse(GetSetting("MAX_CL_predictionPercent_N1"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_predictionPercent_Abs1_N1 = float.Parse(GetSetting("MAX_predictionPercent_Abs1_N1"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_Abs1_N1 = float.Parse(GetSetting("MAX_CL_predictionPercent_Abs1_N1"), System.Globalization.CultureInfo.InvariantCulture);
+
+                MAX_predictionPercent_N2 = float.Parse(GetSetting("MAX_predictionPercent_N2"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_N2 = float.Parse(GetSetting("MAX_CL_predictionPercent_N2"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_predictionPercent_Abs1_N2 = float.Parse(GetSetting("MAX_predictionPercent_Abs1_N2"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_Abs1_N2 = float.Parse(GetSetting("MAX_CL_predictionPercent_Abs1_N2"), System.Globalization.CultureInfo.InvariantCulture);
+
+                MAX_predictionPercent_N3 = float.Parse(GetSetting("MAX_predictionPercent_N3"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_N3 = float.Parse(GetSetting("MAX_CL_predictionPercent_N3"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_predictionPercent_Abs1_N3 = float.Parse(GetSetting("MAX_predictionPercent_Abs1_N3"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_Abs1_N3 = float.Parse(GetSetting("MAX_CL_predictionPercent_Abs1_N3"), System.Globalization.CultureInfo.InvariantCulture);
+
+                MAX_predictionPercent_N4 = float.Parse(GetSetting("MAX_predictionPercent_N4"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_N4 = float.Parse(GetSetting("MAX_CL_predictionPercent_N4"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_predictionPercent_Abs1_N4 = float.Parse(GetSetting("MAX_predictionPercent_Abs1_N4"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_Abs1_N4 = float.Parse(GetSetting("MAX_CL_predictionPercent_Abs1_N4"), System.Globalization.CultureInfo.InvariantCulture);
+
+                MAX_predictionPercent_N5 = float.Parse(GetSetting("MAX_predictionPercent_N5"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_N5 = float.Parse(GetSetting("MAX_CL_predictionPercent_N5"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_predictionPercent_Abs1_N5 = float.Parse(GetSetting("MAX_predictionPercent_Abs1_N5"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_Abs1_N5 = float.Parse(GetSetting("MAX_CL_predictionPercent_Abs1_N5"), System.Globalization.CultureInfo.InvariantCulture);
+
+                MAX_predictionPercent_N6 = float.Parse(GetSetting("MAX_predictionPercent_N6"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_N6 = float.Parse(GetSetting("MAX_CL_predictionPercent_N6"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_predictionPercent_Abs1_N6 = float.Parse(GetSetting("MAX_predictionPercent_Abs1_N6"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_Abs1_N6 = float.Parse(GetSetting("MAX_CL_predictionPercent_Abs1_N6"), System.Globalization.CultureInfo.InvariantCulture);
+
+                MAX_predictionPercent_N7 = float.Parse(GetSetting("MAX_predictionPercent_N7"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_N7 = float.Parse(GetSetting("MAX_CL_predictionPercent_N7"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_predictionPercent_Abs1_N7 = float.Parse(GetSetting("MAX_predictionPercent_Abs1_N7"), System.Globalization.CultureInfo.InvariantCulture);
+                MAX_CL_predictionPercent_Abs1_N7 = float.Parse(GetSetting("MAX_CL_predictionPercent_Abs1_N7"), System.Globalization.CultureInfo.InvariantCulture);
+
+
+
+
                 //Set("MAX_predictionPercent", MAX_predictionPercent.ToString("R"));
                 //Set("MAX_CL_predictionPercent", MAX_CL_predictionPercent.ToString("R"));
                 //Set("MAX_predictionPercent_Abs1", MAX_predictionPercent_Abs1.ToString("R"));
                 //Set("MAX_CL_predictionPercent_Abs1", MAX_CL_predictionPercent_Abs1.ToString("R"));
 
-              
+
 
 
                 if (predictionPercent > MAX_predictionPercent)
@@ -1627,6 +1773,231 @@ namespace LotoPrediction
                     MAX_CL_predictionPercent_Abs1 = CL_predictionPercent_Abs1;
                     SaveLoadNetwork(true, Config.MAX_CL_predictionPercent_Abs1File.ToString());
                     Set("MAX_CL_predictionPercent_Abs1", MAX_CL_predictionPercent_Abs1.ToString("R"));
+                }
+
+                switch (LotoNumber) {
+                    case 1:
+                        if (predictionPercent > MAX_predictionPercent_N1)
+                        {
+                            MAX_predictionPercent_N1 = predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercentFile_N1.ToString());
+                            Set("MAX_predictionPercent_N1", MAX_predictionPercent_N1.ToString("R"));  //Persist the value
+                        }
+
+                        if (CL_predictionPercent > MAX_CL_predictionPercent_N1)
+                        {
+                            MAX_CL_predictionPercent_N1 = CL_predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercentFile_N1.ToString());
+                            Set("MAX_CL_predictionPercent_N1", MAX_CL_predictionPercent_N1.ToString("R"));
+                        }
+
+                        if (predictionPercent_Abs1 > MAX_predictionPercent_Abs1_N1)
+                        {
+                            MAX_predictionPercent_Abs1_N1 = predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercent_Abs1File_N1.ToString());
+                            Set("MAX_predictionPercent_Abs1_N1", MAX_predictionPercent_Abs1_N1.ToString("R"));
+                        }
+
+                        if (CL_predictionPercent_Abs1 > MAX_CL_predictionPercent_Abs1_N1)
+                        {
+                            MAX_CL_predictionPercent_Abs1_N1 = CL_predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercent_Abs1File_N1.ToString());
+                            Set("MAX_CL_predictionPercent_Abs1_N1", MAX_CL_predictionPercent_Abs1_N1.ToString("R"));
+                        }
+
+
+                        break;
+
+                    case 2:
+                        if (predictionPercent > MAX_predictionPercent_N2)
+                        {
+                            MAX_predictionPercent_N2 = predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercentFile_N2.ToString());
+                            Set("MAX_predictionPercent_N2", MAX_predictionPercent_N2.ToString("R"));  //Persist the value
+                        }
+
+                        if (CL_predictionPercent > MAX_CL_predictionPercent_N2)
+                        {
+                            MAX_CL_predictionPercent_N2 = CL_predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercentFile_N2.ToString());
+                            Set("MAX_CL_predictionPercent_N2", MAX_CL_predictionPercent_N2.ToString("R"));
+                        }
+
+                        if (predictionPercent_Abs1 > MAX_predictionPercent_Abs1_N2)
+                        {
+                            MAX_predictionPercent_Abs1_N2 = predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercent_Abs1File_N2.ToString());
+                            Set("MAX_predictionPercent_Abs1_N2", MAX_predictionPercent_Abs1_N2.ToString("R"));
+                        }
+
+                        if (CL_predictionPercent_Abs1 > MAX_CL_predictionPercent_Abs1_N2)
+                        {
+                            MAX_CL_predictionPercent_Abs1_N2 = CL_predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercent_Abs1File_N2.ToString());
+                            Set("MAX_CL_predictionPercent_Abs1_N2", MAX_CL_predictionPercent_Abs1_N2.ToString("R"));
+                        }
+
+
+                        break;
+
+                    case 3:
+                        if (predictionPercent > MAX_predictionPercent_N3)
+                        {
+                            MAX_predictionPercent_N3 = predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercentFile_N3.ToString());
+                            Set("MAX_predictionPercent_N3", MAX_predictionPercent_N3.ToString("R"));  //Persist the value
+                        }
+
+                        if (CL_predictionPercent > MAX_CL_predictionPercent_N3)
+                        {
+                            MAX_CL_predictionPercent_N3 = CL_predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercentFile_N3.ToString());
+                            Set("MAX_CL_predictionPercent_N3", MAX_CL_predictionPercent_N3.ToString("R"));
+                        }
+
+                        if (predictionPercent_Abs1 > MAX_predictionPercent_Abs1_N3)
+                        {
+                            MAX_predictionPercent_Abs1_N3 = predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercent_Abs1File_N3.ToString());
+                            Set("MAX_predictionPercent_Abs1_N3", MAX_predictionPercent_Abs1_N3.ToString("R"));
+                        }
+
+                        if (CL_predictionPercent_Abs1 > MAX_CL_predictionPercent_Abs1_N3)
+                        {
+                            MAX_CL_predictionPercent_Abs1_N3 = CL_predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercent_Abs1File_N3.ToString());
+                            Set("MAX_CL_predictionPercent_Abs1_N3", MAX_CL_predictionPercent_Abs1_N3.ToString("R"));
+                        }
+
+
+                        break;
+
+                    case 4:
+                        if (predictionPercent > MAX_predictionPercent_N4)
+                        {
+                            MAX_predictionPercent_N4 = predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercentFile_N4.ToString());
+                            Set("MAX_predictionPercent_N4", MAX_predictionPercent_N4.ToString("R"));  //Persist the value
+                        }
+
+                        if (CL_predictionPercent > MAX_CL_predictionPercent_N4)
+                        {
+                            MAX_CL_predictionPercent_N4 = CL_predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercentFile_N4.ToString());
+                            Set("MAX_CL_predictionPercent_N4", MAX_CL_predictionPercent_N4.ToString("R"));
+                        }
+
+                        if (predictionPercent_Abs1 > MAX_predictionPercent_Abs1_N4)
+                        {
+                            MAX_predictionPercent_Abs1_N4 = predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercent_Abs1File_N4.ToString());
+                            Set("MAX_predictionPercent_Abs1_N4", MAX_predictionPercent_Abs1_N4.ToString("R"));
+                        }
+
+                        if (CL_predictionPercent_Abs1 > MAX_CL_predictionPercent_Abs1_N4)
+                        {
+                            MAX_CL_predictionPercent_Abs1_N4 = CL_predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercent_Abs1File_N4.ToString());
+                            Set("MAX_CL_predictionPercent_Abs1_N4", MAX_CL_predictionPercent_Abs1_N4.ToString("R"));
+                        }
+
+                        break;
+
+                    case 5:
+                        if (predictionPercent > MAX_predictionPercent_N5)
+                        {
+                            MAX_predictionPercent_N5 = predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercentFile_N5.ToString());
+                            Set("MAX_predictionPercent_N5", MAX_predictionPercent_N5.ToString("R"));  //Persist the value
+                        }
+
+                        if (CL_predictionPercent > MAX_CL_predictionPercent_N5)
+                        {
+                            MAX_CL_predictionPercent_N5 = CL_predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercentFile_N5.ToString());
+                            Set("MAX_CL_predictionPercent_N5", MAX_CL_predictionPercent_N5.ToString("R"));
+                        }
+
+                        if (predictionPercent_Abs1 > MAX_predictionPercent_Abs1_N5)
+                        {
+                            MAX_predictionPercent_Abs1_N5 = predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercent_Abs1File_N5.ToString());
+                            Set("MAX_predictionPercent_Abs1_N5", MAX_predictionPercent_Abs1_N5.ToString("R"));
+                        }
+
+                        if (CL_predictionPercent_Abs1 > MAX_CL_predictionPercent_Abs1_N5)
+                        {
+                            MAX_CL_predictionPercent_Abs1_N5 = CL_predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercent_Abs1File_N5.ToString());
+                            Set("MAX_CL_predictionPercent_Abs1_N5", MAX_CL_predictionPercent_Abs1_N5.ToString("R"));
+                        }
+
+                        break;
+
+                    case 6:
+                        if (predictionPercent > MAX_predictionPercent_N6)
+                        {
+                            MAX_predictionPercent_N6 = predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercentFile_N6.ToString());
+                            Set("MAX_predictionPercent_N6", MAX_predictionPercent_N6.ToString("R"));  //Persist the value
+                        }
+
+                        if (CL_predictionPercent > MAX_CL_predictionPercent_N6)
+                        {
+                            MAX_CL_predictionPercent_N6 = CL_predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercentFile_N6.ToString());
+                            Set("MAX_CL_predictionPercent_N6", MAX_CL_predictionPercent_N6.ToString("R"));
+                        }
+
+                        if (predictionPercent_Abs1 > MAX_predictionPercent_Abs1_N6)
+                        {
+                            MAX_predictionPercent_Abs1_N6 = predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercent_Abs1File_N6.ToString());
+                            Set("MAX_predictionPercent_Abs1_N6", MAX_predictionPercent_Abs1_N6.ToString("R"));
+                        }
+
+                        if (CL_predictionPercent_Abs1 > MAX_CL_predictionPercent_Abs1_N6)
+                        {
+                            MAX_CL_predictionPercent_Abs1_N6 = CL_predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercent_Abs1File_N6.ToString());
+                            Set("MAX_CL_predictionPercent_Abs1_N6", MAX_CL_predictionPercent_Abs1_N6.ToString("R"));
+                        }
+
+                        break;
+
+                    case 7:
+                        if (predictionPercent > MAX_predictionPercent_N7)
+                        {
+                            MAX_predictionPercent_N7 = predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercentFile_N7.ToString());
+                            Set("MAX_predictionPercent_N7", MAX_predictionPercent_N7.ToString("R"));  //Persist the value
+                        }
+
+                        if (CL_predictionPercent > MAX_CL_predictionPercent_N7)
+                        {
+                            MAX_CL_predictionPercent_N7 = CL_predictionPercent;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercentFile_N7.ToString());
+                            Set("MAX_CL_predictionPercent_N7", MAX_CL_predictionPercent_N7.ToString("R"));
+                        }
+
+                        if (predictionPercent_Abs1 > MAX_predictionPercent_Abs1_N7)
+                        {
+                            MAX_predictionPercent_Abs1_N7 = predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_predictionPercent_Abs1File_N7.ToString());
+                            Set("MAX_predictionPercent_Abs1_N7", MAX_predictionPercent_Abs1_N7.ToString("R"));
+                        }
+
+                        if (CL_predictionPercent_Abs1 > MAX_CL_predictionPercent_Abs1_N7)
+                        {
+                            MAX_CL_predictionPercent_Abs1_N7 = CL_predictionPercent_Abs1;
+                            SaveLoadNetwork(true, Config.MAX_CL_predictionPercent_Abs1File_N7.ToString());
+                            Set("MAX_CL_predictionPercent_Abs1_N7", MAX_CL_predictionPercent_Abs1_N7.ToString("R"));
+                        }
+
+                        break;
+
+                    default:
+                        break;
                 }
             }
         }
