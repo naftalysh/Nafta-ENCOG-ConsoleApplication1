@@ -201,7 +201,7 @@ namespace LotoPrediction
             GenerateTemporalData();
 
             ////Create & Train Network
-            if (! CreateAndTrainNetwork(300)) {
+            if (! CreateAndTrainNetwork(1300)) {
                 Console.WriteLine("-- CreateAndTrainNetwork step timeout, exiting --");
                 Environment.Exit(0);
             };
