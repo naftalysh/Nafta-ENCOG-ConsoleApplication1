@@ -1628,7 +1628,7 @@ namespace LotoPrediction
 
 
                     lineStatus =
-                    string.Format(@"{0},{1};{2};{3};{4:0.00}%;{5};{6};{7:0.00}%;{8};{9};{10:0.00}%;{11};{12};{13:0.00}%",
+                    string.Format(@"{0};{1};{2};{3};{4:0.00}%;{5};{6};{7:0.00}%;{8};{9};{10:0.00}%;{11};{12};{13:0.00}%",
                                     line0,
                                     (countPredicted + countUnPredicted),
                                     countPredicted,
@@ -1644,15 +1644,18 @@ namespace LotoPrediction
                                     CL_countUnPredicted_Abs1,
                                     CL_predictionPercent_Abs1);
 
+                
                     //file.WriteLine(line2);
                     //file.WriteLine(line3);
                     file.WriteLine(lineStatus);
                     file.Close();
 
-                    Console.WriteLine(line2);
-                    Console.WriteLine(line3);
-                    Console.WriteLine(lineStatus);
-
+                    //
+                    //Removed for faster execution...
+                    //Console.WriteLine(line2);
+                    //Console.WriteLine(line3);
+                    //Console.WriteLine(lineStatus);
+                    //
 
 
                     ////Save best performant network per each indicator
