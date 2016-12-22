@@ -986,7 +986,7 @@ namespace LotoPrediction
             }
             catch (AggregateException ae)
             {
-                Console.WriteLine("Had an inner exception while running the task for TrainToError.");
+                Console.WriteLine("Had an inner exception while running the task for TrainToError. ({0})", ae.Message);
                 return false;
             }
             finally
