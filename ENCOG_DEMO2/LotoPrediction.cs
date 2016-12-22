@@ -970,15 +970,31 @@ namespace LotoPrediction
 
 
             var task = Task.Run(() => EncogUtility.TrainToError(train, MaxError));
-            if (task.Wait(TimeSpan.FromSeconds(secTimeout)))
+            //if (task.Wait(TimeSpan.FromSeconds(secTimeout)))
+            //{
+            //    Console.WriteLine("-- End of CreateAndTrainNetwork step --");
+            //    return true;
+            //}
+            //else
+            //    return false;
+            ////throw new Exception("Timed out");
+
+
+            try
+            {
+                task.Wait(TimeSpan.FromSeconds(secTimeout));
+            }
+            catch (AggregateException ae)
+            {
+                Console.WriteLine("Had an inner exception while running the task for TrainToError.");
+                return false;
+            }
+            finally
             {
                 Console.WriteLine("-- End of CreateAndTrainNetwork step --");
-                return true;
             }
-            else
-                return false;
-                //throw new Exception("Timed out");
 
+            return true;
         }
 
         public static void errorDiagnostic(BasicNetwork network, TemporalMLDataSet dataSet, Boolean blnShowConsole)
