@@ -294,7 +294,7 @@ namespace LotoPrediction
 
             double flN1, flN2, flN3; //used for Abs1 predictions
             double AbsNumber;
-            List<double> AbsList = new List<double>(3);
+            List<double> AbsList = new List<double>(3) {1,1,1};
 
             // Iterate through all LotoNumber's
             for (int i = 1; i <= 7; i++)
@@ -331,7 +331,7 @@ namespace LotoPrediction
 
                         N1Predictions = N1Predictions + "N1 Abs Predict: (";
 
-                        flN1 = Math.Min(1.0, AbsNumber - 1.0);
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
                         flN3 = AbsNumber + 1;
 
@@ -375,7 +375,7 @@ namespace LotoPrediction
 
                         N2Predictions = N2Predictions + "N2 Abs Predict: (";
 
-                        flN1 = Math.Min(1.0, AbsNumber - 1.0);
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
                         flN3 = AbsNumber + 1;
 
@@ -419,7 +419,7 @@ namespace LotoPrediction
 
                         N3Predictions = N3Predictions + "N3 Abs Predict: (";
 
-                        flN1 = Math.Min(1.0, AbsNumber - 1.0);
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
                         flN3 = AbsNumber + 1;
 
@@ -463,7 +463,7 @@ namespace LotoPrediction
 
                         N4Predictions = N4Predictions + "N4 Abs Predict: (";
 
-                        flN1 = Math.Min(1.0, AbsNumber - 1.0);
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
                         flN3 = AbsNumber + 1;
 
@@ -507,7 +507,7 @@ namespace LotoPrediction
 
                         N5Predictions = N5Predictions + "N5 Abs Predict: (";
 
-                        flN1 = Math.Min(1.0, AbsNumber - 1.0);
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
                         flN3 = AbsNumber + 1;
 
@@ -533,7 +533,7 @@ namespace LotoPrediction
                         {
                             SaveLoadNetwork(false, Config.MAX_CL_predictionPercentFile_N6.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N5Predictions = N5Predictions + "N6 Predict: " + _closedLoop_predicted + " ;";
+                            N6Predictions = N6Predictions + "N6 Predict: " + _closedLoop_predicted + " ;";
                         }
 
                         if (MAX_CL_predictionPercent_Abs1_N6 <= MAX_predictionPercent_Abs1_N6)
@@ -551,7 +551,7 @@ namespace LotoPrediction
 
                         N6Predictions = N6Predictions + "N6 Abs Predict: (";
 
-                        flN1 = Math.Min(1.0, AbsNumber - 1.0);
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
                         flN3 = AbsNumber + 1;
 
@@ -595,7 +595,7 @@ namespace LotoPrediction
 
                         N7Predictions = N7Predictions + "N7 Abs Predict: (";
 
-                        flN1 = Math.Min(1.0, AbsNumber - 1.0);
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
                         flN3 = AbsNumber + 1;
 
