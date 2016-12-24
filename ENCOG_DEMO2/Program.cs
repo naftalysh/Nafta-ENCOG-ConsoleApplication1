@@ -6,8 +6,15 @@ namespace LotoPrediction
     {
         private static void Main(string[] args)
         {
+            //
+            // Commandline parameters
+            //7 20 0.01 false or
+            //Report
+            //
+            Boolean blnReport = false;
             var programName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
             System.Console.WriteLine("Format: " + programName + " LotoNumber, PastWindowSize, MaxError, blnShowConsole ");
+            System.Console.WriteLine("Or, Format: " + programName + " report ");
 
             DateTime Execution_Start = System.DateTime.Now;
 
@@ -32,9 +39,16 @@ namespace LotoPrediction
             }
             else if (args.Length == 1)
             {
-                lotoPrediction.blnShowConsole = Convert.ToBoolean(args[0]);
+                if (args[0].ToUpper() == "REPORT")
+                    blnReport = true;
+                else
+                    lotoPrediction.blnShowConsole = Convert.ToBoolean(args[0]);
             }
 
+
+            if (blnReport)
+                lotoPrediction.Report();
+            else
             lotoPrediction.Predict();
 
             DateTime Execution_End = System.DateTime.Now;
