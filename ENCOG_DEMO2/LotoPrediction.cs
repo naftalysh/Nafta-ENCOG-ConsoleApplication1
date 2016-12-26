@@ -123,6 +123,48 @@ namespace LotoPrediction
         private float MAX_predictionPercent_Abs1_N7 = 0;
         private float MAX_CL_predictionPercent_Abs1_N7 = 0;
 
+        //MIN Handling
+        private float MIN_predictionPercent = 0;
+        private float MIN_CL_predictionPercent = 0;
+        private float MIN_predictionPercent_Abs1 = 0;
+        private float MIN_CL_predictionPercent_Abs1 = 0;
+
+        private float MIN_predictionPercent_N1 = 0;
+        private float MIN_CL_predictionPercent_N1 = 0;
+        private float MIN_predictionPercent_Abs1_N1 = 0;
+        private float MIN_CL_predictionPercent_Abs1_N1 = 0;
+
+        private float MIN_predictionPercent_N2 = 0;
+        private float MIN_CL_predictionPercent_N2 = 0;
+        private float MIN_predictionPercent_Abs1_N2 = 0;
+        private float MIN_CL_predictionPercent_Abs1_N2 = 0;
+
+        private float MIN_predictionPercent_N3 = 0;
+        private float MIN_CL_predictionPercent_N3 = 0;
+        private float MIN_predictionPercent_Abs1_N3 = 0;
+        private float MIN_CL_predictionPercent_Abs1_N3 = 0;
+
+        private float MIN_predictionPercent_N4 = 0;
+        private float MIN_CL_predictionPercent_N4 = 0;
+        private float MIN_predictionPercent_Abs1_N4 = 0;
+        private float MIN_CL_predictionPercent_Abs1_N4 = 0;
+
+        private float MIN_predictionPercent_N5 = 0;
+        private float MIN_CL_predictionPercent_N5 = 0;
+        private float MIN_predictionPercent_Abs1_N5 = 0;
+        private float MIN_CL_predictionPercent_Abs1_N5 = 0;
+
+        private float MIN_predictionPercent_N6 = 0;
+        private float MIN_CL_predictionPercent_N6 = 0;
+        private float MIN_predictionPercent_Abs1_N6 = 0;
+        private float MIN_CL_predictionPercent_Abs1_N6 = 0;
+
+        private float MIN_predictionPercent_N7 = 0;
+        private float MIN_CL_predictionPercent_N7 = 0;
+        private float MIN_predictionPercent_Abs1_N7 = 0;
+        private float MIN_CL_predictionPercent_Abs1_N7 = 0;
+        //MIN Handling
+
         double predicted = 0.0;
         double _closedLoop_predicted = 0.0;
 
@@ -2271,7 +2313,7 @@ namespace LotoPrediction
                         Set("MAX_CL_predictionPercent_Abs1", MAX_CL_predictionPercent_Abs1.ToString("R"));
                     }
 
-                    switch (LotoNumber)
+                     switch (LotoNumber)
                     {
                         case 1:
                             if (predictionPercent > MAX_predictionPercent_N1)
@@ -2496,7 +2538,399 @@ namespace LotoPrediction
                         default:
                             break;
                     }
-                }
+
+
+                    //Min Handling
+                    string strMIN_predictionPercent = GetSetting("MIN_predictionPercent");
+                    string strMIN_CL_predictionPercent = GetSetting("MIN_CL_predictionPercent");
+                    string strMIN_predictionPercent_Abs1 = GetSetting("MIN_predictionPercent_Abs1");
+                    string strMIN_CL_predictionPercent_Abs1 = GetSetting("MIN_CL_predictionPercent_Abs1");
+
+                    string strMIN_predictionPercent_N1 = GetSetting("MIN_predictionPercent_N1");
+                    string strMIN_CL_predictionPercent_N1 = GetSetting("MIN_CL_predictionPercent_N1");
+                    string strMIN_predictionPercent_Abs1_N1 = GetSetting("MIN_predictionPercent_Abs1_N1");
+                    string strMIN_CL_predictionPercent_Abs1_N1 = GetSetting("MIN_CL_predictionPercent_Abs1_N1");
+
+                    string strMIN_predictionPercent_N2 = GetSetting("MIN_predictionPercent_N2");
+                    string strMIN_CL_predictionPercent_N2 = GetSetting("MIN_CL_predictionPercent_N2");
+                    string strMIN_predictionPercent_Abs1_N2 = GetSetting("MIN_predictionPercent_Abs1_N2");
+                    string strMIN_CL_predictionPercent_Abs1_N2 = GetSetting("MIN_CL_predictionPercent_Abs1_N2");
+
+                    string strMIN_predictionPercent_N3 = GetSetting("MIN_predictionPercent_N3");
+                    string strMIN_CL_predictionPercent_N3 = GetSetting("MIN_CL_predictionPercent_N3");
+                    string strMIN_predictionPercent_Abs1_N3 = GetSetting("MIN_predictionPercent_Abs1_N3");
+                    string strMIN_CL_predictionPercent_Abs1_N3 = GetSetting("MIN_CL_predictionPercent_Abs1_N3");
+
+                    string strMIN_predictionPercent_N4 = GetSetting("MIN_predictionPercent_N4");
+                    string strMIN_CL_predictionPercent_N4 = GetSetting("MIN_CL_predictionPercent_N4");
+                    string strMIN_predictionPercent_Abs1_N4 = GetSetting("MIN_predictionPercent_Abs1_N4");
+                    string strMIN_CL_predictionPercent_Abs1_N4 = GetSetting("MIN_CL_predictionPercent_Abs1_N4");
+
+                    string strMIN_predictionPercent_N5 = GetSetting("MIN_predictionPercent_N5");
+                    string strMIN_CL_predictionPercent_N5 = GetSetting("MIN_CL_predictionPercent_N5");
+                    string strMIN_predictionPercent_Abs1_N5 = GetSetting("MIN_predictionPercent_Abs1_N5");
+                    string strMIN_CL_predictionPercent_Abs1_N5 = GetSetting("MIN_CL_predictionPercent_Abs1_N5");
+
+                    string strMIN_predictionPercent_N6 = GetSetting("MIN_predictionPercent_N6");
+                    string strMIN_CL_predictionPercent_N6 = GetSetting("MIN_CL_predictionPercent_N6");
+                    string strMIN_predictionPercent_Abs1_N6 = GetSetting("MIN_predictionPercent_Abs1_N6");
+                    string strMIN_CL_predictionPercent_Abs1_N6 = GetSetting("MIN_CL_predictionPercent_Abs1_N6");
+
+                    string strMIN_predictionPercent_N7 = GetSetting("MIN_predictionPercent_N7");
+                    string strMIN_CL_predictionPercent_N7 = GetSetting("MIN_CL_predictionPercent_N7");
+                    string strMIN_predictionPercent_Abs1_N7 = GetSetting("MIN_predictionPercent_Abs1_N7");
+                    string strMIN_CL_predictionPercent_Abs1_N7 = GetSetting("MIN_CL_predictionPercent_Abs1_N7");
+
+                    if (strMIN_predictionPercent == null) Set("MIN_predictionPercent", "0");
+                    if (strMIN_CL_predictionPercent == null) Set("MIN_CL_predictionPercent", "0");
+                    if (strMIN_predictionPercent_Abs1 == null) Set("MIN_predictionPercent_Abs1", "0");
+                    if (strMIN_CL_predictionPercent_Abs1 == null) Set("MIN_CL_predictionPercent_Abs1", "0");
+
+                    if (strMIN_predictionPercent_N1 == null) Set("MIN_predictionPercent_N1", "60");
+                    if (strMIN_CL_predictionPercent_N1 == null) Set("MIN_CL_predictionPercent_N1", "60");
+                    if (strMIN_predictionPercent_Abs1_N1 == null) Set("MIN_predictionPercent_Abs1_N1", "60");
+                    if (strMIN_CL_predictionPercent_Abs1_N1 == null) Set("MIN_CL_predictionPercent_Abs1_N1", "60");
+
+                    if (strMIN_predictionPercent_N2 == null) Set("MIN_predictionPercent_N2", "60");
+                    if (strMIN_CL_predictionPercent_N2 == null) Set("MIN_CL_predictionPercent_N2", "60");
+                    if (strMIN_predictionPercent_Abs1_N2 == null) Set("MIN_predictionPercent_Abs1_N2", "60");
+                    if (strMIN_CL_predictionPercent_Abs1_N2 == null) Set("MIN_CL_predictionPercent_Abs1_N2", "60");
+
+                    if (strMIN_predictionPercent_N3 == null) Set("MIN_predictionPercent_N3", "60");
+                    if (strMIN_CL_predictionPercent_N3 == null) Set("MIN_CL_predictionPercent_N3", "60");
+                    if (strMIN_predictionPercent_Abs1_N3 == null) Set("MIN_predictionPercent_Abs1_N3", "60");
+                    if (strMIN_CL_predictionPercent_Abs1_N3 == null) Set("MIN_CL_predictionPercent_Abs1_N3", "60");
+
+                    if (strMIN_predictionPercent_N4 == null) Set("MIN_predictionPercent_N4", "60");
+                    if (strMIN_CL_predictionPercent_N4 == null) Set("MIN_CL_predictionPercent_N4", "60");
+                    if (strMIN_predictionPercent_Abs1_N4 == null) Set("MIN_predictionPercent_Abs1_N4", "60");
+                    if (strMIN_CL_predictionPercent_Abs1_N4 == null) Set("MIN_CL_predictionPercent_Abs1_N4", "60");
+
+                    if (strMIN_predictionPercent_N5 == null) Set("MIN_predictionPercent_N5", "60");
+                    if (strMIN_CL_predictionPercent_N5 == null) Set("MIN_CL_predictionPercent_N5", "60");
+                    if (strMIN_predictionPercent_Abs1_N5 == null) Set("MIN_predictionPercent_Abs1_N5", "60");
+                    if (strMIN_CL_predictionPercent_Abs1_N5 == null) Set("MIN_CL_predictionPercent_Abs1_N5", "60");
+
+                    if (strMIN_predictionPercent_N6 == null) Set("MIN_predictionPercent_N6", "60");
+                    if (strMIN_CL_predictionPercent_N6 == null) Set("MIN_CL_predictionPercent_N6", "60");
+                    if (strMIN_predictionPercent_Abs1_N6 == null) Set("MIN_predictionPercent_Abs1_N6", "60");
+                    if (strMIN_CL_predictionPercent_Abs1_N6 == null) Set("MIN_CL_predictionPercent_Abs1_N6", "60");
+
+                    if (strMIN_predictionPercent_N7 == null) Set("MIN_predictionPercent_N7", "60");
+                    if (strMIN_CL_predictionPercent_N7 == null) Set("MIN_CL_predictionPercent_N7", "60");
+                    if (strMIN_predictionPercent_Abs1_N7 == null) Set("MIN_predictionPercent_Abs1_N7", "60");
+                    if (strMIN_CL_predictionPercent_Abs1_N7 == null) Set("MIN_CL_predictionPercent_Abs1_N7", "60");
+
+
+
+                    MIN_predictionPercent = float.Parse(GetSetting("MIN_predictionPercent"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent = float.Parse(GetSetting("MIN_CL_predictionPercent"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_predictionPercent_Abs1 = float.Parse(GetSetting("MIN_predictionPercent_Abs1"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_Abs1 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1"), System.Globalization.CultureInfo.InvariantCulture);
+
+                    MIN_predictionPercent_N1 = float.Parse(GetSetting("MIN_predictionPercent_N1"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_N1 = float.Parse(GetSetting("MIN_CL_predictionPercent_N1"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_predictionPercent_Abs1_N1 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N1"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_Abs1_N1 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N1"), System.Globalization.CultureInfo.InvariantCulture);
+
+                    MIN_predictionPercent_N2 = float.Parse(GetSetting("MIN_predictionPercent_N2"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_N2 = float.Parse(GetSetting("MIN_CL_predictionPercent_N2"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_predictionPercent_Abs1_N2 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N2"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_Abs1_N2 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N2"), System.Globalization.CultureInfo.InvariantCulture);
+
+                    MIN_predictionPercent_N3 = float.Parse(GetSetting("MIN_predictionPercent_N3"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_N3 = float.Parse(GetSetting("MIN_CL_predictionPercent_N3"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_predictionPercent_Abs1_N3 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N3"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_Abs1_N3 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N3"), System.Globalization.CultureInfo.InvariantCulture);
+
+                    MIN_predictionPercent_N4 = float.Parse(GetSetting("MIN_predictionPercent_N4"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_N4 = float.Parse(GetSetting("MIN_CL_predictionPercent_N4"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_predictionPercent_Abs1_N4 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N4"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_Abs1_N4 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N4"), System.Globalization.CultureInfo.InvariantCulture);
+
+                    MIN_predictionPercent_N5 = float.Parse(GetSetting("MIN_predictionPercent_N5"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_N5 = float.Parse(GetSetting("MIN_CL_predictionPercent_N5"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_predictionPercent_Abs1_N5 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N5"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_Abs1_N5 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N5"), System.Globalization.CultureInfo.InvariantCulture);
+
+                    MIN_predictionPercent_N6 = float.Parse(GetSetting("MIN_predictionPercent_N6"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_N6 = float.Parse(GetSetting("MIN_CL_predictionPercent_N6"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_predictionPercent_Abs1_N6 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N6"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_Abs1_N6 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N6"), System.Globalization.CultureInfo.InvariantCulture);
+
+                    MIN_predictionPercent_N7 = float.Parse(GetSetting("MIN_predictionPercent_N7"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_N7 = float.Parse(GetSetting("MIN_CL_predictionPercent_N7"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_predictionPercent_Abs1_N7 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N7"), System.Globalization.CultureInfo.InvariantCulture);
+                    MIN_CL_predictionPercent_Abs1_N7 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N7"), System.Globalization.CultureInfo.InvariantCulture);
+
+
+
+
+                    //Set("MIN_predictionPercent", MIN_predictionPercent.ToString("R"));
+                    //Set("MIN_CL_predictionPercent", MIN_CL_predictionPercent.ToString("R"));
+                    //Set("MIN_predictionPercent_Abs1", MIN_predictionPercent_Abs1.ToString("R"));
+                    //Set("MIN_CL_predictionPercent_Abs1", MIN_CL_predictionPercent_Abs1.ToString("R"));
+
+
+
+
+                    if (predictionPercent < MIN_predictionPercent)
+                    {
+                        MIN_predictionPercent = predictionPercent;
+                        SaveLoadNetwork(true, Config.MIN_predictionPercentFile.ToString());
+                        Set("MIN_predictionPercent", MIN_predictionPercent.ToString("R"));  //Persist the value
+                    }
+
+                    if (CL_predictionPercent < MIN_CL_predictionPercent)
+                    {
+                        MIN_CL_predictionPercent = CL_predictionPercent;
+                        SaveLoadNetwork(true, Config.MIN_CL_predictionPercentFile.ToString());
+                        Set("MIN_CL_predictionPercent", MIN_CL_predictionPercent.ToString("R"));
+                    }
+
+                    if (predictionPercent_Abs1 < MIN_predictionPercent_Abs1)
+                    {
+                        MIN_predictionPercent_Abs1 = predictionPercent_Abs1;
+                        SaveLoadNetwork(true, Config.MIN_predictionPercent_Abs1File.ToString());
+                        Set("MIN_predictionPercent_Abs1", MIN_predictionPercent_Abs1.ToString("R"));
+                    }
+
+                    if (CL_predictionPercent_Abs1 < MIN_CL_predictionPercent_Abs1)
+                    {
+                        MIN_CL_predictionPercent_Abs1 = CL_predictionPercent_Abs1;
+                        SaveLoadNetwork(true, Config.MIN_CL_predictionPercent_Abs1File.ToString());
+                        Set("MIN_CL_predictionPercent_Abs1", MIN_CL_predictionPercent_Abs1.ToString("R"));
+                    }
+
+
+                    switch (LotoNumber)
+                    {
+                        case 1:
+                            if (predictionPercent < MIN_predictionPercent_N1)
+                            {
+                                MIN_predictionPercent_N1 = predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercentFile_N1.ToString());
+                                Set("MIN_predictionPercent_N1", MIN_predictionPercent_N1.ToString("R"));  //Persist the value
+                            }
+
+                            if (CL_predictionPercent < MIN_CL_predictionPercent_N1)
+                            {
+                                MIN_CL_predictionPercent_N1 = CL_predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercentFile_N1.ToString());
+                                Set("MIN_CL_predictionPercent_N1", MIN_CL_predictionPercent_N1.ToString("R"));
+                            }
+
+                            if (predictionPercent_Abs1 < MIN_predictionPercent_Abs1_N1)
+                            {
+                                MIN_predictionPercent_Abs1_N1 = predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercent_Abs1File_N1.ToString());
+                                Set("MIN_predictionPercent_Abs1_N1", MIN_predictionPercent_Abs1_N1.ToString("R"));
+                            }
+
+                            if (CL_predictionPercent_Abs1 < MIN_CL_predictionPercent_Abs1_N1)
+                            {
+                                MIN_CL_predictionPercent_Abs1_N1 = CL_predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercent_Abs1File_N1.ToString());
+                                Set("MIN_CL_predictionPercent_Abs1_N1", MIN_CL_predictionPercent_Abs1_N1.ToString("R"));
+                            }
+
+
+                            break;
+
+                        case 2:
+                            if (predictionPercent < MIN_predictionPercent_N2)
+                            {
+                                MIN_predictionPercent_N2 = predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercentFile_N2.ToString());
+                                Set("MIN_predictionPercent_N2", MIN_predictionPercent_N2.ToString("R"));  //Persist the value
+                            }
+
+                            if (CL_predictionPercent < MIN_CL_predictionPercent_N2)
+                            {
+                                MIN_CL_predictionPercent_N2 = CL_predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercentFile_N2.ToString());
+                                Set("MIN_CL_predictionPercent_N2", MIN_CL_predictionPercent_N2.ToString("R"));
+                            }
+
+                            if (predictionPercent_Abs1 < MIN_predictionPercent_Abs1_N2)
+                            {
+                                MIN_predictionPercent_Abs1_N2 = predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercent_Abs1File_N2.ToString());
+                                Set("MIN_predictionPercent_Abs1_N2", MIN_predictionPercent_Abs1_N2.ToString("R"));
+                            }
+
+                            if (CL_predictionPercent_Abs1 < MIN_CL_predictionPercent_Abs1_N2)
+                            {
+                                MIN_CL_predictionPercent_Abs1_N2 = CL_predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercent_Abs1File_N2.ToString());
+                                Set("MIN_CL_predictionPercent_Abs1_N2", MIN_CL_predictionPercent_Abs1_N2.ToString("R"));
+                            }
+
+
+                            break;
+
+                        case 3:
+                            if (predictionPercent < MIN_predictionPercent_N3)
+                            {
+                                MIN_predictionPercent_N3 = predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercentFile_N3.ToString());
+                                Set("MIN_predictionPercent_N3", MIN_predictionPercent_N3.ToString("R"));  //Persist the value
+                            }
+
+                            if (CL_predictionPercent < MIN_CL_predictionPercent_N3)
+                            {
+                                MIN_CL_predictionPercent_N3 = CL_predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercentFile_N3.ToString());
+                                Set("MIN_CL_predictionPercent_N3", MIN_CL_predictionPercent_N3.ToString("R"));
+                            }
+
+                            if (predictionPercent_Abs1 < MIN_predictionPercent_Abs1_N3)
+                            {
+                                MIN_predictionPercent_Abs1_N3 = predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercent_Abs1File_N3.ToString());
+                                Set("MIN_predictionPercent_Abs1_N3", MIN_predictionPercent_Abs1_N3.ToString("R"));
+                            }
+
+                            if (CL_predictionPercent_Abs1 < MIN_CL_predictionPercent_Abs1_N3)
+                            {
+                                MIN_CL_predictionPercent_Abs1_N3 = CL_predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercent_Abs1File_N3.ToString());
+                                Set("MIN_CL_predictionPercent_Abs1_N3", MIN_CL_predictionPercent_Abs1_N3.ToString("R"));
+                            }
+
+
+                            break;
+
+                        case 4:
+                            if (predictionPercent < MIN_predictionPercent_N4)
+                            {
+                                MIN_predictionPercent_N4 = predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercentFile_N4.ToString());
+                                Set("MIN_predictionPercent_N4", MIN_predictionPercent_N4.ToString("R"));  //Persist the value
+                            }
+
+                            if (CL_predictionPercent < MIN_CL_predictionPercent_N4)
+                            {
+                                MIN_CL_predictionPercent_N4 = CL_predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercentFile_N4.ToString());
+                                Set("MIN_CL_predictionPercent_N4", MIN_CL_predictionPercent_N4.ToString("R"));
+                            }
+
+                            if (predictionPercent_Abs1 < MIN_predictionPercent_Abs1_N4)
+                            {
+                                MIN_predictionPercent_Abs1_N4 = predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercent_Abs1File_N4.ToString());
+                                Set("MIN_predictionPercent_Abs1_N4", MIN_predictionPercent_Abs1_N4.ToString("R"));
+                            }
+
+                            if (CL_predictionPercent_Abs1 < MIN_CL_predictionPercent_Abs1_N4)
+                            {
+                                MIN_CL_predictionPercent_Abs1_N4 = CL_predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercent_Abs1File_N4.ToString());
+                                Set("MIN_CL_predictionPercent_Abs1_N4", MIN_CL_predictionPercent_Abs1_N4.ToString("R"));
+                            }
+
+                            break;
+
+                        case 5:
+                            if (predictionPercent < MIN_predictionPercent_N5)
+                            {
+                                MIN_predictionPercent_N5 = predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercentFile_N5.ToString());
+                                Set("MIN_predictionPercent_N5", MIN_predictionPercent_N5.ToString("R"));  //Persist the value
+                            }
+
+                            if (CL_predictionPercent < MIN_CL_predictionPercent_N5)
+                            {
+                                MIN_CL_predictionPercent_N5 = CL_predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercentFile_N5.ToString());
+                                Set("MIN_CL_predictionPercent_N5", MIN_CL_predictionPercent_N5.ToString("R"));
+                            }
+
+                            if (predictionPercent_Abs1 < MIN_predictionPercent_Abs1_N5)
+                            {
+                                MIN_predictionPercent_Abs1_N5 = predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercent_Abs1File_N5.ToString());
+                                Set("MIN_predictionPercent_Abs1_N5", MIN_predictionPercent_Abs1_N5.ToString("R"));
+                            }
+
+                            if (CL_predictionPercent_Abs1 < MIN_CL_predictionPercent_Abs1_N5)
+                            {
+                                MIN_CL_predictionPercent_Abs1_N5 = CL_predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercent_Abs1File_N5.ToString());
+                                Set("MIN_CL_predictionPercent_Abs1_N5", MIN_CL_predictionPercent_Abs1_N5.ToString("R"));
+                            }
+
+                            break;
+
+                        case 6:
+                            if (predictionPercent < MIN_predictionPercent_N6)
+                            {
+                                MIN_predictionPercent_N6 = predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercentFile_N6.ToString());
+                                Set("MIN_predictionPercent_N6", MIN_predictionPercent_N6.ToString("R"));  //Persist the value
+                            }
+
+                            if (CL_predictionPercent < MIN_CL_predictionPercent_N6)
+                            {
+                                MIN_CL_predictionPercent_N6 = CL_predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercentFile_N6.ToString());
+                                Set("MIN_CL_predictionPercent_N6", MIN_CL_predictionPercent_N6.ToString("R"));
+                            }
+
+                            if (predictionPercent_Abs1 < MIN_predictionPercent_Abs1_N6)
+                            {
+                                MIN_predictionPercent_Abs1_N6 = predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercent_Abs1File_N6.ToString());
+                                Set("MIN_predictionPercent_Abs1_N6", MIN_predictionPercent_Abs1_N6.ToString("R"));
+                            }
+
+                            if (CL_predictionPercent_Abs1 < MIN_CL_predictionPercent_Abs1_N6)
+                            {
+                                MIN_CL_predictionPercent_Abs1_N6 = CL_predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercent_Abs1File_N6.ToString());
+                                Set("MIN_CL_predictionPercent_Abs1_N6", MIN_CL_predictionPercent_Abs1_N6.ToString("R"));
+                            }
+
+                            break;
+
+                        case 7:
+                            if (predictionPercent < MIN_predictionPercent_N7)
+                            {
+                                MIN_predictionPercent_N7 = predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercentFile_N7.ToString());
+                                Set("MIN_predictionPercent_N7", MIN_predictionPercent_N7.ToString("R"));  //Persist the value
+                            }
+
+                            if (CL_predictionPercent < MIN_CL_predictionPercent_N7)
+                            {
+                                MIN_CL_predictionPercent_N7 = CL_predictionPercent;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercentFile_N7.ToString());
+                                Set("MIN_CL_predictionPercent_N7", MIN_CL_predictionPercent_N7.ToString("R"));
+                            }
+
+                            if (predictionPercent_Abs1 < MIN_predictionPercent_Abs1_N7)
+                            {
+                                MIN_predictionPercent_Abs1_N7 = predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_predictionPercent_Abs1File_N7.ToString());
+                                Set("MIN_predictionPercent_Abs1_N7", MIN_predictionPercent_Abs1_N7.ToString("R"));
+                            }
+
+                            if (CL_predictionPercent_Abs1 < MIN_CL_predictionPercent_Abs1_N7)
+                            {
+                                MIN_CL_predictionPercent_Abs1_N7 = CL_predictionPercent_Abs1;
+                                SaveLoadNetwork(true, Config.MIN_CL_predictionPercent_Abs1File_N7.ToString());
+                                Set("MIN_CL_predictionPercent_Abs1_N7", MIN_CL_predictionPercent_Abs1_N7.ToString("R"));
+                            }
+
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                //Min Handling
+            }
         }
 
 
