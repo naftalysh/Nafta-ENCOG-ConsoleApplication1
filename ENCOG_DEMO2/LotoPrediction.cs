@@ -2581,10 +2581,10 @@ namespace LotoPrediction
                     string strMIN_predictionPercent_Abs1_N7 = GetSetting("MIN_predictionPercent_Abs1_N7");
                     string strMIN_CL_predictionPercent_Abs1_N7 = GetSetting("MIN_CL_predictionPercent_Abs1_N7");
 
-                    if (strMIN_predictionPercent == null) Set("MIN_predictionPercent", "0");
-                    if (strMIN_CL_predictionPercent == null) Set("MIN_CL_predictionPercent", "0");
-                    if (strMIN_predictionPercent_Abs1 == null) Set("MIN_predictionPercent_Abs1", "0");
-                    if (strMIN_CL_predictionPercent_Abs1 == null) Set("MIN_CL_predictionPercent_Abs1", "0");
+                    if (strMIN_predictionPercent == null) Set("MIN_predictionPercent", "60");
+                    if (strMIN_CL_predictionPercent == null) Set("MIN_CL_predictionPercent", "60");
+                    if (strMIN_predictionPercent_Abs1 == null) Set("MIN_predictionPercent_Abs1", "60");
+                    if (strMIN_CL_predictionPercent_Abs1 == null) Set("MIN_CL_predictionPercent_Abs1", "60");
 
                     if (strMIN_predictionPercent_N1 == null) Set("MIN_predictionPercent_N1", "60");
                     if (strMIN_CL_predictionPercent_N1 == null) Set("MIN_CL_predictionPercent_N1", "60");
