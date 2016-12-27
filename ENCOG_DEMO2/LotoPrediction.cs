@@ -246,7 +246,424 @@ namespace LotoPrediction
             NormalizeData();
 
 
-            //Read Max prections found from "appSettings " file.
+
+            //MIN Reporting
+            //Read MIN prections found from "appSettings " file.
+            string strMIN_predictionPercent = GetSetting("MIN_predictionPercent");
+            string strMIN_CL_predictionPercent = GetSetting("MIN_CL_predictionPercent");
+            string strMIN_predictionPercent_Abs1 = GetSetting("MIN_predictionPercent_Abs1");
+            string strMIN_CL_predictionPercent_Abs1 = GetSetting("MIN_CL_predictionPercent_Abs1");
+
+            string strMIN_predictionPercent_N1 = GetSetting("MIN_predictionPercent_N1");
+            string strMIN_CL_predictionPercent_N1 = GetSetting("MIN_CL_predictionPercent_N1");
+            string strMIN_predictionPercent_Abs1_N1 = GetSetting("MIN_predictionPercent_Abs1_N1");
+            string strMIN_CL_predictionPercent_Abs1_N1 = GetSetting("MIN_CL_predictionPercent_Abs1_N1");
+
+            string strMIN_predictionPercent_N2 = GetSetting("MIN_predictionPercent_N2");
+            string strMIN_CL_predictionPercent_N2 = GetSetting("MIN_CL_predictionPercent_N2");
+            string strMIN_predictionPercent_Abs1_N2 = GetSetting("MIN_predictionPercent_Abs1_N2");
+            string strMIN_CL_predictionPercent_Abs1_N2 = GetSetting("MIN_CL_predictionPercent_Abs1_N2");
+
+            string strMIN_predictionPercent_N3 = GetSetting("MIN_predictionPercent_N3");
+            string strMIN_CL_predictionPercent_N3 = GetSetting("MIN_CL_predictionPercent_N3");
+            string strMIN_predictionPercent_Abs1_N3 = GetSetting("MIN_predictionPercent_Abs1_N3");
+            string strMIN_CL_predictionPercent_Abs1_N3 = GetSetting("MIN_CL_predictionPercent_Abs1_N3");
+
+            string strMIN_predictionPercent_N4 = GetSetting("MIN_predictionPercent_N4");
+            string strMIN_CL_predictionPercent_N4 = GetSetting("MIN_CL_predictionPercent_N4");
+            string strMIN_predictionPercent_Abs1_N4 = GetSetting("MIN_predictionPercent_Abs1_N4");
+            string strMIN_CL_predictionPercent_Abs1_N4 = GetSetting("MIN_CL_predictionPercent_Abs1_N4");
+
+            string strMIN_predictionPercent_N5 = GetSetting("MIN_predictionPercent_N5");
+            string strMIN_CL_predictionPercent_N5 = GetSetting("MIN_CL_predictionPercent_N5");
+            string strMIN_predictionPercent_Abs1_N5 = GetSetting("MIN_predictionPercent_Abs1_N5");
+            string strMIN_CL_predictionPercent_Abs1_N5 = GetSetting("MIN_CL_predictionPercent_Abs1_N5");
+
+            string strMIN_predictionPercent_N6 = GetSetting("MIN_predictionPercent_N6");
+            string strMIN_CL_predictionPercent_N6 = GetSetting("MIN_CL_predictionPercent_N6");
+            string strMIN_predictionPercent_Abs1_N6 = GetSetting("MIN_predictionPercent_Abs1_N6");
+            string strMIN_CL_predictionPercent_Abs1_N6 = GetSetting("MIN_CL_predictionPercent_Abs1_N6");
+
+            string strMIN_predictionPercent_N7 = GetSetting("MIN_predictionPercent_N7");
+            string strMIN_CL_predictionPercent_N7 = GetSetting("MIN_CL_predictionPercent_N7");
+            string strMIN_predictionPercent_Abs1_N7 = GetSetting("MIN_predictionPercent_Abs1_N7");
+            string strMIN_CL_predictionPercent_Abs1_N7 = GetSetting("MIN_CL_predictionPercent_Abs1_N7");
+
+            // Convert to float numbers
+            MIN_predictionPercent = float.Parse(GetSetting("MIN_predictionPercent"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent = float.Parse(GetSetting("MIN_CL_predictionPercent"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_predictionPercent_Abs1 = float.Parse(GetSetting("MIN_predictionPercent_Abs1"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_Abs1 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1"), System.Globalization.CultureInfo.InvariantCulture);
+
+            MIN_predictionPercent_N1 = float.Parse(GetSetting("MIN_predictionPercent_N1"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_N1 = float.Parse(GetSetting("MIN_CL_predictionPercent_N1"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_predictionPercent_Abs1_N1 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N1"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_Abs1_N1 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N1"), System.Globalization.CultureInfo.InvariantCulture);
+
+            MIN_predictionPercent_N2 = float.Parse(GetSetting("MIN_predictionPercent_N2"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_N2 = float.Parse(GetSetting("MIN_CL_predictionPercent_N2"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_predictionPercent_Abs1_N2 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N2"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_Abs1_N2 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N2"), System.Globalization.CultureInfo.InvariantCulture);
+
+            MIN_predictionPercent_N3 = float.Parse(GetSetting("MIN_predictionPercent_N3"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_N3 = float.Parse(GetSetting("MIN_CL_predictionPercent_N3"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_predictionPercent_Abs1_N3 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N3"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_Abs1_N3 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N3"), System.Globalization.CultureInfo.InvariantCulture);
+
+            MIN_predictionPercent_N4 = float.Parse(GetSetting("MIN_predictionPercent_N4"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_N4 = float.Parse(GetSetting("MIN_CL_predictionPercent_N4"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_predictionPercent_Abs1_N4 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N4"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_Abs1_N4 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N4"), System.Globalization.CultureInfo.InvariantCulture);
+
+            MIN_predictionPercent_N5 = float.Parse(GetSetting("MIN_predictionPercent_N5"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_N5 = float.Parse(GetSetting("MIN_CL_predictionPercent_N5"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_predictionPercent_Abs1_N5 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N5"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_Abs1_N5 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N5"), System.Globalization.CultureInfo.InvariantCulture);
+
+            MIN_predictionPercent_N6 = float.Parse(GetSetting("MIN_predictionPercent_N6"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_N6 = float.Parse(GetSetting("MIN_CL_predictionPercent_N6"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_predictionPercent_Abs1_N6 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N6"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_Abs1_N6 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N6"), System.Globalization.CultureInfo.InvariantCulture);
+
+            MIN_predictionPercent_N7 = float.Parse(GetSetting("MIN_predictionPercent_N7"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_N7 = float.Parse(GetSetting("MIN_CL_predictionPercent_N7"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_predictionPercent_Abs1_N7 = float.Parse(GetSetting("MIN_predictionPercent_Abs1_N7"), System.Globalization.CultureInfo.InvariantCulture);
+            MIN_CL_predictionPercent_Abs1_N7 = float.Parse(GetSetting("MIN_CL_predictionPercent_Abs1_N7"), System.Globalization.CultureInfo.InvariantCulture);
+
+
+            string N1PredictionsMIN, N2PredictionsMIN, N3PredictionsMIN, N4PredictionsMIN, N5PredictionsMIN, N6PredictionsMIN, N7PredictionsMIN;
+            N1PredictionsMIN = N2PredictionsMIN = N3PredictionsMIN = N4PredictionsMIN = N5PredictionsMIN = N6PredictionsMIN = N7PredictionsMIN = "";
+            //predicted = 0.0;
+            //_closedLoop_predicted = 0.0;
+
+            double flN1, flN2, flN3; //used for Abs1 PredictionsMIN
+            double AbsNumber;
+            List<double> AbsList = new List<double>(3) {1,1,1};
+
+            // Iterate through all LotoNumber's
+            for (int i = 1; i <= 7; i++)
+            {
+                LotoNumber = i;
+                switch (LotoNumber)
+                {
+                    case 1:
+                        if (MIN_CL_predictionPercent_N1 > MIN_predictionPercent_N1)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercentFile_N1.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N1PredictionsMIN = N1PredictionsMIN + "N1 Predict: " + predicted + " ;";
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercentFile_N1.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N1PredictionsMIN = N1PredictionsMIN + "N1 Predict: " + _closedLoop_predicted + " ;";
+                        }
+
+                        if (MIN_CL_predictionPercent_Abs1_N1 > MIN_predictionPercent_Abs1_N1)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercent_Abs1File_N1.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = predicted;
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercent_Abs1File_N1.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = _closedLoop_predicted;
+                        }
+
+                        N1PredictionsMIN = N1PredictionsMIN + "N1 Abs Predict: (";
+
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
+                        flN2 = AbsNumber;
+                        flN3 = AbsNumber + 1;
+
+                        AbsList[0] = flN1; AbsList[1] = flN2; AbsList[2] = flN3;
+
+                        foreach (var item in AbsList.Distinct())
+                        {
+                            N1PredictionsMIN = N1PredictionsMIN + item.ToString() + " ";
+                        }
+
+                        N1PredictionsMIN = N1PredictionsMIN + ")";
+
+                        break;
+
+                    case 2:
+                        if (MIN_CL_predictionPercent_N2 > MIN_predictionPercent_N2)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercentFile_N2.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N2PredictionsMIN = N2PredictionsMIN + "N2 Predict: " + predicted + " ;";
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercentFile_N2.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N2PredictionsMIN = N2PredictionsMIN + "N2 Predict: " + _closedLoop_predicted + " ;";
+                        }
+
+                        if (MIN_CL_predictionPercent_Abs1_N2 > MIN_predictionPercent_Abs1_N2)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercent_Abs1File_N2.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = predicted;
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercent_Abs1File_N2.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = _closedLoop_predicted;
+                        }
+
+                        N2PredictionsMIN = N2PredictionsMIN + "N2 Abs Predict: (";
+
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
+                        flN2 = AbsNumber;
+                        flN3 = AbsNumber + 1;
+
+                        AbsList[0] = flN1; AbsList[1] = flN2; AbsList[2] = flN3;
+
+                        foreach (var item in AbsList.Distinct())
+                        {
+                            N2PredictionsMIN = N2PredictionsMIN + item.ToString() + " ";
+                        }
+
+                        N2PredictionsMIN = N2PredictionsMIN + ")";
+
+                        break;
+
+                    case 3:
+                        if (MIN_CL_predictionPercent_N3 > MIN_predictionPercent_N3)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercentFile_N3.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N3PredictionsMIN = N3PredictionsMIN + "N3 Predict: " + predicted + " ;";
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercentFile_N3.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N3PredictionsMIN = N3PredictionsMIN + "N3 Predict: " + _closedLoop_predicted + " ;";
+                        }
+
+                        if (MIN_CL_predictionPercent_Abs1_N3 > MIN_predictionPercent_Abs1_N3)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercent_Abs1File_N3.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = predicted;
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercent_Abs1File_N3.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = _closedLoop_predicted;
+                        }
+
+                        N3PredictionsMIN = N3PredictionsMIN + "N3 Abs Predict: (";
+
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
+                        flN2 = AbsNumber;
+                        flN3 = AbsNumber + 1;
+
+                        AbsList[0] = flN1; AbsList[1] = flN2; AbsList[2] = flN3;
+
+                        foreach (var item in AbsList.Distinct())
+                        {
+                            N3PredictionsMIN = N3PredictionsMIN + item.ToString() + " ";
+                        }
+
+                        N3PredictionsMIN = N3PredictionsMIN + ")";
+
+                        break;
+
+                    case 4:
+                        if (MIN_CL_predictionPercent_N4 > MIN_predictionPercent_N4)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercentFile_N4.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N4PredictionsMIN = N4PredictionsMIN + "N4 Predict: " + predicted + " ;";
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercentFile_N4.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N4PredictionsMIN = N4PredictionsMIN + "N4 Predict: " + _closedLoop_predicted + " ;";
+                        }
+
+                        if (MIN_CL_predictionPercent_Abs1_N4 > MIN_predictionPercent_Abs1_N4)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercent_Abs1File_N4.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = predicted;
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercent_Abs1File_N4.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = _closedLoop_predicted;
+                        }
+
+                        N4PredictionsMIN = N4PredictionsMIN + "N4 Abs Predict: (";
+
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
+                        flN2 = AbsNumber;
+                        flN3 = AbsNumber + 1;
+
+                        AbsList[0] = flN1; AbsList[1] = flN2; AbsList[2] = flN3;
+
+                        foreach (var item in AbsList.Distinct())
+                        {
+                            N4PredictionsMIN = N4PredictionsMIN + item.ToString() + " ";
+                        }
+
+                        N4PredictionsMIN = N4PredictionsMIN + ")";
+
+                        break;
+
+                    case 5:
+                        if (MIN_CL_predictionPercent_N5 > MIN_predictionPercent_N5)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercentFile_N5.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N5PredictionsMIN = N5PredictionsMIN + "N5 Predict: " + predicted + " ;";
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercentFile_N5.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N5PredictionsMIN = N5PredictionsMIN + "N5 Predict: " + _closedLoop_predicted + " ;";
+                        }
+
+                        if (MIN_CL_predictionPercent_Abs1_N5 > MIN_predictionPercent_Abs1_N5)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercent_Abs1File_N5.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = predicted;
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercent_Abs1File_N5.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = _closedLoop_predicted;
+                        }
+
+                        N5PredictionsMIN = N5PredictionsMIN + "N5 Abs Predict: (";
+
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
+                        flN2 = AbsNumber;
+                        flN3 = AbsNumber + 1;
+
+                        AbsList[0] = flN1; AbsList[1] = flN2; AbsList[2] = flN3;
+
+                        foreach (var item in AbsList.Distinct())
+                        {
+                            N5PredictionsMIN = N5PredictionsMIN + item.ToString() + " ";
+                        }
+
+                        N5PredictionsMIN = N5PredictionsMIN + ")";
+
+                        break;
+
+                    case 6:
+                        if (MIN_CL_predictionPercent_N6 > MIN_predictionPercent_N6)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercentFile_N6.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N6PredictionsMIN = N6PredictionsMIN + "N6 Predict: " + predicted + " ;";
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercentFile_N6.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N6PredictionsMIN = N6PredictionsMIN + "N6 Predict: " + _closedLoop_predicted + " ;";
+                        }
+
+                        if (MIN_CL_predictionPercent_Abs1_N6 > MIN_predictionPercent_Abs1_N6)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercent_Abs1File_N6.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = predicted;
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercent_Abs1File_N6.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = _closedLoop_predicted;
+                        }
+
+                        N6PredictionsMIN = N6PredictionsMIN + "N6 Abs Predict: (";
+
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
+                        flN2 = AbsNumber;
+                        flN3 = AbsNumber + 1;
+
+                        AbsList[0] = flN1; AbsList[1] = flN2; AbsList[2] = flN3;
+
+                        foreach (var item in AbsList.Distinct())
+                        {
+                            N6PredictionsMIN = N6PredictionsMIN + item.ToString() + " ";
+                        }
+
+                        N6PredictionsMIN = N6PredictionsMIN + ")";
+
+                        break;
+
+                    case 7:
+                        if (MIN_CL_predictionPercent_N7 > MIN_predictionPercent_N7)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercentFile_N7.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N7PredictionsMIN = N7PredictionsMIN + "N7 Predict: " + predicted + " ;";
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercentFile_N7.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            N7PredictionsMIN = N7PredictionsMIN + "N7 Predict: " + _closedLoop_predicted + " ;";
+                        }
+
+                        if (MIN_CL_predictionPercent_Abs1_N7 > MIN_predictionPercent_Abs1_N7)
+                        {
+                            SaveLoadNetwork(false, Config.MIN_predictionPercent_Abs1File_N7.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = predicted;
+                        }
+                        else
+                        {
+                            SaveLoadNetwork(false, Config.MIN_CL_predictionPercent_Abs1File_N7.ToString()); //Load saved network
+                            PredictNetworkNew();
+                            AbsNumber = _closedLoop_predicted;
+                        }
+
+                        N7PredictionsMIN = N7PredictionsMIN + "N7 Abs Predict: (";
+
+                        flN1 = Math.Max(1.0, AbsNumber - 1.0);
+                        flN2 = AbsNumber;
+                        flN3 = AbsNumber + 1;
+
+                        AbsList[0] = flN1; AbsList[1] = flN2; AbsList[2] = flN3;
+
+                        foreach (var item in AbsList.Distinct())
+                        {
+                            N7PredictionsMIN = N7PredictionsMIN + item.ToString() + " ";
+                        }
+
+                        N7PredictionsMIN = N7PredictionsMIN + ")";
+
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+
+            //MIN Reporting
+
+            //MAX Reporting
+            //Read MAX prections found from "appSettings " file.
             string strMAX_predictionPercent = GetSetting("MAX_predictionPercent");
             string strMAX_CL_predictionPercent = GetSetting("MAX_CL_predictionPercent");
             string strMAX_predictionPercent_Abs1 = GetSetting("MAX_predictionPercent_Abs1");
@@ -329,14 +746,11 @@ namespace LotoPrediction
             MAX_CL_predictionPercent_Abs1_N7 = float.Parse(GetSetting("MAX_CL_predictionPercent_Abs1_N7"), System.Globalization.CultureInfo.InvariantCulture);
 
 
-            string N1Predictions, N2Predictions, N3Predictions, N4Predictions, N5Predictions, N6Predictions, N7Predictions;
-            N1Predictions = N2Predictions = N3Predictions = N4Predictions = N5Predictions = N6Predictions = N7Predictions = "";
+            string N1PredictionsMAX, N2PredictionsMAX, N3PredictionsMAX, N4PredictionsMAX, N5PredictionsMAX, N6PredictionsMAX, N7PredictionsMAX;
+            N1PredictionsMAX = N2PredictionsMAX = N3PredictionsMAX = N4PredictionsMAX = N5PredictionsMAX = N6PredictionsMAX = N7PredictionsMAX = "";
             //predicted = 0.0;
             //_closedLoop_predicted = 0.0;
 
-            double flN1, flN2, flN3; //used for Abs1 predictions
-            double AbsNumber;
-            List<double> AbsList = new List<double>(3) {1,1,1};
 
             // Iterate through all LotoNumber's
             for (int i = 1; i <= 7; i++)
@@ -349,13 +763,13 @@ namespace LotoPrediction
                         {
                             SaveLoadNetwork(false, Config.MAX_predictionPercentFile_N1.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N1Predictions = N1Predictions + "N1 Predict: " + predicted + " ;";
+                            N1PredictionsMAX = N1PredictionsMAX + "N1 Predict: " + predicted + " ;";
                         }
                         else
                         {
                             SaveLoadNetwork(false, Config.MAX_CL_predictionPercentFile_N1.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N1Predictions = N1Predictions + "N1 Predict: " + _closedLoop_predicted + " ;";
+                            N1PredictionsMAX = N1PredictionsMAX + "N1 Predict: " + _closedLoop_predicted + " ;";
                         }
 
                         if (MAX_CL_predictionPercent_Abs1_N1 <= MAX_predictionPercent_Abs1_N1)
@@ -371,7 +785,7 @@ namespace LotoPrediction
                             AbsNumber = _closedLoop_predicted;
                         }
 
-                        N1Predictions = N1Predictions + "N1 Abs Predict: (";
+                        N1PredictionsMAX = N1PredictionsMAX + "N1 Abs Predict: (";
 
                         flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
@@ -381,10 +795,10 @@ namespace LotoPrediction
 
                         foreach (var item in AbsList.Distinct())
                         {
-                            N1Predictions = N1Predictions + item.ToString() + " ";
+                            N1PredictionsMAX = N1PredictionsMAX + item.ToString() + " ";
                         }
 
-                        N1Predictions = N1Predictions + ")";
+                        N1PredictionsMAX = N1PredictionsMAX + ")";
 
                         break;
 
@@ -393,13 +807,13 @@ namespace LotoPrediction
                         {
                             SaveLoadNetwork(false, Config.MAX_predictionPercentFile_N2.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N2Predictions = N2Predictions + "N2 Predict: " + predicted + " ;";
+                            N2PredictionsMAX = N2PredictionsMAX + "N2 Predict: " + predicted + " ;";
                         }
                         else
                         {
                             SaveLoadNetwork(false, Config.MAX_CL_predictionPercentFile_N2.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N2Predictions = N2Predictions + "N2 Predict: " + _closedLoop_predicted + " ;";
+                            N2PredictionsMAX = N2PredictionsMAX + "N2 Predict: " + _closedLoop_predicted + " ;";
                         }
 
                         if (MAX_CL_predictionPercent_Abs1_N2 <= MAX_predictionPercent_Abs1_N2)
@@ -415,7 +829,7 @@ namespace LotoPrediction
                             AbsNumber = _closedLoop_predicted;
                         }
 
-                        N2Predictions = N2Predictions + "N2 Abs Predict: (";
+                        N2PredictionsMAX = N2PredictionsMAX + "N2 Abs Predict: (";
 
                         flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
@@ -425,10 +839,10 @@ namespace LotoPrediction
 
                         foreach (var item in AbsList.Distinct())
                         {
-                            N2Predictions = N2Predictions + item.ToString() + " ";
+                            N2PredictionsMAX = N2PredictionsMAX + item.ToString() + " ";
                         }
 
-                        N2Predictions = N2Predictions + ")";
+                        N2PredictionsMAX = N2PredictionsMAX + ")";
 
                         break;
 
@@ -437,13 +851,13 @@ namespace LotoPrediction
                         {
                             SaveLoadNetwork(false, Config.MAX_predictionPercentFile_N3.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N3Predictions = N3Predictions + "N3 Predict: " + predicted + " ;";
+                            N3PredictionsMAX = N3PredictionsMAX + "N3 Predict: " + predicted + " ;";
                         }
                         else
                         {
                             SaveLoadNetwork(false, Config.MAX_CL_predictionPercentFile_N3.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N3Predictions = N3Predictions + "N3 Predict: " + _closedLoop_predicted + " ;";
+                            N3PredictionsMAX = N3PredictionsMAX + "N3 Predict: " + _closedLoop_predicted + " ;";
                         }
 
                         if (MAX_CL_predictionPercent_Abs1_N3 <= MAX_predictionPercent_Abs1_N3)
@@ -459,7 +873,7 @@ namespace LotoPrediction
                             AbsNumber = _closedLoop_predicted;
                         }
 
-                        N3Predictions = N3Predictions + "N3 Abs Predict: (";
+                        N3PredictionsMAX = N3PredictionsMAX + "N3 Abs Predict: (";
 
                         flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
@@ -469,10 +883,10 @@ namespace LotoPrediction
 
                         foreach (var item in AbsList.Distinct())
                         {
-                            N3Predictions = N3Predictions + item.ToString() + " ";
+                            N3PredictionsMAX = N3PredictionsMAX + item.ToString() + " ";
                         }
 
-                        N3Predictions = N3Predictions + ")";
+                        N3PredictionsMAX = N3PredictionsMAX + ")";
 
                         break;
 
@@ -481,13 +895,13 @@ namespace LotoPrediction
                         {
                             SaveLoadNetwork(false, Config.MAX_predictionPercentFile_N4.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N4Predictions = N4Predictions + "N4 Predict: " + predicted + " ;";
+                            N4PredictionsMAX = N4PredictionsMAX + "N4 Predict: " + predicted + " ;";
                         }
                         else
                         {
                             SaveLoadNetwork(false, Config.MAX_CL_predictionPercentFile_N4.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N4Predictions = N4Predictions + "N4 Predict: " + _closedLoop_predicted + " ;";
+                            N4PredictionsMAX = N4PredictionsMAX + "N4 Predict: " + _closedLoop_predicted + " ;";
                         }
 
                         if (MAX_CL_predictionPercent_Abs1_N4 <= MAX_predictionPercent_Abs1_N4)
@@ -503,7 +917,7 @@ namespace LotoPrediction
                             AbsNumber = _closedLoop_predicted;
                         }
 
-                        N4Predictions = N4Predictions + "N4 Abs Predict: (";
+                        N4PredictionsMAX = N4PredictionsMAX + "N4 Abs Predict: (";
 
                         flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
@@ -513,10 +927,10 @@ namespace LotoPrediction
 
                         foreach (var item in AbsList.Distinct())
                         {
-                            N4Predictions = N4Predictions + item.ToString() + " ";
+                            N4PredictionsMAX = N4PredictionsMAX + item.ToString() + " ";
                         }
 
-                        N4Predictions = N4Predictions + ")";
+                        N4PredictionsMAX = N4PredictionsMAX + ")";
 
                         break;
 
@@ -525,13 +939,13 @@ namespace LotoPrediction
                         {
                             SaveLoadNetwork(false, Config.MAX_predictionPercentFile_N5.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N5Predictions = N5Predictions + "N5 Predict: " + predicted + " ;";
+                            N5PredictionsMAX = N5PredictionsMAX + "N5 Predict: " + predicted + " ;";
                         }
                         else
                         {
                             SaveLoadNetwork(false, Config.MAX_CL_predictionPercentFile_N5.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N5Predictions = N5Predictions + "N5 Predict: " + _closedLoop_predicted + " ;";
+                            N5PredictionsMAX = N5PredictionsMAX + "N5 Predict: " + _closedLoop_predicted + " ;";
                         }
 
                         if (MAX_CL_predictionPercent_Abs1_N5 <= MAX_predictionPercent_Abs1_N5)
@@ -547,7 +961,7 @@ namespace LotoPrediction
                             AbsNumber = _closedLoop_predicted;
                         }
 
-                        N5Predictions = N5Predictions + "N5 Abs Predict: (";
+                        N5PredictionsMAX = N5PredictionsMAX + "N5 Abs Predict: (";
 
                         flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
@@ -557,10 +971,10 @@ namespace LotoPrediction
 
                         foreach (var item in AbsList.Distinct())
                         {
-                            N5Predictions = N5Predictions + item.ToString() + " ";
+                            N5PredictionsMAX = N5PredictionsMAX + item.ToString() + " ";
                         }
 
-                        N5Predictions = N5Predictions + ")";
+                        N5PredictionsMAX = N5PredictionsMAX + ")";
 
                         break;
 
@@ -569,13 +983,13 @@ namespace LotoPrediction
                         {
                             SaveLoadNetwork(false, Config.MAX_predictionPercentFile_N6.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N6Predictions = N6Predictions + "N6 Predict: " + predicted + " ;";
+                            N6PredictionsMAX = N6PredictionsMAX + "N6 Predict: " + predicted + " ;";
                         }
                         else
                         {
                             SaveLoadNetwork(false, Config.MAX_CL_predictionPercentFile_N6.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N6Predictions = N6Predictions + "N6 Predict: " + _closedLoop_predicted + " ;";
+                            N6PredictionsMAX = N6PredictionsMAX + "N6 Predict: " + _closedLoop_predicted + " ;";
                         }
 
                         if (MAX_CL_predictionPercent_Abs1_N6 <= MAX_predictionPercent_Abs1_N6)
@@ -591,7 +1005,7 @@ namespace LotoPrediction
                             AbsNumber = _closedLoop_predicted;
                         }
 
-                        N6Predictions = N6Predictions + "N6 Abs Predict: (";
+                        N6PredictionsMAX = N6PredictionsMAX + "N6 Abs Predict: (";
 
                         flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
@@ -601,10 +1015,10 @@ namespace LotoPrediction
 
                         foreach (var item in AbsList.Distinct())
                         {
-                            N6Predictions = N6Predictions + item.ToString() + " ";
+                            N6PredictionsMAX = N6PredictionsMAX + item.ToString() + " ";
                         }
 
-                        N6Predictions = N6Predictions + ")";
+                        N6PredictionsMAX = N6PredictionsMAX + ")";
 
                         break;
 
@@ -613,13 +1027,13 @@ namespace LotoPrediction
                         {
                             SaveLoadNetwork(false, Config.MAX_predictionPercentFile_N7.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N7Predictions = N7Predictions + "N7 Predict: " + predicted + " ;";
+                            N7PredictionsMAX = N7PredictionsMAX + "N7 Predict: " + predicted + " ;";
                         }
                         else
                         {
                             SaveLoadNetwork(false, Config.MAX_CL_predictionPercentFile_N7.ToString()); //Load saved network
                             PredictNetworkNew();
-                            N7Predictions = N7Predictions + "N7 Predict: " + _closedLoop_predicted + " ;";
+                            N7PredictionsMAX = N7PredictionsMAX + "N7 Predict: " + _closedLoop_predicted + " ;";
                         }
 
                         if (MAX_CL_predictionPercent_Abs1_N7 <= MAX_predictionPercent_Abs1_N7)
@@ -635,7 +1049,7 @@ namespace LotoPrediction
                             AbsNumber = _closedLoop_predicted;
                         }
 
-                        N7Predictions = N7Predictions + "N7 Abs Predict: (";
+                        N7PredictionsMAX = N7PredictionsMAX + "N7 Abs Predict: (";
 
                         flN1 = Math.Max(1.0, AbsNumber - 1.0);
                         flN2 = AbsNumber;
@@ -645,10 +1059,10 @@ namespace LotoPrediction
 
                         foreach (var item in AbsList.Distinct())
                         {
-                            N7Predictions = N7Predictions + item.ToString() + " ";
+                            N7PredictionsMAX = N7PredictionsMAX + item.ToString() + " ";
                         }
 
-                        N7Predictions = N7Predictions + ")";
+                        N7PredictionsMAX = N7PredictionsMAX + ")";
 
                         break;
 
@@ -658,14 +1072,25 @@ namespace LotoPrediction
             }
 
 
-            Console.WriteLine("-- Predictions ---\n");
-            Console.WriteLine("-- N1Predictions --- " + N1Predictions + "\n");
-            Console.WriteLine("-- N2Predictions --- " + N2Predictions + "\n");
-            Console.WriteLine("-- N3Predictions --- " + N3Predictions + "\n");
-            Console.WriteLine("-- N4Predictions --- " + N4Predictions + "\n");
-            Console.WriteLine("-- N5Predictions --- " + N5Predictions + "\n");
-            Console.WriteLine("-- N6Predictions --- " + N6Predictions + "\n");
-            Console.WriteLine("-- N7Predictions --- " + N7Predictions + "\n");
+            //MAX Reporting
+
+            Console.WriteLine("-- Predictions MAX ---\n");
+            Console.WriteLine("-- N1PredictionsMAX --- " + N1PredictionsMAX + "\n");
+            Console.WriteLine("-- N2PredictionsMAX --- " + N2PredictionsMAX + "\n");
+            Console.WriteLine("-- N3PredictionsMAX --- " + N3PredictionsMAX + "\n");
+            Console.WriteLine("-- N4PredictionsMAX --- " + N4PredictionsMAX + "\n");
+            Console.WriteLine("-- N5PredictionsMAX --- " + N5PredictionsMAX + "\n");
+            Console.WriteLine("-- N6PredictionsMAX --- " + N6PredictionsMAX + "\n");
+            Console.WriteLine("-- N7PredictionsMAX --- " + N7PredictionsMAX + "\n");
+
+            Console.WriteLine("-- Predictions MIN ---\n");
+            Console.WriteLine("-- N1PredictionsMIN --- " + N1PredictionsMIN + "\n");
+            Console.WriteLine("-- N2PredictionsMIN --- " + N2PredictionsMIN + "\n");
+            Console.WriteLine("-- N3PredictionsMIN --- " + N3PredictionsMIN + "\n");
+            Console.WriteLine("-- N4PredictionsMIN --- " + N4PredictionsMIN + "\n");
+            Console.WriteLine("-- N5PredictionsMIN --- " + N5PredictionsMIN + "\n");
+            Console.WriteLine("-- N6PredictionsMIN --- " + N6PredictionsMIN + "\n");
+            Console.WriteLine("-- N7PredictionsMIN --- " + N7PredictionsMIN + "\n");
 
 
         }
