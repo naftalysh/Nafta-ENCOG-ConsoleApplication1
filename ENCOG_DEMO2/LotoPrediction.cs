@@ -32,36 +32,50 @@ namespace LotoPrediction
         public double _closedLoopNormalizedActual1 { get; set; }
         public double NA_Actual1 { get; set; }
         public double NormalizedNA_Actual1 { get; set; }
+        public double _closedLoopNA_Actual1 { get; set; }
+        public double Normalized_closedLoopNA_Actual1 { get; set; }
         public double Actual2 { get; set; }
         public double NormalizedActual2 { get; set; }
         public double _closedLoopNormalizedActual2 { get; set; }
         public double NA_Actual2 { get; set; }
         public double NormalizedNA_Actual2 { get; set; }
+        public double _closedLoopNA_Actual2 { get; set; }
+        public double Normalized_closedLoopNA_Actual2 { get; set; }
         public double Actual3 { get; set; }
         public double NormalizedActual3 { get; set; }
         public double _closedLoopNormalizedActual3 { get; set; }
         public double NA_Actual3 { get; set; }
         public double NormalizedNA_Actual3 { get; set; }
+        public double _closedLoopNA_Actual3 { get; set; }
+        public double Normalized_closedLoopNA_Actual3 { get; set; }
         public double Actual4 { get; set; }
         public double NormalizedActual4 { get; set; }
         public double _closedLoopNormalizedActual4 { get; set; }
         public double NA_Actual4 { get; set; }
         public double NormalizedNA_Actual4 { get; set; }
+        public double _closedLoopNA_Actual4 { get; set; }
+        public double Normalized_closedLoopNA_Actual4 { get; set; }
         public double Actual5 { get; set; }
         public double NormalizedActual5 { get; set; }
         public double _closedLoopNormalizedActual5 { get; set; }
         public double NA_Actual5 { get; set; }
         public double NormalizedNA_Actual5 { get; set; }
+        public double _closedLoopNA_Actual5 { get; set; }
+        public double Normalized_closedLoopNA_Actual5 { get; set; }
         public double Actual6 { get; set; }
         public double NormalizedActual6 { get; set; }
         public double _closedLoopNormalizedActual6 { get; set; }
         public double NA_Actual6 { get; set; }
         public double NormalizedNA_Actual6 { get; set; }
+        public double _closedLoopNA_Actual6 { get; set; }
+        public double Normalized_closedLoopNA_Actual6 { get; set; }
         public double Actual7 { get; set; }
         public double NormalizedActual7 { get; set; }
         public double _closedLoopNormalizedActual7 { get; set; }
         public double NA_Actual7 { get; set; }
         public double NormalizedNA_Actual7 { get; set; }
+        public double _closedLoopNA_Actual7 { get; set; }
+        public double Normalized_closedLoopNA_Actual7 { get; set; }
 
     }
 
@@ -1187,7 +1201,7 @@ namespace LotoPrediction
             //foreach (int numberA in data.Select(t => t.Actual7).ToArray()) NA.NumbersDic7_Total[numberA]++;
 
             //Assign NA_Actual values for training set
-            
+
             for (int i = 0; i < TrainEnd; i++)
             {
                 NA.NumbersDic37_Total[(int)data[i].Actual1]++;
@@ -1197,6 +1211,17 @@ namespace LotoPrediction
                 NA.NumbersDic37_Total[(int)data[i].Actual5]++;
                 NA.NumbersDic37_Total[(int)data[i].Actual6]++;
                 NA.NumbersDic7_Total[(int)data[i].Actual7]++;
+            }
+
+            for (int i = 0; i < TrainEnd; i++)
+            {
+                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual1] = NA.NumbersDic37_Total[(int)data[i].Actual1];
+                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual2] = NA.NumbersDic37_Total[(int)data[i].Actual2];
+                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual3] = NA.NumbersDic37_Total[(int)data[i].Actual3];
+                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual4] = NA.NumbersDic37_Total[(int)data[i].Actual4];
+                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual5] = NA.NumbersDic37_Total[(int)data[i].Actual5];
+                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual6] = NA.NumbersDic37_Total[(int)data[i].Actual6];
+                NA.closedLoopNumbersDic7_Total[(int)data[i].Actual7] = NA.NumbersDic7_Total[(int)data[i].Actual7];
 
                 data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
                 data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
@@ -1205,20 +1230,32 @@ namespace LotoPrediction
                 data[i].NA_Actual5 = NA.NumbersDic37_Total[(int)data[i].Actual5];
                 data[i].NA_Actual6 = NA.NumbersDic37_Total[(int)data[i].Actual6];
                 data[i].NA_Actual7 = NA.NumbersDic7_Total[(int)data[i].Actual7];
+
+                data[i]._closedLoopNA_Actual1 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual1];
+                data[i]._closedLoopNA_Actual2 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual2];
+                data[i]._closedLoopNA_Actual3 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual3];
+                data[i]._closedLoopNA_Actual4 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual4];
+                data[i]._closedLoopNA_Actual5 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual5];
+                data[i]._closedLoopNA_Actual6 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual6];
+                data[i]._closedLoopNA_Actual7 = NA.closedLoopNumbersDic7_Total[(int)data[i].Actual7];
             }
 
 
             //Assign NA_Actual values for evaluation set
-            for (int i = EvaluateStart-1; i < EvaluateEnd; i++)
+            for (int i = EvaluateStart - 1; i < EvaluateEnd; i++)
             {
 
-                NA.NumbersDic37_Total[(int)data[i].Actual1] += 1;    
+                NA.NumbersDic37_Total[(int)data[i].Actual1] += 1;
                 NA.NumbersDic37_Total[(int)data[i].Actual2] += 1;
                 NA.NumbersDic37_Total[(int)data[i].Actual3] += 1;
                 NA.NumbersDic37_Total[(int)data[i].Actual4] += 1;
                 NA.NumbersDic37_Total[(int)data[i].Actual5] += 1;
                 NA.NumbersDic37_Total[(int)data[i].Actual6] += 1;
                 NA.NumbersDic7_Total[(int)data[i].Actual7] += 1;
+            }
+
+            for (int i = EvaluateStart-1; i < EvaluateEnd; i++)
+            {
 
                 data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
                 data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
@@ -1230,33 +1267,6 @@ namespace LotoPrediction
             }
 
 
-            //Assign NA_Actual values for all set per PastWindowSize
-            //_NumbersDic37_PastWindow
-            //_NumbersDic7_PastWindow
-
-            
-            //for (int i = PastWindowSize; i < EvaluateEnd; i++)
-            //{
-            //    NA.ResetPastWindowAnalysis();
-            //    for (int j = PastWindowSize; j >= 1; j--)
-            //    {
-            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual1] += 1;
-            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual2] += 1;
-            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual3] += 1;
-            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual4] += 1;
-            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual5] += 1;
-            //        NA.NumbersDic37_PastWindow[(int)data[i-j].Actual6] += 1;
-            //        NA.NumbersDic7_PastWindow[(int)data[i-j].Actual7] += 1;
-            //    }
-
-            //    data[i].NA_Actual1 = NA.NumbersDic37_PastWindow[(int)data[i].Actual1];
-            //    data[i].NA_Actual2 = NA.NumbersDic37_PastWindow[(int)data[i].Actual2];
-            //    data[i].NA_Actual3 = NA.NumbersDic37_PastWindow[(int)data[i].Actual3];
-            //    data[i].NA_Actual4 = NA.NumbersDic37_PastWindow[(int)data[i].Actual4];
-            //    data[i].NA_Actual5 = NA.NumbersDic37_PastWindow[(int)data[i].Actual5];
-            //    data[i].NA_Actual6 = NA.NumbersDic37_PastWindow[(int)data[i].Actual6];
-            //    data[i].NA_Actual7 = NA.NumbersDic7_PastWindow[(int)data[i].Actual7];
-            //}
 
 
 
