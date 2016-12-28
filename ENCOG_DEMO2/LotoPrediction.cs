@@ -194,6 +194,7 @@ namespace LotoPrediction
         private TemporalMLDataSet trainingSet;
         private BasicNetwork network;
         private NormalizeArray norm0, norm1, norm2, norm3, norm4, norm5, norm6, norm7, norm8, norm9, norm10, norm11, norm12, norm13, norm14;
+        double[] normalizedArray;
         private NumbersAnalysis NA = new NumbersAnalysis();
 
 
@@ -1293,7 +1294,7 @@ namespace LotoPrediction
                        
 
             //NormalizeDayOfWeek
-            var normalizedArray = norm0.Process((data.Select(t => (double)t.DayOfWeek).ToArray()));
+            normalizedArray = norm0.Process((data.Select(t => (double)t.DayOfWeek).ToArray()));
             for (int i = 0; i < normalizedArray.Count(); i++)
             {
                 data[i].NormalizeDayOfWeek = normalizedArray[i];
@@ -2265,15 +2266,16 @@ namespace LotoPrediction
                                     .Select(t => t.NormalizedActual6).First();
 
 
-                                input[i * 7 + 6] = (LotoNumber == 1) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual1).First() :
-                                                   (LotoNumber == 2) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual2).First() :
-                                                   (LotoNumber == 3) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual3).First() :
-                                                   (LotoNumber == 4) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual4).First() :
-                                                   (LotoNumber == 5) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual5).First() :
-                                                   data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual6).First();
+                                input[i * 7 + 6] =
+                                        (LotoNumber == 1) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual1).First() :
+                                        (LotoNumber == 2) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual2).First() :
+                                        (LotoNumber == 3) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual3).First() :
+                                        (LotoNumber == 4) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual4).First() :
+                                        (LotoNumber == 5) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual5).First() :
+                                        data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual6).First();
 
 
-                                _closedLoop_input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                            _closedLoop_input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                     .Select(t => t._closedLoopNormalizedActual1).First();
 
                                 _closedLoop_input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
@@ -2291,8 +2293,15 @@ namespace LotoPrediction
                                 _closedLoop_input[i * 7 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                     .Select(t => t._closedLoopNormalizedActual6).First();
 
-                                _closedLoop_input[i * 7 + 6] = input[i * 7 + 6];
-                            }
+
+                                _closedLoop_input[i * 7 + 6] = 
+                                        (LotoNumber == 1) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual1).First() :
+                                        (LotoNumber == 2) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual2).First() :
+                                        (LotoNumber == 3) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual3).First() :
+                                        (LotoNumber == 4) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual4).First() :
+                                        (LotoNumber == 5) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual5).First() :
+                                        data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual6).First();
+                        }
 
                             output = network.Compute(input);
                             _closedLoop_output = network.Compute(_closedLoop_input);
@@ -2314,10 +2323,11 @@ namespace LotoPrediction
                                 _closedLoop_input[i * 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                     .Select(t => t._closedLoopNormalizedActual7).First();
 
-                                _closedLoop_input[i * 2 + 1] = input[i * 2 + 1];
-                            }
+                                _closedLoop_input[i * 2 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                    .Select(t => t.Normalized_closedLoopNA_Actual7).First();
+                        }
 
-                            output = network.Compute(input);
+                        output = network.Compute(input);
                             _closedLoop_output = network.Compute(_closedLoop_input);
                         }
 
@@ -2332,50 +2342,101 @@ namespace LotoPrediction
                                 data[currentId]._closedLoopNormalizedActual1 = _closedLoop_normalizedPredicted;
                                 predicted = Math.Round(norm1.Stats.DeNormalize(normalizedPredicted), 0);
                                 _closedLoop_predicted = Math.Round(norm1.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
-                                break;
+                                NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted]++;
+                                data[currentId]._closedLoopNA_Actual1 = NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted];
+
+                                normalizedArray = norm8.Process(data.Select(t => t._closedLoopNA_Actual1).ToArray());
+                                for (int i = 0; i < normalizedArray.Count(); i++)
+                                    data[i].Normalized_closedLoopNA_Actual1 = normalizedArray[i];
+
+                            break;
 
                             case 2:
                                 data[currentId]._closedLoopNormalizedActual2 = _closedLoop_normalizedPredicted;
                                 predicted = Math.Round(norm2.Stats.DeNormalize(normalizedPredicted), 0);
                                 _closedLoop_predicted = Math.Round(norm2.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
-                                break;
+                                NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted]++;
+                                data[currentId]._closedLoopNA_Actual2 = NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted];
+
+                                normalizedArray = norm9.Process(data.Select(t => t._closedLoopNA_Actual2).ToArray());
+                                for (int i = 0; i < normalizedArray.Count(); i++)
+                                    data[i].Normalized_closedLoopNA_Actual2 = normalizedArray[i];
+
+                            break;
 
                             case 3:
                                 data[currentId]._closedLoopNormalizedActual3 = _closedLoop_normalizedPredicted;
                                 predicted = Math.Round(norm3.Stats.DeNormalize(normalizedPredicted), 0);
                                 _closedLoop_predicted = Math.Round(norm3.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
-                                break;
+                                NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted]++;
+                                data[currentId]._closedLoopNA_Actual3 = NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted];
 
+                                normalizedArray = norm10.Process(data.Select(t => t._closedLoopNA_Actual3).ToArray());
+                                for (int i = 0; i < normalizedArray.Count(); i++)
+                                    data[i].Normalized_closedLoopNA_Actual3 = normalizedArray[i];
+
+                            break;
+                            
                             case 4:
                                 data[currentId]._closedLoopNormalizedActual4 = _closedLoop_normalizedPredicted;
                                 predicted = Math.Round(norm4.Stats.DeNormalize(normalizedPredicted), 0);
                                 _closedLoop_predicted = Math.Round(norm4.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
-                                break;
+                                NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted]++;
+                                data[currentId]._closedLoopNA_Actual4 = NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted];
+
+                                normalizedArray = norm11.Process(data.Select(t => t._closedLoopNA_Actual4).ToArray());
+                                for (int i = 0; i < normalizedArray.Count(); i++)
+                                    data[i].Normalized_closedLoopNA_Actual4 = normalizedArray[i];
+
+                            break;
 
                             case 5:
                                 data[currentId]._closedLoopNormalizedActual5 = _closedLoop_normalizedPredicted;
                                 predicted = Math.Round(norm5.Stats.DeNormalize(normalizedPredicted), 0);
                                 _closedLoop_predicted = Math.Round(norm5.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
-                                break;
+                                NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted]++;
+                                data[currentId]._closedLoopNA_Actual5 = NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted];
+
+                                normalizedArray = norm12.Process(data.Select(t => t._closedLoopNA_Actual5).ToArray());
+                                for (int i = 0; i < normalizedArray.Count(); i++)
+                                    data[i].Normalized_closedLoopNA_Actual5 = normalizedArray[i];
+
+                            break;
 
                             case 6:
                                 data[currentId]._closedLoopNormalizedActual6 = _closedLoop_normalizedPredicted;
                                 predicted = Math.Round(norm6.Stats.DeNormalize(normalizedPredicted), 0);
                                 _closedLoop_predicted = Math.Round(norm6.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
-                                break;
+                                NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted]++;
+                                data[currentId]._closedLoopNA_Actual6 = NA.closedLoopNumbersDic37_Total[(int)_closedLoop_predicted];
+
+                                normalizedArray = norm13.Process(data.Select(t => t._closedLoopNA_Actual6).ToArray());
+                                for (int i = 0; i < normalizedArray.Count(); i++)
+                                    data[i].Normalized_closedLoopNA_Actual6 = normalizedArray[i];
+
+                            break;
 
                             case 7:
                                 data[currentId]._closedLoopNormalizedActual7 = _closedLoop_normalizedPredicted;
                                 predicted = Math.Round(norm7.Stats.DeNormalize(normalizedPredicted), 0);
                                 _closedLoop_predicted = Math.Round(norm7.Stats.DeNormalize(_closedLoop_normalizedPredicted), 0);
-                                break;
+                                NA.closedLoopNumbersDic7_Total[(int)_closedLoop_predicted]++;
+                                data[currentId]._closedLoopNA_Actual7 = NA.closedLoopNumbersDic7_Total[(int)_closedLoop_predicted];
+
+                                normalizedArray = norm14.Process(data.Select(t => t._closedLoopNA_Actual7).ToArray());
+                                for (int i = 0; i < normalizedArray.Count(); i++)
+                                    data[i].Normalized_closedLoopNA_Actual7 = normalizedArray[i];
+
+                            break;
 
                             default:
                                 break;
                         }
 
-                        //double Actual1 = data.Where(t => t.Id == currentId).Select(t => t.Actual1).First();
-                        actual1 = actual2 = actual3 = actual4 = actual5 = actual6 = actual7 = 0.0;
+
+
+                    //double Actual1 = data.Where(t => t.Id == currentId).Select(t => t.Actual1).First();
+                    actual1 = actual2 = actual3 = actual4 = actual5 = actual6 = actual7 = 0.0;
 
                         if (LotoNumber != 7)
                         {
