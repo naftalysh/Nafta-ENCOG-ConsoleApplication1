@@ -3556,8 +3556,14 @@ namespace LotoPrediction
                             _closedLoop_input[i * 7 + 5] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                 .Select(t => t._closedLoopNormalizedActual6).First();
 
-                            _closedLoop_input[i * 7 + 6] = input[i * 7 + 6];
 
+                            _closedLoop_input[i * 7 + 6] =
+                                           (LotoNumber == 1) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual1).First() :
+                                           (LotoNumber == 2) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual2).First() :
+                                           (LotoNumber == 3) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual3).First() :
+                                           (LotoNumber == 4) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual4).First() :
+                                           (LotoNumber == 5) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual5).First() :
+                                           data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual6).First();
                     }
 
                     output = network.Compute(input);
@@ -3580,7 +3586,8 @@ namespace LotoPrediction
                         _closedLoop_input[i * 2] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                             .Select(t => t._closedLoopNormalizedActual7).First();
 
-                        _closedLoop_input[i * 2 + 1] = input[i * 2 + 1];
+                        _closedLoop_input[i * 2 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                  .Select(t => t.Normalized_closedLoopNA_Actual7).First();
                     }
 
                     output = network.Compute(input);
