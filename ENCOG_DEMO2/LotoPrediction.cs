@@ -1280,62 +1280,7 @@ namespace LotoPrediction
             norm13 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
             norm14 = new NormalizeArray() { NormalizedHigh = NormalizeHigh, NormalizedLow = NormalizeLow };
 
-
-            //var Array1 = data.Select(t => t.Actual1).ToArray();
-            //var Array2 = data.Select(t => t.Actual2).ToArray();
-            //var Array3 = data.Select(t => t.Actual3).ToArray();
-            //var Array4 = data.Select(t => t.Actual4).ToArray();
-            //var Array5 = data.Select(t => t.Actual5).ToArray();
-            //var Array6 = data.Select(t => t.Actual6).ToArray();
-
-            //var combinedArray = Array1.Concat(Array2).ToArray();
-            //combinedArray = combinedArray.Concat(Array3).ToArray();
-            //combinedArray = combinedArray.Concat(Array4).ToArray();
-            //combinedArray = combinedArray.Concat(Array5).ToArray();
-            //combinedArray = combinedArray.Concat(Array6).ToArray();
-
-            //var normalizedArray = norm.Process(combinedArray);
-
-            //int arrayCount = Array1.Count();
-            //int combinedCount = arrayCount * 6;
-
-            //// get the first arrayCount
-            //double[] normalizedArray1 = normalizedArray.Slice(0, arrayCount);
-            //double[] normalizedArray2 = normalizedArray.Slice(arrayCount, arrayCount);
-            //double[] normalizedArray3 = normalizedArray.Slice(arrayCount * 2, arrayCount);
-            //double[] normalizedArray4 = normalizedArray.Slice(arrayCount * 3, arrayCount);
-            //double[] normalizedArray5 = normalizedArray.Slice(arrayCount * 4, arrayCount);
-            //double[] normalizedArray6 = normalizedArray.Slice(arrayCount * 5, arrayCount);
-
-            //for (int i = 0; i < normalizedArray1.Count(); i++)
-            //{
-            //    data[i].NormalizedActual1 = normalizedArray1[i];
-            //}
-
-            //for (int i = 0; i < normalizedArray2.Count(); i++)
-            //{
-            //    data[i].NormalizedActual2 = normalizedArray2[i];
-            //}
-
-            //for (int i = 0; i < normalizedArray3.Count(); i++)
-            //{
-            //    data[i].NormalizedActual3 = normalizedArray3[i];
-            //}
-
-            //for (int i = 0; i < normalizedArray4.Count(); i++)
-            //{
-            //    data[i].NormalizedActual4 = normalizedArray4[i];
-            //}
-
-            //for (int i = 0; i < normalizedArray5.Count(); i++)
-            //{
-            //    data[i].NormalizedActual5 = normalizedArray5[i];
-            //}
-
-            //for (int i = 0; i < normalizedArray6.Count(); i++)
-            //{
-            //    data[i].NormalizedActual6 = normalizedArray6[i];
-            //}
+                       
 
             //NormalizeDayOfWeek
             var normalizedArray = norm0.Process((data.Select(t => (double)t.DayOfWeek).ToArray()));
