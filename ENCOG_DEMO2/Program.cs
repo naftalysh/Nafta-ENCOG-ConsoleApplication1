@@ -13,12 +13,21 @@ namespace LotoPrediction
             //
             Boolean blnReport = false;
             var programName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-            System.Console.WriteLine("Format: " + programName + " LotoNumber, PastWindowSize, MaxError, blnShowConsole ");
+            System.Console.WriteLine("Format: " + programName + " trainPercent, LotoNumber, PastWindowSize, MaxError, blnShowConsole ");
             System.Console.WriteLine("Or, Format: " + programName + " report ");
 
             DateTime Execution_Start = System.DateTime.Now;
 
             var lotoPrediction = new LotoPrediction();
+            if (args.Length == 5)
+            {
+                lotoPrediction.trainPercent = Convert.ToInt32(args[0]);
+                lotoPrediction.LotoNumber = Convert.ToInt32(args[1]);
+                lotoPrediction.PastWindowSize = Convert.ToInt32(args[2]);
+                lotoPrediction.MaxError = Convert.ToDouble(args[3]);
+                lotoPrediction.blnShowConsole = Convert.ToBoolean(args[4]);
+            }
+            else
             if (args.Length == 4)
             {
                 lotoPrediction.LotoNumber = Convert.ToInt32(args[0]);

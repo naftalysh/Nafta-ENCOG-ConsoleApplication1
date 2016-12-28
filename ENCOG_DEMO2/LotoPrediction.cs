@@ -84,6 +84,8 @@ namespace LotoPrediction
         public string EvaluateFileHeader = @"DrawNumber,LotoNumber,TotalPredictions,countPredicted,countUnPredicted,predictionPercent,CL_countPredicted,CL_countUnPredicted,CL_predictionPercent,countPredicted_Abs1,countUnPredicted_Abs1,predictionPercent_Abs1,CL_countPredicted_Abs1,CL_countUnPredicted_Abs1,CL_predictionPercent_Abs1";
         public string PredictFileHeader = @"DrawNumber,LotoNumber,PastWindowSize,MaxError,predicted,predictionPercent,CL_predictionPercent";
 
+        public int trainPercent = 75;
+
         public int PastWindowSize = 17;
         public const int FutureWindowSize = 1;
         public const double NormalizeHigh = 1.0;
@@ -1182,7 +1184,7 @@ namespace LotoPrediction
 
             TotalNumOfIterations = data.Select(t => t.Id).Max() - (data.Select(t => t.Id).Min() + PastWindowSize) + 1;
             TrainStart = data.Select(t => t.Id).Min() + PastWindowSize;
-            TrainEnd = TrainStart + TotalNumOfIterations * 75 / 100; 
+            TrainEnd = TrainStart + TotalNumOfIterations * trainPercent / 100; 
             EvaluateStart = TrainEnd + 1;
             EvaluateEnd = data.Count;
 
