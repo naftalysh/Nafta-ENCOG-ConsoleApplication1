@@ -43,15 +43,16 @@ namespace LotoPrediction
             }
             else if (args.Length == 2)
             {
-                lotoPrediction.LotoNumber = Convert.ToInt32(args[0]);
-                lotoPrediction.blnShowConsole = Convert.ToBoolean(args[1]);
-            }
-            else if (args.Length == 1)
-            {
                 if (args[0].ToUpper() == "REPORT")
+                {
                     blnReport = true;
+                    lotoPrediction.trainPercent = Convert.ToInt32(args[1]);
+                }
                 else
-                    lotoPrediction.blnShowConsole = Convert.ToBoolean(args[0]);
+                {
+                    lotoPrediction.LotoNumber = Convert.ToInt32(args[0]);
+                    lotoPrediction.blnShowConsole = Convert.ToBoolean(args[1]);
+                }
             }
 
 

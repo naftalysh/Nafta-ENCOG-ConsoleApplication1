@@ -1824,7 +1824,7 @@ namespace LotoPrediction
                 OutputNeurons = FutureWindowSize
             };
 
-            pattern.AddHiddenLayer((PastWindowSize + FutureWindowSize) * 2);
+            pattern.AddHiddenLayer((PastWindowSize + FutureWindowSize) * 1);
             network = (BasicNetwork)pattern.Generate();
 
             ITrain train = new ResilientPropagation(network, trainingSet);
