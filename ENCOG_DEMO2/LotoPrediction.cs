@@ -85,8 +85,8 @@ namespace LotoPrediction
         public string PredictFileHeader = @"DrawNumber,LotoNumber,PastWindowSize,MaxError,predicted,predictionPercent,CL_predictionPercent";
 
         public int trainPercent = 75;
-
         public int PastWindowSize = 17;
+        public int MaxPastWindowSize = 37;
         public const int FutureWindowSize = 1;
         public const double NormalizeHigh = 1.0;
         public const double NormalizeLow = -1.0;
@@ -1202,6 +1202,143 @@ namespace LotoPrediction
             //foreach (int numberA in data.Select(t => t.Actual5).ToArray()) NA.NumbersDic37_Total[numberA]++;
             //foreach (int numberA in data.Select(t => t.Actual6).ToArray()) NA.NumbersDic37_Total[numberA]++;
             //foreach (int numberA in data.Select(t => t.Actual7).ToArray()) NA.NumbersDic7_Total[numberA]++;
+
+            // Calculate NA.NumbersDic37_PastWindow and NA.NumbersDic7_PastWindow values.
+
+
+            int CurrentNumber1, CurrentNumber2, CurrentNumber3, CurrentNumber4, CurrentNumber5, CurrentNumber6, CurrentNumber7;
+            int maxWindow;
+
+
+            for (int i = 0; i < TrainEnd; i++)
+            {
+                CurrentNumber1 = (int)data[i].Actual1;
+                maxWindow = 0;
+
+                // Search for max window needed within then actual numbers for CurrentNumber
+                for (int j = i + 1; j < TrainEnd; j++)
+                {
+                    maxWindow++;
+                    if (maxWindow > MaxPastWindowSize)
+                        break;
+
+                    if ((int)data[j].Actual1 == CurrentNumber1)  //Found a matching number after maxWindow draws.
+                    {
+                        NA.NumbersDic37_PastWindow[1] = Math.Max(NA.NumbersDic37_PastWindow[1], maxWindow);
+                        break;
+                    }
+                }
+
+                CurrentNumber2 = (int)data[i].Actual2;
+                maxWindow = 0;
+
+                // Search for max window needed within then actual numbers for CurrentNumber
+                for (int j = i + 1; j < TrainEnd; j++)
+                {
+                    maxWindow++;
+                    if (maxWindow > MaxPastWindowSize)
+                        break;
+
+                    if ((int)data[j].Actual2 == CurrentNumber2)  //Found a matching number after maxWindow draws.
+                    {
+                        NA.NumbersDic37_PastWindow[2] = Math.Max(NA.NumbersDic37_PastWindow[2], maxWindow);
+                        break;
+                    }
+                }
+
+                CurrentNumber3 = (int)data[i].Actual3;
+                maxWindow = 0;
+
+                // Search for max window needed within then actual numbers for CurrentNumber
+                for (int j = i + 1; j < TrainEnd; j++)
+                {
+                    maxWindow++;
+                    if (maxWindow > MaxPastWindowSize)
+                        break;
+
+                    if ((int)data[j].Actual3 == CurrentNumber3)  //Found a matching number after maxWindow draws.
+                    {
+                        NA.NumbersDic37_PastWindow[3] = Math.Max(NA.NumbersDic37_PastWindow[3], maxWindow);
+                        break;
+                    }
+                }
+
+                CurrentNumber4 = (int)data[i].Actual4;
+                maxWindow = 0;
+
+                // Search for max window needed within then actual numbers for CurrentNumber
+                for (int j = i + 1; j < TrainEnd; j++)
+                {
+                    maxWindow++;
+                    if (maxWindow > MaxPastWindowSize)
+                        break;
+
+                    if ((int)data[j].Actual4 == CurrentNumber4)  //Found a matching number after maxWindow draws.
+                    {
+                        NA.NumbersDic37_PastWindow[4] = Math.Max(NA.NumbersDic37_PastWindow[4], maxWindow);
+                        break;
+                    }
+                }
+
+                CurrentNumber5 = (int)data[i].Actual5;
+                maxWindow = 0;
+
+                // Search for max window needed within then actual numbers for CurrentNumber
+                for (int j = i + 1; j < TrainEnd; j++)
+                {
+                    maxWindow++;
+                    if (maxWindow > MaxPastWindowSize)
+                        break;
+
+                    if ((int)data[j].Actual5 == CurrentNumber5)  //Found a matching number after maxWindow draws.
+                    {
+                        NA.NumbersDic37_PastWindow[5] = Math.Max(NA.NumbersDic37_PastWindow[5], maxWindow);
+                        break;
+                    }
+                }
+
+                CurrentNumber6 = (int)data[i].Actual6;
+                maxWindow = 0;
+
+                // Search for max window needed within then actual numbers for CurrentNumber
+                for (int j = i + 1; j < TrainEnd; j++)
+                {
+                    maxWindow++;
+                    if (maxWindow > MaxPastWindowSize)
+                        break;
+
+                    if ((int)data[j].Actual6 == CurrentNumber6)  //Found a matching number after maxWindow draws.
+                    {
+                        NA.NumbersDic37_PastWindow[6] = Math.Max(NA.NumbersDic37_PastWindow[6], maxWindow);
+                        break;
+                    }
+                }
+
+                CurrentNumber7 = (int)data[i].Actual7;
+                maxWindow = 0;
+
+                // Search for max window needed within then actual numbers for CurrentNumber
+                for (int j = i + 1; j < TrainEnd; j++)
+                {
+                    maxWindow++;
+                    if ((int)data[j].Actual7 == CurrentNumber7)  //Found a matching number after maxWindow draws.
+                    {
+                        NA.NumbersDic7_PastWindow[1] = Math.Max(NA.NumbersDic7_PastWindow[1], maxWindow);
+                        break;
+                    }
+                }
+            }
+
+            if (PastWindowSize == 0)    //If we need to get PastWindowSize from the "PastWindow" calculation above then ..
+            {
+                if (LotoNumber >= 1 && LotoNumber <= 6)
+                    PastWindowSize = NA.NumbersDic37_PastWindow[LotoNumber];
+                else
+                    PastWindowSize = NA.NumbersDic7_PastWindow[1];
+            }
+
+
+
 
             //Assign NA_Actual values for training set
 
