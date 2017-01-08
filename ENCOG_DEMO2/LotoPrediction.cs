@@ -1222,7 +1222,13 @@ namespace LotoPrediction
                     if (maxWindow > MaxPastWindowSize)
                         break;
 
-                    if ((int)data[j].Actual1 == CurrentNumber1)  //Found a matching number after maxWindow draws.
+                    //Found a matching number after maxWindow draws.
+                    if (((int)data[j].Actual1 == CurrentNumber1)||
+                        ((int)data[j].Actual2 == CurrentNumber1)||
+                        ((int)data[j].Actual3 == CurrentNumber1)||
+                        ((int)data[j].Actual4 == CurrentNumber1)||
+                        ((int)data[j].Actual5 == CurrentNumber1)||
+                        ((int)data[j].Actual6 == CurrentNumber1))
                     {
                         NA.NumbersDic37_PastWindow[1] = Math.Max(NA.NumbersDic37_PastWindow[1], maxWindow);
                         break;
@@ -1239,7 +1245,12 @@ namespace LotoPrediction
                     if (maxWindow > MaxPastWindowSize)
                         break;
 
-                    if ((int)data[j].Actual2 == CurrentNumber2)  //Found a matching number after maxWindow draws.
+                    if (((int)data[j].Actual1 == CurrentNumber2) ||
+                        ((int)data[j].Actual2 == CurrentNumber2) ||
+                        ((int)data[j].Actual3 == CurrentNumber2) ||
+                        ((int)data[j].Actual4 == CurrentNumber2) ||
+                        ((int)data[j].Actual5 == CurrentNumber2) ||
+                        ((int)data[j].Actual6 == CurrentNumber2))
                     {
                         NA.NumbersDic37_PastWindow[2] = Math.Max(NA.NumbersDic37_PastWindow[2], maxWindow);
                         break;
@@ -1256,7 +1267,12 @@ namespace LotoPrediction
                     if (maxWindow > MaxPastWindowSize)
                         break;
 
-                    if ((int)data[j].Actual3 == CurrentNumber3)  //Found a matching number after maxWindow draws.
+                    if (((int)data[j].Actual1 == CurrentNumber3) ||
+                        ((int)data[j].Actual2 == CurrentNumber3) ||
+                        ((int)data[j].Actual3 == CurrentNumber3) ||
+                        ((int)data[j].Actual4 == CurrentNumber3) ||
+                        ((int)data[j].Actual5 == CurrentNumber3) ||
+                        ((int)data[j].Actual6 == CurrentNumber3))
                     {
                         NA.NumbersDic37_PastWindow[3] = Math.Max(NA.NumbersDic37_PastWindow[3], maxWindow);
                         break;
@@ -1273,7 +1289,12 @@ namespace LotoPrediction
                     if (maxWindow > MaxPastWindowSize)
                         break;
 
-                    if ((int)data[j].Actual4 == CurrentNumber4)  //Found a matching number after maxWindow draws.
+                    if (((int)data[j].Actual1 == CurrentNumber4) ||
+                        ((int)data[j].Actual2 == CurrentNumber4) ||
+                        ((int)data[j].Actual3 == CurrentNumber4) ||
+                        ((int)data[j].Actual4 == CurrentNumber4) ||
+                        ((int)data[j].Actual5 == CurrentNumber4) ||
+                        ((int)data[j].Actual6 == CurrentNumber4))
                     {
                         NA.NumbersDic37_PastWindow[4] = Math.Max(NA.NumbersDic37_PastWindow[4], maxWindow);
                         break;
@@ -1290,7 +1311,12 @@ namespace LotoPrediction
                     if (maxWindow > MaxPastWindowSize)
                         break;
 
-                    if ((int)data[j].Actual5 == CurrentNumber5)  //Found a matching number after maxWindow draws.
+                    if (((int)data[j].Actual1 == CurrentNumber5) ||
+                        ((int)data[j].Actual2 == CurrentNumber5) ||
+                        ((int)data[j].Actual3 == CurrentNumber5) ||
+                        ((int)data[j].Actual4 == CurrentNumber5) ||
+                        ((int)data[j].Actual5 == CurrentNumber5) ||
+                        ((int)data[j].Actual6 == CurrentNumber5))
                     {
                         NA.NumbersDic37_PastWindow[5] = Math.Max(NA.NumbersDic37_PastWindow[5], maxWindow);
                         break;
@@ -1307,7 +1333,12 @@ namespace LotoPrediction
                     if (maxWindow > MaxPastWindowSize)
                         break;
 
-                    if ((int)data[j].Actual6 == CurrentNumber6)  //Found a matching number after maxWindow draws.
+                    if (((int)data[j].Actual1 == CurrentNumber6) ||
+                        ((int)data[j].Actual2 == CurrentNumber6) ||
+                        ((int)data[j].Actual3 == CurrentNumber6) ||
+                        ((int)data[j].Actual4 == CurrentNumber6) ||
+                        ((int)data[j].Actual5 == CurrentNumber6) ||
+                        ((int)data[j].Actual6 == CurrentNumber6))
                     {
                         NA.NumbersDic37_PastWindow[6] = Math.Max(NA.NumbersDic37_PastWindow[6], maxWindow);
                         break;
