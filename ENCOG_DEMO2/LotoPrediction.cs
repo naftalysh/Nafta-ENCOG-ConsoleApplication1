@@ -1219,8 +1219,6 @@ namespace LotoPrediction
                 for (int j = i + 1; j < TrainEnd; j++)
                 {
                     maxWindow++;
-                    if (maxWindow > MaxPastWindowSize)
-                        break;
 
                     //Found a matching number after maxWindow draws.
                     if (((int)data[j].Actual1 == CurrentNumber1)||
@@ -1231,6 +1229,7 @@ namespace LotoPrediction
                         ((int)data[j].Actual6 == CurrentNumber1))
                     {
                         NA.NumbersDic37_PastWindow[1] = Math.Max(NA.NumbersDic37_PastWindow[1], maxWindow);
+                        NA.NumbersDic37_PastWindow[1] = Math.Min(NA.NumbersDic37_PastWindow[1], MaxPastWindowSize);
                         break;
                     }
                 }
@@ -1242,8 +1241,6 @@ namespace LotoPrediction
                 for (int j = i + 1; j < TrainEnd; j++)
                 {
                     maxWindow++;
-                    if (maxWindow > MaxPastWindowSize)
-                        break;
 
                     if (((int)data[j].Actual1 == CurrentNumber2) ||
                         ((int)data[j].Actual2 == CurrentNumber2) ||
@@ -1253,6 +1250,7 @@ namespace LotoPrediction
                         ((int)data[j].Actual6 == CurrentNumber2))
                     {
                         NA.NumbersDic37_PastWindow[2] = Math.Max(NA.NumbersDic37_PastWindow[2], maxWindow);
+                        NA.NumbersDic37_PastWindow[2] = Math.Min(NA.NumbersDic37_PastWindow[2], MaxPastWindowSize);
                         break;
                     }
                 }
@@ -1264,8 +1262,6 @@ namespace LotoPrediction
                 for (int j = i + 1; j < TrainEnd; j++)
                 {
                     maxWindow++;
-                    if (maxWindow > MaxPastWindowSize)
-                        break;
 
                     if (((int)data[j].Actual1 == CurrentNumber3) ||
                         ((int)data[j].Actual2 == CurrentNumber3) ||
@@ -1275,6 +1271,8 @@ namespace LotoPrediction
                         ((int)data[j].Actual6 == CurrentNumber3))
                     {
                         NA.NumbersDic37_PastWindow[3] = Math.Max(NA.NumbersDic37_PastWindow[3], maxWindow);
+                        NA.NumbersDic37_PastWindow[3] = Math.Min(NA.NumbersDic37_PastWindow[3], MaxPastWindowSize);
+
                         break;
                     }
                 }
@@ -1286,8 +1284,6 @@ namespace LotoPrediction
                 for (int j = i + 1; j < TrainEnd; j++)
                 {
                     maxWindow++;
-                    if (maxWindow > MaxPastWindowSize)
-                        break;
 
                     if (((int)data[j].Actual1 == CurrentNumber4) ||
                         ((int)data[j].Actual2 == CurrentNumber4) ||
@@ -1297,6 +1293,7 @@ namespace LotoPrediction
                         ((int)data[j].Actual6 == CurrentNumber4))
                     {
                         NA.NumbersDic37_PastWindow[4] = Math.Max(NA.NumbersDic37_PastWindow[4], maxWindow);
+                        NA.NumbersDic37_PastWindow[4] = Math.Min(NA.NumbersDic37_PastWindow[4], MaxPastWindowSize);
                         break;
                     }
                 }
@@ -1308,8 +1305,6 @@ namespace LotoPrediction
                 for (int j = i + 1; j < TrainEnd; j++)
                 {
                     maxWindow++;
-                    if (maxWindow > MaxPastWindowSize)
-                        break;
 
                     if (((int)data[j].Actual1 == CurrentNumber5) ||
                         ((int)data[j].Actual2 == CurrentNumber5) ||
@@ -1319,6 +1314,8 @@ namespace LotoPrediction
                         ((int)data[j].Actual6 == CurrentNumber5))
                     {
                         NA.NumbersDic37_PastWindow[5] = Math.Max(NA.NumbersDic37_PastWindow[5], maxWindow);
+                        NA.NumbersDic37_PastWindow[5] = Math.Min(NA.NumbersDic37_PastWindow[5], MaxPastWindowSize);
+
                         break;
                     }
                 }
@@ -1330,8 +1327,6 @@ namespace LotoPrediction
                 for (int j = i + 1; j < TrainEnd; j++)
                 {
                     maxWindow++;
-                    if (maxWindow > MaxPastWindowSize)
-                        break;
 
                     if (((int)data[j].Actual1 == CurrentNumber6) ||
                         ((int)data[j].Actual2 == CurrentNumber6) ||
@@ -1341,7 +1336,7 @@ namespace LotoPrediction
                         ((int)data[j].Actual6 == CurrentNumber6))
                     {
                         NA.NumbersDic37_PastWindow[6] = Math.Max(NA.NumbersDic37_PastWindow[6], maxWindow);
-                        break;
+                        NA.NumbersDic37_PastWindow[6] = Math.Min(NA.NumbersDic37_PastWindow[6], MaxPastWindowSize); break;
                     }
                 }
 
@@ -1369,30 +1364,26 @@ namespace LotoPrediction
             }
 
 
-
-
-            //Assign NA_Actual values for training set
-
-            for (int i = 0; i < TrainEnd; i++)
+            for (int i = TrainStart; i < EvaluateEnd; i++)
             {
-                NA.NumbersDic37_Total[(int)data[i].Actual1]++;
-                NA.NumbersDic37_Total[(int)data[i].Actual2]++;
-                NA.NumbersDic37_Total[(int)data[i].Actual3]++;
-                NA.NumbersDic37_Total[(int)data[i].Actual4]++;
-                NA.NumbersDic37_Total[(int)data[i].Actual5]++;
-                NA.NumbersDic37_Total[(int)data[i].Actual6]++;
-                NA.NumbersDic7_Total[(int)data[i].Actual7]++;
-            }
+                NA.NumbersDic37_Total[(int)data[i].Actual1] = 0;
+                NA.NumbersDic37_Total[(int)data[i].Actual2] = 0;
+                NA.NumbersDic37_Total[(int)data[i].Actual3] = 0;
+                NA.NumbersDic37_Total[(int)data[i].Actual4] = 0;
+                NA.NumbersDic37_Total[(int)data[i].Actual5] = 0;
+                NA.NumbersDic37_Total[(int)data[i].Actual6] = 0;
+                NA.NumbersDic7_Total[(int)data[i].Actual7] = 0;
 
-            for (int i = 0; i < TrainEnd; i++)
-            {
-                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual1] = NA.NumbersDic37_Total[(int)data[i].Actual1];
-                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual2] = NA.NumbersDic37_Total[(int)data[i].Actual2];
-                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual3] = NA.NumbersDic37_Total[(int)data[i].Actual3];
-                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual4] = NA.NumbersDic37_Total[(int)data[i].Actual4];
-                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual5] = NA.NumbersDic37_Total[(int)data[i].Actual5];
-                NA.closedLoopNumbersDic37_Total[(int)data[i].Actual6] = NA.NumbersDic37_Total[(int)data[i].Actual6];
-                NA.closedLoopNumbersDic7_Total[(int)data[i].Actual7] = NA.NumbersDic7_Total[(int)data[i].Actual7];
+                for (int j = i - PastWindowSize; j < i; j++)
+				{
+                    NA.NumbersDic37_Total[(int)data[j].Actual1]++;
+                    NA.NumbersDic37_Total[(int)data[j].Actual2]++;
+                    NA.NumbersDic37_Total[(int)data[j].Actual3]++;
+                    NA.NumbersDic37_Total[(int)data[j].Actual4]++;
+                    NA.NumbersDic37_Total[(int)data[j].Actual5]++;
+                    NA.NumbersDic37_Total[(int)data[j].Actual6]++;
+                    NA.NumbersDic7_Total[(int)data[j].Actual7]++;
+                }
 
                 data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
                 data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
@@ -1402,46 +1393,87 @@ namespace LotoPrediction
                 data[i].NA_Actual6 = NA.NumbersDic37_Total[(int)data[i].Actual6];
                 data[i].NA_Actual7 = NA.NumbersDic7_Total[(int)data[i].Actual7];
 
-                data[i]._closedLoopNA_Actual1 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual1];
-                data[i]._closedLoopNA_Actual2 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual2];
-                data[i]._closedLoopNA_Actual3 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual3];
-                data[i]._closedLoopNA_Actual4 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual4];
-                data[i]._closedLoopNA_Actual5 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual5];
-                data[i]._closedLoopNA_Actual6 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual6];
-                data[i]._closedLoopNA_Actual7 = NA.closedLoopNumbersDic7_Total[(int)data[i].Actual7];
-            }
-
-
-            //Assign NA_Actual values for evaluation set
-            for (int i = EvaluateStart - 1; i < EvaluateEnd; i++)
-            {
-
-                NA.NumbersDic37_Total[(int)data[i].Actual1] += 1;
-                NA.NumbersDic37_Total[(int)data[i].Actual2] += 1;
-                NA.NumbersDic37_Total[(int)data[i].Actual3] += 1;
-                NA.NumbersDic37_Total[(int)data[i].Actual4] += 1;
-                NA.NumbersDic37_Total[(int)data[i].Actual5] += 1;
-                NA.NumbersDic37_Total[(int)data[i].Actual6] += 1;
-                NA.NumbersDic7_Total[(int)data[i].Actual7] += 1;
-            }
-
-            for (int i = EvaluateStart-1; i < EvaluateEnd; i++)
-            {
-
-                data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
-                data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
-                data[i].NA_Actual3 = NA.NumbersDic37_Total[(int)data[i].Actual3];
-                data[i].NA_Actual4 = NA.NumbersDic37_Total[(int)data[i].Actual4];
-                data[i].NA_Actual5 = NA.NumbersDic37_Total[(int)data[i].Actual5];
-                data[i].NA_Actual6 = NA.NumbersDic37_Total[(int)data[i].Actual6];
-                data[i].NA_Actual7 = NA.NumbersDic7_Total[(int)data[i].Actual7];
-            }
-
-
-
-
-
+                data[i]._closedLoopNA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
+                data[i]._closedLoopNA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
+                data[i]._closedLoopNA_Actual3 = NA.NumbersDic37_Total[(int)data[i].Actual3];
+                data[i]._closedLoopNA_Actual4 = NA.NumbersDic37_Total[(int)data[i].Actual4];
+                data[i]._closedLoopNA_Actual5 = NA.NumbersDic37_Total[(int)data[i].Actual5];
+                data[i]._closedLoopNA_Actual6 = NA.NumbersDic37_Total[(int)data[i].Actual6];
+                data[i]._closedLoopNA_Actual7 = NA.NumbersDic7_Total[(int)data[i].Actual7];
         }
+
+
+        //Assign NA_Actual values for training set
+
+        //for (int i = 0; i < TrainEnd; i++)
+        //{
+        //    NA.NumbersDic37_Total[(int)data[i].Actual1]++;
+        //    NA.NumbersDic37_Total[(int)data[i].Actual2]++;
+        //    NA.NumbersDic37_Total[(int)data[i].Actual3]++;
+        //    NA.NumbersDic37_Total[(int)data[i].Actual4]++;
+        //    NA.NumbersDic37_Total[(int)data[i].Actual5]++;
+        //    NA.NumbersDic37_Total[(int)data[i].Actual6]++;
+        //    NA.NumbersDic7_Total[(int)data[i].Actual7]++;
+        //}
+
+        //for (int i = 0; i < TrainEnd; i++)
+        //{
+        //    NA.closedLoopNumbersDic37_Total[(int)data[i].Actual1] = NA.NumbersDic37_Total[(int)data[i].Actual1];
+        //    NA.closedLoopNumbersDic37_Total[(int)data[i].Actual2] = NA.NumbersDic37_Total[(int)data[i].Actual2];
+        //    NA.closedLoopNumbersDic37_Total[(int)data[i].Actual3] = NA.NumbersDic37_Total[(int)data[i].Actual3];
+        //    NA.closedLoopNumbersDic37_Total[(int)data[i].Actual4] = NA.NumbersDic37_Total[(int)data[i].Actual4];
+        //    NA.closedLoopNumbersDic37_Total[(int)data[i].Actual5] = NA.NumbersDic37_Total[(int)data[i].Actual5];
+        //    NA.closedLoopNumbersDic37_Total[(int)data[i].Actual6] = NA.NumbersDic37_Total[(int)data[i].Actual6];
+        //    NA.closedLoopNumbersDic7_Total[(int)data[i].Actual7] = NA.NumbersDic7_Total[(int)data[i].Actual7];
+
+        //    data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
+        //    data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
+        //    data[i].NA_Actual3 = NA.NumbersDic37_Total[(int)data[i].Actual3];
+        //    data[i].NA_Actual4 = NA.NumbersDic37_Total[(int)data[i].Actual4];
+        //    data[i].NA_Actual5 = NA.NumbersDic37_Total[(int)data[i].Actual5];
+        //    data[i].NA_Actual6 = NA.NumbersDic37_Total[(int)data[i].Actual6];
+        //    data[i].NA_Actual7 = NA.NumbersDic7_Total[(int)data[i].Actual7];
+
+        //    data[i]._closedLoopNA_Actual1 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual1];
+        //    data[i]._closedLoopNA_Actual2 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual2];
+        //    data[i]._closedLoopNA_Actual3 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual3];
+        //    data[i]._closedLoopNA_Actual4 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual4];
+        //    data[i]._closedLoopNA_Actual5 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual5];
+        //    data[i]._closedLoopNA_Actual6 = NA.closedLoopNumbersDic37_Total[(int)data[i].Actual6];
+        //    data[i]._closedLoopNA_Actual7 = NA.closedLoopNumbersDic7_Total[(int)data[i].Actual7];
+        //}
+
+
+        ////Assign NA_Actual values for evaluation set
+        //for (int i = EvaluateStart - 1; i < EvaluateEnd; i++)
+        //{
+
+        //    NA.NumbersDic37_Total[(int)data[i].Actual1] += 1;
+        //    NA.NumbersDic37_Total[(int)data[i].Actual2] += 1;
+        //    NA.NumbersDic37_Total[(int)data[i].Actual3] += 1;
+        //    NA.NumbersDic37_Total[(int)data[i].Actual4] += 1;
+        //    NA.NumbersDic37_Total[(int)data[i].Actual5] += 1;
+        //    NA.NumbersDic37_Total[(int)data[i].Actual6] += 1;
+        //    NA.NumbersDic7_Total[(int)data[i].Actual7] += 1;
+        //}
+
+        //for (int i = EvaluateStart-1; i < EvaluateEnd; i++)
+        //{
+
+        //    data[i].NA_Actual1 = NA.NumbersDic37_Total[(int)data[i].Actual1];
+        //    data[i].NA_Actual2 = NA.NumbersDic37_Total[(int)data[i].Actual2];
+        //    data[i].NA_Actual3 = NA.NumbersDic37_Total[(int)data[i].Actual3];
+        //    data[i].NA_Actual4 = NA.NumbersDic37_Total[(int)data[i].Actual4];
+        //    data[i].NA_Actual5 = NA.NumbersDic37_Total[(int)data[i].Actual5];
+        //    data[i].NA_Actual6 = NA.NumbersDic37_Total[(int)data[i].Actual6];
+        //    data[i].NA_Actual7 = NA.NumbersDic7_Total[(int)data[i].Actual7];
+        //}
+
+
+
+
+
+    }
 
         private void NormalizeData()
         {
@@ -2445,7 +2477,7 @@ namespace LotoPrediction
                                         data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.NormalizedNA_Actual6).First();
 
 
-                            _closedLoop_input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
+                                _closedLoop_input[i * 7] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
                                     .Select(t => t._closedLoopNormalizedActual1).First();
 
                                 _closedLoop_input[i * 7 + 1] = data.Where(t => t.Id == ((currentId - PastWindowSize + i)))
@@ -2471,7 +2503,7 @@ namespace LotoPrediction
                                         (LotoNumber == 4) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual4).First() :
                                         (LotoNumber == 5) ? data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual5).First() :
                                         data.Where(t => t.Id == ((currentId - PastWindowSize + i))).Select(t => t.Normalized_closedLoopNA_Actual6).First();
-                        }
+                            }
 
                             output = network.Compute(input);
                             _closedLoop_output = network.Compute(_closedLoop_input);
@@ -2498,8 +2530,8 @@ namespace LotoPrediction
                         }
 
                         output = network.Compute(input);
-                            _closedLoop_output = network.Compute(_closedLoop_input);
-                        }
+                        _closedLoop_output = network.Compute(_closedLoop_input);
+                    }
 
                         normalizedPredicted = output[0];
                         _closedLoop_normalizedPredicted = _closedLoop_output[0];
@@ -2519,7 +2551,7 @@ namespace LotoPrediction
                                 for (int i = 0; i < normalizedArray.Count(); i++)
                                     data[i].Normalized_closedLoopNA_Actual1 = normalizedArray[i];
 
-                            break;
+                                break;
 
                             case 2:
                                 data[currentId]._closedLoopNormalizedActual2 = _closedLoop_normalizedPredicted;
@@ -2532,7 +2564,7 @@ namespace LotoPrediction
                                 for (int i = 0; i < normalizedArray.Count(); i++)
                                     data[i].Normalized_closedLoopNA_Actual2 = normalizedArray[i];
 
-                            break;
+                                break;
 
                             case 3:
                                 data[currentId]._closedLoopNormalizedActual3 = _closedLoop_normalizedPredicted;
@@ -2545,7 +2577,7 @@ namespace LotoPrediction
                                 for (int i = 0; i < normalizedArray.Count(); i++)
                                     data[i].Normalized_closedLoopNA_Actual3 = normalizedArray[i];
 
-                            break;
+                                break;
                             
                             case 4:
                                 data[currentId]._closedLoopNormalizedActual4 = _closedLoop_normalizedPredicted;
@@ -2558,7 +2590,7 @@ namespace LotoPrediction
                                 for (int i = 0; i < normalizedArray.Count(); i++)
                                     data[i].Normalized_closedLoopNA_Actual4 = normalizedArray[i];
 
-                            break;
+                                break;
 
                             case 5:
                                 data[currentId]._closedLoopNormalizedActual5 = _closedLoop_normalizedPredicted;
@@ -2571,7 +2603,7 @@ namespace LotoPrediction
                                 for (int i = 0; i < normalizedArray.Count(); i++)
                                     data[i].Normalized_closedLoopNA_Actual5 = normalizedArray[i];
 
-                            break;
+                                break;
 
                             case 6:
                                 data[currentId]._closedLoopNormalizedActual6 = _closedLoop_normalizedPredicted;
@@ -2584,7 +2616,7 @@ namespace LotoPrediction
                                 for (int i = 0; i < normalizedArray.Count(); i++)
                                     data[i].Normalized_closedLoopNA_Actual6 = normalizedArray[i];
 
-                            break;
+                                break;
 
                             case 7:
                                 data[currentId]._closedLoopNormalizedActual7 = _closedLoop_normalizedPredicted;
@@ -2597,7 +2629,7 @@ namespace LotoPrediction
                                 for (int i = 0; i < normalizedArray.Count(); i++)
                                     data[i].Normalized_closedLoopNA_Actual7 = normalizedArray[i];
 
-                            break;
+                                break;
 
                             default:
                                 break;
@@ -2605,8 +2637,8 @@ namespace LotoPrediction
 
 
 
-                    //double Actual1 = data.Where(t => t.Id == currentId).Select(t => t.Actual1).First();
-                    actual1 = actual2 = actual3 = actual4 = actual5 = actual6 = actual7 = 0.0;
+                        //double Actual1 = data.Where(t => t.Id == currentId).Select(t => t.Actual1).First();
+                        actual1 = actual2 = actual3 = actual4 = actual5 = actual6 = actual7 = 0.0;
 
                         if (LotoNumber != 7)
                         {
