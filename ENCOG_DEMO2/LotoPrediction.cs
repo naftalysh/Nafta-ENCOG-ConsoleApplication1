@@ -1126,7 +1126,7 @@ namespace LotoPrediction
             GenerateTemporalData();
 
             ////Create & Train Network
-            if (! CreateAndTrainNetwork(1300)) {
+            if (! CreateAndTrainNetwork(300)) {
                 Console.WriteLine("-- CreateAndTrainNetwork step timeout, exiting --");
                 Environment.Exit(0);
             };
@@ -1183,12 +1183,18 @@ namespace LotoPrediction
                 });
             }
 
-            TotalNumOfIterations = data.Select(t => t.Id).Max() - (data.Select(t => t.Id).Min() + PastWindowSize) + 1;
-            TrainStart = data.Select(t => t.Id).Min() + PastWindowSize;
-            TrainEnd = TrainStart + TotalNumOfIterations * trainPercent / 100; 
+            //TotalNumOfIterations = data.Select(t => t.Id).Max() - (data.Select(t => t.Id).Min() + PastWindowSize) + 1;
+            //TrainStart = 1; // data.Select(t => t.Id).Min() + PastWindowSize;
+            //TrainEnd = TrainStart + TotalNumOfIterations * trainPercent / 100;
+            //EvaluateStart = TrainEnd + 1;
+            //EvaluateEnd = data.Count;
+
+            //TotalNumOfIterations = data.Select(t => t.Id).Max() - (data.Select(t => t.Id).Min() + PastWindowSize) + 1;
+            //TrainStart = data.Select(t => t.Id).Min() + PastWindowSize;
+
+            TrainEnd = data.Count * trainPercent / 100;
             EvaluateStart = TrainEnd + 1;
             EvaluateEnd = data.Count;
-
 
             //var queryActual1 =
             //        from LotoData in data
@@ -1347,7 +1353,9 @@ namespace LotoPrediction
                         ((int)data[j].Actual6 == CurrentNumber6))
                     {
                         NA.NumbersDic37_PastWindow[6] = Math.Max(NA.NumbersDic37_PastWindow[6], maxWindow);
-                        NA.NumbersDic37_PastWindow[6] = Math.Min(NA.NumbersDic37_PastWindow[6], MaxPastWindowSize); break;
+                        NA.NumbersDic37_PastWindow[6] = Math.Min(NA.NumbersDic37_PastWindow[6], MaxPastWindowSize);
+
+                        break;
                     }
                 }
 
@@ -1367,7 +1375,7 @@ namespace LotoPrediction
                     }
                 }
 
-                NA.NumbersDic7_PastWindow[1] = Math.Max(NA.NumbersDic7_PastWindow[1], MinPastWindowSize);
+                //NA.NumbersDic7_PastWindow[1] = Math.Max(NA.NumbersDic7_PastWindow[1], MinPastWindowSize);
             }
 
 
@@ -1378,6 +1386,10 @@ namespace LotoPrediction
                 else
                     PastWindowSize = NA.NumbersDic7_PastWindow[1];
             }
+
+
+            TotalNumOfIterations = data.Select(t => t.Id).Max() - (data.Select(t => t.Id).Min() + PastWindowSize) + 1;
+            TrainStart = data.Select(t => t.Id).Min() + PastWindowSize;
 
 
             for (int i = TrainStart; i < EvaluateEnd; i++)
