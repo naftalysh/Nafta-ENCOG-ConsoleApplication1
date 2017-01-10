@@ -1217,13 +1217,21 @@ namespace LotoPrediction
             int maxWindow;
 
 
-            for (int i = 0; i < TrainEnd; i++)
+            NA.NumbersDic37_PastWindow[1] = MinPastWindowSize;
+            NA.NumbersDic37_PastWindow[2] = MinPastWindowSize;
+            NA.NumbersDic37_PastWindow[3] = MinPastWindowSize;
+            NA.NumbersDic37_PastWindow[4] = MinPastWindowSize;
+            NA.NumbersDic37_PastWindow[5] = MinPastWindowSize;
+            NA.NumbersDic37_PastWindow[6] = MinPastWindowSize;
+            NA.NumbersDic7_PastWindow[1] = MinPastWindowSize;
+
+            for (int i = TrainEnd / 10; i >= 0; i--)
             {
                 CurrentNumber1 = (int)data[i].Actual1;
                 maxWindow = 0;
 
                 // Search for max window needed within then actual numbers for CurrentNumber
-                for (int j = i + 1; j < TrainEnd; j++)
+                for (int j = i - 1; j >= 0; j--)
                 {
                     maxWindow++;
 
@@ -1247,7 +1255,7 @@ namespace LotoPrediction
                 maxWindow = 0;
 
                 // Search for max window needed within then actual numbers for CurrentNumber
-                for (int j = i + 1; j < TrainEnd; j++)
+                for (int j = i - 1; j >= 0; j--)
                 {
                     maxWindow++;
 
@@ -1270,7 +1278,7 @@ namespace LotoPrediction
                 maxWindow = 0;
 
                 // Search for max window needed within then actual numbers for CurrentNumber
-                for (int j = i + 1; j < TrainEnd; j++)
+                for (int j = i - 1; j >= 0; j--)
                 {
                     maxWindow++;
 
@@ -1294,7 +1302,7 @@ namespace LotoPrediction
                 maxWindow = 0;
 
                 // Search for max window needed within then actual numbers for CurrentNumber
-                for (int j = i + 1; j < TrainEnd; j++)
+                for (int j = i - 1; j >= 0; j--)
                 {
                     maxWindow++;
 
@@ -1317,7 +1325,7 @@ namespace LotoPrediction
                 maxWindow = 0;
 
                 // Search for max window needed within then actual numbers for CurrentNumber
-                for (int j = i + 1; j < TrainEnd; j++)
+                for (int j = i - 1; j >= 0; j--)
                 {
                     maxWindow++;
 
@@ -1341,7 +1349,7 @@ namespace LotoPrediction
                 maxWindow = 0;
 
                 // Search for max window needed within then actual numbers for CurrentNumber
-                for (int j = i + 1; j < TrainEnd; j++)
+                for (int j = i - 1; j >= 0; j--)
                 {
                     maxWindow++;
 
@@ -1365,7 +1373,7 @@ namespace LotoPrediction
                 maxWindow = 0;
 
                 // Search for max window needed within then actual numbers for CurrentNumber
-                for (int j = i + 1; j < TrainEnd; j++)
+                for (int j = i - 1; j >= 0; j--)
                 {
                     maxWindow++;
                     if ((int)data[j].Actual7 == CurrentNumber7)  //Found a matching number after maxWindow draws.
