@@ -1126,7 +1126,7 @@ namespace LotoPrediction
             GenerateTemporalData();
 
             ////Create & Train Network
-            if (! CreateAndTrainNetwork(300)) {
+            if (! CreateAndTrainNetwork(500)) {
                 Console.WriteLine("-- CreateAndTrainNetwork step timeout, exiting --");
                 Environment.Exit(0);
             };
@@ -1225,7 +1225,7 @@ namespace LotoPrediction
             NA.NumbersDic37_PastWindow[6] = MinPastWindowSize;
             NA.NumbersDic7_PastWindow[1] = MinPastWindowSize;
 
-            for (int i = TrainEnd / 10; i >= 0; i--)
+            for (int i = TrainEnd; i >= TrainEnd / 90; i--)
             {
                 CurrentNumber1 = (int)data[i].Actual1;
                 maxWindow = 0;
